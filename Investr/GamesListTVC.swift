@@ -31,7 +31,7 @@ class GamesListTVC: UIViewController {
     var playingGamesnum = 0
     var upcomingGames = [String]()
     var playingGames = [String]()
-    //blah
+    
     
     func firstGamesQuery()
     {
