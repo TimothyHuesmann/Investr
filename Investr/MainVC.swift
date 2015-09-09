@@ -15,14 +15,14 @@ class MainVC: UIViewController {
     @IBOutlet weak var registerButton: UIButton!
     
     
-    @IBAction func loginButtonPressed(sender: AnyObject)
+    @IBAction func loginButtonPressed(sender: AnyObject)        //login button
     {
         var loginVC = self.storyboard?.instantiateViewControllerWithIdentifier("LoginVC") as! LoginVC
         self.navigationController?.pushViewController(loginVC, animated: true)
     }
     
     
-    @IBAction func registerButtonPressed(sender: AnyObject)
+    @IBAction func registerButtonPressed(sender: AnyObject)     //registration button
     {
         var registerVC = self.storyboard?.instantiateViewControllerWithIdentifier("RegisterVC") as! RegisterVC
         self.navigationController?.pushViewController(registerVC, animated: true)

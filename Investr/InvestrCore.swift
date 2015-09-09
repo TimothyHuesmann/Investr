@@ -11,6 +11,6 @@ import UIKit
 
 class InvestrCore: NSObject
 {
-    static var currUser = ""
-    static var userID = ""
+    static var currUser = ""        //current user Username
+    static var userID = ""          //current user objectID
 }

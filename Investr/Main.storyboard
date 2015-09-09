@@ -281,7 +281,7 @@
         <!--RegisterVC-->
         <scene sceneID="rLE-Gs-LGk">
             <objects>
-                <viewController id="hga-CV-w2B" customClass="RegisterVC" customModule="Investr" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RegisterVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="hga-CV-w2B" customClass="RegisterVC" customModule="Investr" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6V6-B1-sg7"/>
                         <viewControllerLayoutGuide type="bottom" id="XL7-kS-Orn"/>

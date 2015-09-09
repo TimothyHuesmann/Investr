@@ -34,7 +34,7 @@ class GamesListTVC: UIViewController {
     
     
     
-    func firstGamesQuery()
+    func firstGamesQuery()          //query of games that are not yet running
     {
         var query = PFQuery(className: "Game")
         query.whereKey("Playing", equalTo:false)
@@ -58,7 +58,7 @@ class GamesListTVC: UIViewController {
                 println("Error: \(error!) \(error!.userInfo!)")
             }
         }
-        var query2 = PFQuery(className: "Game")
+        var query2 = PFQuery(className: "Game")       //query of games that are running and the user is in
         query2.whereKey("Playing", equalTo:true)
         query2.whereKey("CurrentPlayers", equalTo:InvestrCore.currUser)
         query2.findObjectsInBackgroundWithBlock {
@@ -83,7 +83,7 @@ class GamesListTVC: UIViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
-        firstGamesQuery()
+        firstGamesQuery()  //calls both queries
         self.upcomingGamesTV.reloadData()
     }
     
@@ -131,11 +131,11 @@ class GamesListTVC: UIViewController {
         // Configure the cell...
         if(self.tableViewSwitch.selectedSegmentIndex == 0)
         {
-            cell.textLabel!.text = self.upcomingGames[indexPath.row]
+            cell.textLabel!.text = self.upcomingGames[indexPath.row] //display upcoming games
         }
         else
         {
-            cell.textLabel!.text = self.playingGames[indexPath.row]
+            cell.textLabel!.text = self.playingGames[indexPath.row]  //display my games
         }
         
         return cell

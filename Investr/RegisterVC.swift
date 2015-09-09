@@ -44,7 +44,7 @@ class RegisterVC: UIViewController {
                     self.navigationController?.pushViewController(MainVC(), animated: true)
                 }
             }
-        }
+        }                                       //error checking and responses
         else if(self.usernameTF.text == "")
         {
             var alert = UIAlertView()

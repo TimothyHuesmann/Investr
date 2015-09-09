@@ -26,11 +26,11 @@ class LoginVC: UIViewController{
                     var gamesListTVC = self.storyboard?.instantiateViewControllerWithIdentifier("GamesListTVC") as! GamesListTVC
                     self.navigationController?.pushViewController(gamesListTVC, animated: true)
                     // Do stuff after successful login.
-                    InvestrCore.currUser = self.userNameTF.text
+                    InvestrCore.currUser = self.userNameTF.text         //saves global username
                     var query = PFUser.query()
                     query!.whereKey("username", equalTo: InvestrCore.currUser)
                     var user = query!.findObjects()
-                    InvestrCore.userID = PFUser.currentUser()!.objectId!
+                    InvestrCore.userID = PFUser.currentUser()!.objectId!    //saves global user objectId
                     
                 } else {
                     var alert = UIAlertView()
