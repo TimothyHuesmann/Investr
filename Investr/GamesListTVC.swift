@@ -49,6 +49,7 @@ class GamesListTVC: UIViewController {
                     {
                         self.upcomingGames.append(object["Name"]! as! String)
                     }
+                    self.upcomingGamesTV.reloadData()
                 }
             } else {
                 // Log details of the failure
