@@ -33,6 +33,7 @@ class GamesListTVC: UIViewController {
     var playingGames = [String]()
     
     
+    
     func firstGamesQuery()
     {
         var query = PFQuery(className: "Game")
