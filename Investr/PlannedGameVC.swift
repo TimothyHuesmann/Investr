@@ -11,14 +11,19 @@ import UIKit
 class PlannedGameVC: UIViewController {
     
     @IBOutlet weak var priceLabel: UILabel!
+    @IBOutlet weak var numPlayers: UILabel!
+    @IBOutlet weak var startDate: UILabel!
     @IBOutlet weak var enterGameButton: UIButton!
     @IBAction func enterButtonPressed(sender: AnyObject)
     {
-        var alert = UIAlertView()
-        alert.title = "Confirm?"
-        alert.message = "Are You Sure You Want to Enter This Game?"
-        alert.addButtonWithTitle("Why Wouldn't I?")
-        alert.show()
+        var alert = UIAlertController(title: "Confirm?", message: "Are you sure you want to enter this game?", preferredStyle: UIAlertControllerStyle.Alert)
+        let okButton = UIAlertAction(title:"Yes", style: .Default, handler:
+            {
+                (action: UIAlertAction!) in
+                println("Hello")
+            })
+        alert.addAction(okButton)
+        
     }
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -252,7 +252,9 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="enterGameButton" destination="acY-UR-hAg" id="Fmy-LH-Jpt"/>
+                        <outlet property="numPlayers" destination="FiW-GY-5M3" id="urO-bH-5sv"/>
                         <outlet property="priceLabel" destination="inA-Xl-jhX" id="YNz-AK-WHg"/>
+                        <outlet property="startDate" destination="Kdo-Yg-yE5" id="oIR-HD-2xg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eBZ-Js-ZsS" userLabel="First Responder" sceneMemberID="firstResponder"/>
