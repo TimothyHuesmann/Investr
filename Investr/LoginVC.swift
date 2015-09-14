@@ -23,8 +23,8 @@ class LoginVC: UIViewController{
             PFUser.logInWithUsernameInBackground(self.userNameTF.text, password: self.passwordTF.text) {
                 (user: PFUser?, error: NSError?) -> Void in
                 if user != nil {
-                    var gamesListTVC = self.storyboard?.instantiateViewControllerWithIdentifier("GamesListTVC") as! GamesListTVC
-                    self.navigationController?.pushViewController(gamesListTVC, animated: true)
+                    var menuVC = self.storyboard?.instantiateViewControllerWithIdentifier("MenuVC") as! MenuVC
+                    self.navigationController?.pushViewController(menuVC, animated: true)
                     // Do stuff after successful login.
                     InvestrCore.currUser = self.userNameTF.text         //saves global username
                     var query = PFUser.query()

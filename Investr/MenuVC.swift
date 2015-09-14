@@ -1,5 +1,5 @@
 //
-//  CurrentGameVC.swift
+//  MenuVC.swift
 //  Investr
 //
 //  Created by Timothy Huesmann on 9/14/15.
@@ -7,14 +7,35 @@
 //
 
 import UIKit
+import Parse
 
-class CurrentGameVC: UIViewController {
+class MenuVC: UIViewController {
 
-    @IBOutlet weak var gameName: UILabel!
-    var tempName = ""
+    
+    var currentUser = PFUser.currentUser()
+    
+    @IBOutlet weak var welcomeLabel: UILabel!
+    
+    
+    @IBAction func upcomingGamesButtonPressed(sender: AnyObject)
+    {
+        var gameslistVC = self.storyboard?.instantiateViewControllerWithIdentifier("GamesListTVC") as! GamesListTVC
+        self.navigationController?.pushViewController(gameslistVC, animated: true)
+    }
+    
+    @IBAction func myGamesButtonPressed(sender: AnyObject)
+    {
+        var myGamesVC = self.storyboard?.instantiateViewControllerWithIdentifier("MyGamesTVC") as! MyGamesTVC
+        self.navigationController?.pushViewController(myGamesVC, animated: true)
+    }
+    
+    
+    
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.gameName.text = tempName
 
         // Do any additional setup after loading the view.
     }
@@ -22,11 +43,6 @@ class CurrentGameVC: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    func setName(name: String)
-    {
-        tempName = name
     }
     
 

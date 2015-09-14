@@ -114,9 +114,9 @@ class GamesListTVC: UIViewController {
         let indexPath = tableView.indexPathForSelectedRow()
         let currentCell = tableView.cellForRowAtIndexPath(indexPath!) as UITableViewCell!
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        var viewController = storyboard.instantiateViewControllerWithIdentifier("PlannedGameVC") as! PlannedGameVC
+        var viewController = self.storyboard?.instantiateViewControllerWithIdentifier("PlannedGameVC") as! PlannedGameVC
         viewController.setName(currentCell.textLabel!.text!)
-        self.presentViewController(viewController, animated: true, completion: nil)
+        self.navigationController?.pushViewController(viewController, animated: true)
        
     }
     

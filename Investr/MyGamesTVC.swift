@@ -83,6 +83,17 @@ class MyGamesTVC: UIViewController {
         return cell
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath!)
+    {
+        let indexPath = tableView.indexPathForSelectedRow()
+        let currentCell = tableView.cellForRowAtIndexPath(indexPath!) as UITableViewCell!
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        var viewController = self.storyboard?.instantiateViewControllerWithIdentifier("CurrentGameVC") as! CurrentGameVC
+        viewController.setName(currentCell.textLabel!.text!)
+        self.navigationController?.pushViewController(viewController, animated: true)
+        
+    }
+    
 
     /*
     // Override to support conditional editing of the table view.

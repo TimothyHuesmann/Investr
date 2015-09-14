@@ -31,6 +31,7 @@
 		A7F148DC1B973AE300A13CE2 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A7F148DB1B973AE300A13CE2 /* libsqlite3.dylib */; };
 		A7F149191BA6F94B00A13CE2 /* CurrentGameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F149181BA6F94B00A13CE2 /* CurrentGameVC.swift */; };
 		A7F1491D1BA7009D00A13CE2 /* MyGamesTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F1491C1BA7009D00A13CE2 /* MyGamesTVC.swift */; };
+		A7F1491F1BA7060000A13CE2 /* MenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F1491E1BA7060000A13CE2 /* MenuVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +86,7 @@
 		A7F148DB1B973AE300A13CE2 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		A7F149181BA6F94B00A13CE2 /* CurrentGameVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentGameVC.swift; sourceTree = "<group>"; };
 		A7F1491C1BA7009D00A13CE2 /* MyGamesTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyGamesTVC.swift; sourceTree = "<group>"; };
+		A7F1491E1BA7060000A13CE2 /* MenuVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuVC.swift; sourceTree = "<group>"; };
 		AC67422E0FED279EED90B0B5 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		B70F36A72504B8DAB220CE68 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -182,6 +184,7 @@
 				A7F148B41B97302E00A13CE2 /* MainVC.swift */,
 				A7F148B61B97306200A13CE2 /* RegisterVC.swift */,
 				A7F148B81B97308A00A13CE2 /* LoginVC.swift */,
+				A7F1491E1BA7060000A13CE2 /* MenuVC.swift */,
 				A7F148BA1B9730CB00A13CE2 /* GamesListTVC.swift */,
 				A7F1491C1BA7009D00A13CE2 /* MyGamesTVC.swift */,
 				A7F148BC1B97311000A13CE2 /* PlannedGameVC.swift */,
@@ -379,6 +382,7 @@
 				A7F148B91B97308A00A13CE2 /* LoginVC.swift in Sources */,
 				A7F148B51B97302E00A13CE2 /* MainVC.swift in Sources */,
 				A7F148BD1B97311000A13CE2 /* PlannedGameVC.swift in Sources */,
+				A7F1491F1BA7060000A13CE2 /* MenuVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
