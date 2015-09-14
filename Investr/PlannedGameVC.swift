@@ -14,6 +14,8 @@ class PlannedGameVC: UIViewController {
     @IBOutlet weak var numPlayers: UILabel!
     @IBOutlet weak var startDate: UILabel!
     @IBOutlet weak var enterGameButton: UIButton!
+    @IBOutlet weak var gameName: UILabel!
+    var tempGameName : String!
     @IBAction func enterButtonPressed(sender: AnyObject)
     {
         var alert = UIAlertController(title: "Confirm?", message: "Are you sure you want to enter this game?", preferredStyle: UIAlertControllerStyle.Alert)
@@ -27,13 +29,19 @@ class PlannedGameVC: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.gameName.text = self.tempGameName
+
         // Do any additional setup after loading the view.
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func setName(name: String)
+    {
+        self.tempGameName = name
     }
     
     

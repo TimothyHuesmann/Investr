@@ -24,7 +24,7 @@ class GamesListTVC: UIViewController {
         self.upcomingGamesTV.reloadData()
     }
     
-    @IBOutlet weak var tableViewSwitch: UISegmentedControl!
+    
     @IBOutlet weak var upcomingGamesTV: UITableView!
     var currentUser = PFUser.currentUser()
     var upcomingGamesnum = 0
@@ -58,34 +58,14 @@ class GamesListTVC: UIViewController {
                 println("Error: \(error!) \(error!.userInfo!)")
             }
         }
-        var query2 = PFQuery(className: "Game")       //query of games that are running and the user is in
-        query2.whereKey("Playing", equalTo:true)
-        query2.whereKey("CurrentPlayers", equalTo:InvestrCore.currUser)
-        query2.findObjectsInBackgroundWithBlock {
-            (objects2: [AnyObject]?, error: NSError?) -> Void in
-            
-            if error == nil {
-                // The find succeeded.
-                println("Successfully retrieved \(objects2!.count) scores.")
-                // Do something with the found objects
-                if let objects2 = objects2 as? [PFObject] {
-                    self.playingGamesnum = objects2.count
-                    for object2 in objects2
-                    {
-                        self.playingGames.append(object2["Name"]! as! String)
-                    }
-                }
-            } else {
-                // Log details of the failure
-                println("Error: \(error!) \(error!.userInfo!)")
-            }
-        }
+        
     }
     
     override func viewWillAppear(animated: Bool) {
         firstGamesQuery()  //calls both queries
         self.upcomingGamesTV.reloadData()
     }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -114,14 +94,9 @@ class GamesListTVC: UIViewController {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
         
-        if(self.tableViewSwitch.selectedSegmentIndex == 0)
-        {
-            return upcomingGamesnum
-        }
-        else
-        {
-            return playingGamesnum
-        }
+        return upcomingGamesnum
+        
+       
     }
     
     
@@ -129,16 +104,20 @@ class GamesListTVC: UIViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! UITableViewCell
         
         // Configure the cell...
-        if(self.tableViewSwitch.selectedSegmentIndex == 0)
-        {
             cell.textLabel!.text = self.upcomingGames[indexPath.row] //display upcoming games
-        }
-        else
-        {
-            cell.textLabel!.text = self.playingGames[indexPath.row]  //display my games
-        }
         
         return cell
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath!)
+    {
+        let indexPath = tableView.indexPathForSelectedRow()
+        let currentCell = tableView.cellForRowAtIndexPath(indexPath!) as UITableViewCell!
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        var viewController = storyboard.instantiateViewControllerWithIdentifier("PlannedGameVC") as! PlannedGameVC
+        viewController.setName(currentCell.textLabel!.text!)
+        self.presentViewController(viewController, animated: true, completion: nil)
+       
     }
     
     

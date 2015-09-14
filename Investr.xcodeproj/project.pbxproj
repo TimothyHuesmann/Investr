@@ -29,6 +29,8 @@
 		A7F148D81B973ABE00A13CE2 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7F148D71B973ABE00A13CE2 /* SystemConfiguration.framework */; };
 		A7F148DA1B973ACD00A13CE2 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A7F148D91B973ACD00A13CE2 /* libz.dylib */; };
 		A7F148DC1B973AE300A13CE2 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A7F148DB1B973AE300A13CE2 /* libsqlite3.dylib */; };
+		A7F149191BA6F94B00A13CE2 /* CurrentGameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F149181BA6F94B00A13CE2 /* CurrentGameVC.swift */; };
+		A7F1491D1BA7009D00A13CE2 /* MyGamesTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F1491C1BA7009D00A13CE2 /* MyGamesTVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +83,8 @@
 		A7F148D71B973ABE00A13CE2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		A7F148D91B973ACD00A13CE2 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		A7F148DB1B973AE300A13CE2 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		A7F149181BA6F94B00A13CE2 /* CurrentGameVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentGameVC.swift; sourceTree = "<group>"; };
+		A7F1491C1BA7009D00A13CE2 /* MyGamesTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyGamesTVC.swift; sourceTree = "<group>"; };
 		AC67422E0FED279EED90B0B5 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		B70F36A72504B8DAB220CE68 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -179,7 +183,9 @@
 				A7F148B61B97306200A13CE2 /* RegisterVC.swift */,
 				A7F148B81B97308A00A13CE2 /* LoginVC.swift */,
 				A7F148BA1B9730CB00A13CE2 /* GamesListTVC.swift */,
+				A7F1491C1BA7009D00A13CE2 /* MyGamesTVC.swift */,
 				A7F148BC1B97311000A13CE2 /* PlannedGameVC.swift */,
+				A7F149181BA6F94B00A13CE2 /* CurrentGameVC.swift */,
 				A7F148BE1B97313200A13CE2 /* InvestrCore.swift */,
 			);
 			name = VCs;
@@ -366,8 +372,10 @@
 			files = (
 				A7F148B71B97306200A13CE2 /* RegisterVC.swift in Sources */,
 				A7F148931B972FAC00A13CE2 /* AppDelegate.swift in Sources */,
+				A7F1491D1BA7009D00A13CE2 /* MyGamesTVC.swift in Sources */,
 				A7F148BB1B9730CB00A13CE2 /* GamesListTVC.swift in Sources */,
 				A7F148BF1B97313200A13CE2 /* InvestrCore.swift in Sources */,
+				A7F149191BA6F94B00A13CE2 /* CurrentGameVC.swift in Sources */,
 				A7F148B91B97308A00A13CE2 /* LoginVC.swift in Sources */,
 				A7F148B51B97302E00A13CE2 /* MainVC.swift in Sources */,
 				A7F148BD1B97311000A13CE2 /* PlannedGameVC.swift in Sources */,

@@ -52,7 +52,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PYa-Qg-Sz8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="501.5" y="359.5"/>
+            <point key="canvasLocation" x="633.5" y="79.5"/>
         </scene>
         <!--LoginVC-->
         <scene sceneID="uQf-oF-ngR">
@@ -84,15 +84,10 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QCF-fc-I5O">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="admin" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QCF-fc-I5O">
                                 <rect key="frame" x="47" y="197" width="281" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fCM-fX-gIq">
-                                <rect key="frame" x="47" y="280" width="281" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rPU-gI-5Eg">
                                 <rect key="frame" x="163" y="353" width="49" height="30"/>
@@ -103,6 +98,11 @@
                                     <action selector="submitButtonPressed:" destination="ujO-hs-ZRO" eventType="touchDown" id="XsC-NZ-L1F"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="admin" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fCM-fX-gIq">
+                                <rect key="frame" x="47" y="280" width="281" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -116,7 +116,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y1f-aQ-5e8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="939.5" y="-120.5"/>
+            <point key="canvasLocation" x="1067.5" y="-312.5"/>
         </scene>
         <!--Games ListTVC-->
         <scene sceneID="vJ1-3K-CIa">
@@ -130,18 +130,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="XSd-fm-qiW">
-                                <rect key="frame" x="16" y="72" width="343" height="29"/>
-                                <segments>
-                                    <segment title="Upcoming Games"/>
-                                    <segment title="My Games"/>
-                                </segments>
-                                <connections>
-                                    <action selector="switchPressed:" destination="I5w-UD-wON" eventType="valueChanged" id="gdN-Gd-dmD"/>
-                                </connections>
-                            </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="oDz-wD-wQ7">
-                                <rect key="frame" x="0.0" y="108" width="375" height="505"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="2Ci-vi-qNd">
@@ -156,6 +146,12 @@
                                     <outlet property="delegate" destination="I5w-UD-wON" id="Qvv-Yt-5WD"/>
                                 </connections>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Upcoming Games" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dX4-Pn-bqZ">
+                                <rect key="frame" x="118" y="82" width="139" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -163,13 +159,12 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
-                        <outlet property="tableViewSwitch" destination="XSd-fm-qiW" id="sEf-O1-Djm"/>
                         <outlet property="upcomingGamesTV" destination="oDz-wD-wQ7" id="oRQ-iR-Snv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pKy-jR-6iI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1385.5" y="-312.5"/>
+            <point key="canvasLocation" x="1957.5" y="-324.5"/>
         </scene>
         <!--Planned GameVC-->
         <scene sceneID="bYF-aY-TkO">
@@ -186,12 +181,6 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1 Day Game" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oJC-A9-aYk">
                                 <rect key="frame" x="36" y="78" width="112" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Price:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZK1-md-YCn">
-                                <rect key="frame" x="36" y="143" width="44" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="$0.99" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="inA-Xl-jhX">
@@ -245,13 +234,21 @@
                                     <action selector="enterButtonPressed:" destination="5Qy-Fq-wOi" eventType="touchDown" id="n2i-bB-f1a"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Price:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZK1-md-YCn">
+                                <rect key="frame" x="36" y="142" width="44" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="enterGameButton" destination="acY-UR-hAg" id="Fmy-LH-Jpt"/>
+                        <outlet property="gameName" destination="oJC-A9-aYk" id="m2O-Bu-LRg"/>
                         <outlet property="numPlayers" destination="FiW-GY-5M3" id="urO-bH-5sv"/>
                         <outlet property="priceLabel" destination="inA-Xl-jhX" id="YNz-AK-WHg"/>
                         <outlet property="startDate" destination="Kdo-Yg-yE5" id="oIR-HD-2xg"/>
@@ -259,12 +256,57 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eBZ-Js-ZsS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1862.5" y="-312.5"/>
+            <point key="canvasLocation" x="2370.5" y="-324.5"/>
         </scene>
-        <!--View Controller-->
+        <!--My GamesTVC-->
+        <scene sceneID="3rj-1X-udq">
+            <objects>
+                <viewController storyboardIdentifier="MyGamesTVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ckx-ql-GFb" customClass="MyGamesTVC" customModule="Investr" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1pS-Rj-mka"/>
+                        <viewControllerLayoutGuide type="bottom" id="YFL-Aw-Jzn"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="J0v-Nw-j0S">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="1wh-DI-osX">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="VtU-Kb-gJX">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VtU-Kb-gJX" id="P1o-hy-gOj">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="ckx-ql-GFb" id="8dP-9Y-fxy"/>
+                                    <outlet property="delegate" destination="ckx-ql-GFb" id="Iqi-dB-dmr"/>
+                                </connections>
+                            </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="My Games" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O7Z-wR-qJy">
+                                <rect key="frame" x="146" y="81" width="83" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kaA-Bu-jcs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1957.5" y="419.5"/>
+        </scene>
+        <!--Current GameVC-->
         <scene sceneID="DRP-l7-T7N">
             <objects>
-                <viewController id="OeC-eJ-IZ1" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CurrentGameVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="OeC-eJ-IZ1" customClass="CurrentGameVC" customModule="Investr" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="DQc-iR-BZI"/>
                         <viewControllerLayoutGuide type="bottom" id="dLd-HS-SY8"/>
@@ -278,7 +320,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xtf-gS-kt0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2360.5" y="-312.5"/>
+            <point key="canvasLocation" x="2370.5" y="419.5"/>
         </scene>
         <!--RegisterVC-->
         <scene sceneID="rLE-Gs-LGk">
@@ -378,7 +420,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jXb-Kq-GrX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="939.5" y="594.5"/>
+            <point key="canvasLocation" x="1067.5" y="454.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="cc7-7u-GSq">
@@ -394,7 +436,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kW0-aQ-u4T" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-106" y="360"/>
+            <point key="canvasLocation" x="-6" y="80"/>
         </scene>
     </scenes>
 </document>
