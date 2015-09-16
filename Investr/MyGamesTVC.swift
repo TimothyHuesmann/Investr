@@ -39,6 +39,9 @@ class MyGamesTVC: UIViewController {
                 println("Error: \(error!) \(error!.userInfo!)")
             }
         }
+        
+        var query3 = PFQuery(className: "Game")
+        
     }
     
     override func viewDidLoad() {
@@ -62,7 +65,7 @@ class MyGamesTVC: UIViewController {
     {
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
-        return 1
+        return 2
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
