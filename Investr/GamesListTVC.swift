@@ -31,6 +31,9 @@ class GamesListTVC: UIViewController {
     var playingGamesnum = 0
     var upcomingGames = [String]()
     var playingGames = [String]()
+    var numPlayers = 0
+    var potSize = 0
+    var price = 0.0
     
     
     
@@ -45,7 +48,8 @@ class GamesListTVC: UIViewController {
                 // The find succeeded.
                 println("Successfully retrieved \(objects!.count) scores.")
                 // Do something with the found objects
-                if let objects = objects as? [PFObject] {
+                if let objects = objects as? [PFObject]
+                {
                     self.upcomingGamesnum = objects.count
                     for object in objects
                     {
@@ -53,7 +57,9 @@ class GamesListTVC: UIViewController {
                     }
                     self.upcomingGamesTV.reloadData()
                 }
-            } else {
+            }
+            else
+            {
                 // Log details of the failure
                 println("Error: \(error!) \(error!.userInfo!)")
             }
@@ -111,13 +117,52 @@ class GamesListTVC: UIViewController {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath!)
     {
+        
         let indexPath = tableView.indexPathForSelectedRow()
         let currentCell = tableView.cellForRowAtIndexPath(indexPath!) as UITableViewCell!
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        var viewController = self.storyboard?.instantiateViewControllerWithIdentifier("PlannedGameVC") as! PlannedGameVC
-        viewController.setName(currentCell.textLabel!.text!)
-        self.navigationController?.pushViewController(viewController, animated: true)
-       
+        var query = PFQuery(className: "Game")
+        print(currentCell.textLabel!.text!)
+        query.whereKey("Name", equalTo: currentCell.textLabel!.text!)
+        query.findObjectsInBackgroundWithBlock
+        {
+            (objects: [AnyObject]?, error: NSError?) -> Void in
+            if error == nil
+            {
+                //the find succeeded
+                println("Successfully found \(objects!.count) Games")
+                if let objects = objects as? [PFObject]
+                {
+                    if objects[0]["CurrentPlayers"] != nil
+                    {
+                        self.numPlayers = objects[0]["CurrentPlayers"]!.count     //setting the number of players label
+                    }
+                    else
+                    {
+                        self.numPlayers = 0
+                    }
+                    
+                    if objects[0]["PotSize"] != nil
+                    {
+                        self.potSize = objects[0]["PotSize"]! as! Int   //setting the potSize label
+                    }
+                    else
+                    {
+                        self.potSize = 0
+                    }
+                    self.price = objects[0]["Price"]! as! Double    //setting the price label
+                    var viewController = self.storyboard?.instantiateViewControllerWithIdentifier("PlannedGameVC") as! PlannedGameVC
+                    
+                    viewController.setGameInfo(currentCell.textLabel!.text!, numPlayers: self.numPlayers, potSize: self.potSize, price: self.price)
+                    self.navigationController?.pushViewController(viewController, animated: true)
+                }
+                    
+            }
+            else
+            {
+                // Log details of the failure
+                println("Error: \(error!) \(error!.userInfo!)")
+            }
+        }
     }
     
     

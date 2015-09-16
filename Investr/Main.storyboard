@@ -250,6 +250,7 @@
                         <outlet property="enterGameButton" destination="acY-UR-hAg" id="Fmy-LH-Jpt"/>
                         <outlet property="gameName" destination="oJC-A9-aYk" id="m2O-Bu-LRg"/>
                         <outlet property="numPlayers" destination="FiW-GY-5M3" id="urO-bH-5sv"/>
+                        <outlet property="potSizeLabel" destination="YAM-BB-rPr" id="sur-l5-sa2"/>
                         <outlet property="priceLabel" destination="inA-Xl-jhX" id="YNz-AK-WHg"/>
                         <outlet property="startDate" destination="Kdo-Yg-yE5" id="oIR-HD-2xg"/>
                     </connections>
