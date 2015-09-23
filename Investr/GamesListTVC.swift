@@ -61,10 +61,31 @@ class GamesListTVC: UIViewController {
             else
             {
                 // Log details of the failure
-                //print("Error: \(error!) \(error!.userInfo)")
+                print("Error: \(error!) \(error!.userInfo)")
             }
         }
-        
+       
+        let query2 = PFQuery(className: "Game")
+        query2.whereKey("Playing", equalTo:true)
+        query2.findObjectsInBackgroundWithBlock {
+            (objects2: [PFObject]?, error: NSError?) -> Void in
+            
+            if error == nil{
+                if let objects2 = objects2
+                {
+                    self.playingGamesnum = objects2.count
+                    for object2 in objects2
+                    {
+                        self.playingGames.append(object2["Name"]! as! String)
+                    }
+                    self.upcomingGamesTV.reloadData()
+                }
+            }
+            else
+            {
+                print("Error: \(error!) \(error!.userInfo)")
+            }
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -89,18 +110,38 @@ class GamesListTVC: UIViewController {
     
     // MARK: - Table view data source
     
+    func tableView(tableView: UITableView,
+        titleForHeaderInSection section: Int) -> String?
+    {
+        if(section == 0)
+        {
+            return "Running Games"
+        }
+        else
+        {
+            return "Upcoming Games"
+        }
+    }
+    
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
         
-        return 1
+        return 2
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
         
-        return upcomingGamesnum
+        if(section == 0)
+        {
+            return playingGamesnum
+        }
+        else
+        {
+            return upcomingGamesnum
+        }
         
        
     }
@@ -110,7 +151,14 @@ class GamesListTVC: UIViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) 
         
         // Configure the cell...
-            cell.textLabel!.text = self.upcomingGames[indexPath.row] //display upcoming games
+        if(indexPath.section == 0)
+        {
+            cell.textLabel!.text = self.playingGames[indexPath.row] //display upcoming games
+        }
+        else
+        {
+            cell.textLabel!.text = self.upcomingGames[indexPath.row] //display currently running games
+        }
         
         return cell
     }
