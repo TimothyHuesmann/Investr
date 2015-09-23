@@ -19,13 +19,13 @@ class MenuVC: UIViewController {
     
     @IBAction func upcomingGamesButtonPressed(sender: AnyObject)
     {
-        var gameslistVC = self.storyboard?.instantiateViewControllerWithIdentifier("GamesListTVC") as! GamesListTVC
+        let gameslistVC = self.storyboard?.instantiateViewControllerWithIdentifier("GamesListTVC") as! GamesListTVC
         self.navigationController?.pushViewController(gameslistVC, animated: true)
     }
     
     @IBAction func myGamesButtonPressed(sender: AnyObject)
     {
-        var myGamesVC = self.storyboard?.instantiateViewControllerWithIdentifier("MyGamesTVC") as! MyGamesTVC
+        let myGamesVC = self.storyboard?.instantiateViewControllerWithIdentifier("MyGamesTVC") as! MyGamesTVC
         self.navigationController?.pushViewController(myGamesVC, animated: true)
     }
     

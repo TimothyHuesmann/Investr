@@ -18,33 +18,47 @@ class LoginVC: UIViewController{
     
     @IBAction func submitButtonPressed(sender: AnyObject)
     {
+        let username = userNameTF.text!
+        let password = passwordTF.text!
         if(self.userNameTF.text != "" && self.passwordTF.text != "")
         {
-            PFUser.logInWithUsernameInBackground(self.userNameTF.text, password: self.passwordTF.text) {
+            PFUser.logInWithUsernameInBackground(username, password: password) {
                 (user: PFUser?, error: NSError?) -> Void in
                 if user != nil {
-                    var menuVC = self.storyboard?.instantiateViewControllerWithIdentifier("MenuVC") as! MenuVC
+                    let menuVC = self.storyboard?.instantiateViewControllerWithIdentifier("MenuVC") as! MenuVC
                     self.navigationController?.pushViewController(menuVC, animated: true)
                     // Do stuff after successful login.
-                    InvestrCore.currUser = self.userNameTF.text         //saves global username
-                    var query = PFUser.query()
+                    InvestrCore.currUser = self.userNameTF.text!         //saves global username
+                    let query = PFUser.query()
                     query!.whereKey("username", equalTo: InvestrCore.currUser)
-                    var user = query!.findObjects()
+                    
+                    do{
+                    _ = try query!.findObjects()
+                    }
+                    catch
+                    {
+                        
+                    }
+                    
+                    
                     InvestrCore.userID = PFUser.currentUser()!.objectId!    //saves global user objectId
                     
                 } else {
-                    var alert = UIAlertView()
+                    let alert = UIAlertView()
                     alert.title = "Login Error"
                     alert.message = "Invalid Email/Password Combination, Please Try Again"
                     alert.addButtonWithTitle("OK")
                     alert.show()
                     // The login failed. Check error to see why.
                 }
+                
             }
+            
+            
         }
         else
         {
-            var alert = UIAlertView()
+            let alert = UIAlertView()
             alert.title = "Login Error"
             alert.message = "Invalid Email/Password Combination, Please Try Again"
             alert.addButtonWithTitle("OK")

@@ -39,16 +39,16 @@ class GamesListTVC: UIViewController {
     
     func firstGamesQuery()          //query of games that are not yet running
     {
-        var query = PFQuery(className: "Game")
+        let query = PFQuery(className: "Game")
         query.whereKey("Playing", equalTo:false)
         query.findObjectsInBackgroundWithBlock {
-            (objects: [AnyObject]?, error: NSError?) -> Void in
+            (objects: [PFObject]?, error: NSError?) -> Void in
             
             if error == nil {
                 // The find succeeded.
-                println("Successfully retrieved \(objects!.count) scores.")
+                print("Successfully retrieved \(objects!.count) scores.")
                 // Do something with the found objects
-                if let objects = objects as? [PFObject]
+                if let objects = objects
                 {
                     self.upcomingGamesnum = objects.count
                     for object in objects
@@ -61,7 +61,7 @@ class GamesListTVC: UIViewController {
             else
             {
                 // Log details of the failure
-                println("Error: \(error!) \(error!.userInfo!)")
+                //print("Error: \(error!) \(error!.userInfo)")
             }
         }
         
@@ -107,7 +107,7 @@ class GamesListTVC: UIViewController {
     
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) 
         
         // Configure the cell...
             cell.textLabel!.text = self.upcomingGames[indexPath.row] //display upcoming games
@@ -118,19 +118,19 @@ class GamesListTVC: UIViewController {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath!)
     {
         
-        let indexPath = tableView.indexPathForSelectedRow()
+        let indexPath = tableView.indexPathForSelectedRow
         let currentCell = tableView.cellForRowAtIndexPath(indexPath!) as UITableViewCell!
-        var query = PFQuery(className: "Game")
-        print(currentCell.textLabel!.text!)
+        let query = PFQuery(className: "Game")
+        print(currentCell.textLabel!.text!, terminator: "")
         query.whereKey("Name", equalTo: currentCell.textLabel!.text!)
         query.findObjectsInBackgroundWithBlock
         {
-            (objects: [AnyObject]?, error: NSError?) -> Void in
+            (objects: [PFObject]?, error: NSError?) -> Void in
             if error == nil
             {
                 //the find succeeded
-                println("Successfully found \(objects!.count) Games")
-                if let objects = objects as? [PFObject]
+                //print("Successfully found \(objects!.count) Games")
+                if let objects = objects
                 {
                     if objects[0]["CurrentPlayers"] != nil
                     {
@@ -150,7 +150,7 @@ class GamesListTVC: UIViewController {
                         self.potSize = 0
                     }
                     self.price = objects[0]["Price"]! as! Double    //setting the price label
-                    var viewController = self.storyboard?.instantiateViewControllerWithIdentifier("PlannedGameVC") as! PlannedGameVC
+                    let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("PlannedGameVC") as! PlannedGameVC
                     
                     viewController.setGameInfo(currentCell.textLabel!.text!, numPlayers: self.numPlayers, potSize: self.potSize, price: self.price)
                     self.navigationController?.pushViewController(viewController, animated: true)
@@ -160,7 +160,7 @@ class GamesListTVC: UIViewController {
             else
             {
                 // Log details of the failure
-                println("Error: \(error!) \(error!.userInfo!)")
+                //print("Error: \(error!) \(error!.userInfo!)")
             }
         }
     }

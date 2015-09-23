@@ -17,14 +17,14 @@ class MainVC: UIViewController {
     
     @IBAction func loginButtonPressed(sender: AnyObject)        //login button
     {
-        var loginVC = self.storyboard?.instantiateViewControllerWithIdentifier("LoginVC") as! LoginVC
+        let loginVC = self.storyboard?.instantiateViewControllerWithIdentifier("LoginVC") as! LoginVC
         self.navigationController?.pushViewController(loginVC, animated: true)
     }
     
     
     @IBAction func registerButtonPressed(sender: AnyObject)     //registration button
     {
-        var registerVC = self.storyboard?.instantiateViewControllerWithIdentifier("RegisterVC") as! RegisterVC
+        let registerVC = self.storyboard?.instantiateViewControllerWithIdentifier("RegisterVC") as! RegisterVC
         self.navigationController?.pushViewController(registerVC, animated: true)
     }
     override func viewDidLoad() {

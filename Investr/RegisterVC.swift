@@ -22,7 +22,7 @@ class RegisterVC: UIViewController {
     {
         if(self.usernameTF.text != "" && self.emailTF.text != "" && self.phoneTF.text != "" && self.passwordTF.text != "" && self.conPasswordTF.text != "" && self.passwordTF.text == self.conPasswordTF.text)
         {
-            var user = PFUser()
+            let user = PFUser()
             user.username = self.usernameTF.text
             user.password = self.passwordTF.text
             user.email = self.emailTF.text
@@ -32,11 +32,11 @@ class RegisterVC: UIViewController {
             user.signUpInBackgroundWithBlock {
                 (succeeded: Bool, error: NSError?) -> Void in
                 if let error = error {
-                    let errorString = error.userInfo?["error"] as? NSString
+                    let errorString = error.userInfo["error"] as? NSString
                     // Show the errorString somewhere and let the user try again.
                 } else {
                     // Hooray! Let them use the app now.
-                    var alert = UIAlertView()
+                    let alert = UIAlertView()
                     alert.title = "Thank You"
                     alert.message = "You have now registered"
                     alert.addButtonWithTitle("OK")
@@ -47,7 +47,7 @@ class RegisterVC: UIViewController {
         }                                       //error checking and responses
         else if(self.usernameTF.text == "")
         {
-            var alert = UIAlertView()
+            let alert = UIAlertView()
             alert.title = "Error"
             alert.message = "Please Enter a Username"
             alert.addButtonWithTitle("OK")
@@ -55,7 +55,7 @@ class RegisterVC: UIViewController {
         }
         else if(self.emailTF.text == "")
         {
-            var alert = UIAlertView()
+            let alert = UIAlertView()
             alert.title = "Error"
             alert.message = "Please Enter an Email"
             alert.addButtonWithTitle("OK")
@@ -63,7 +63,7 @@ class RegisterVC: UIViewController {
         }
         else if(self.phoneTF.text == "")
         {
-            var alert = UIAlertView()
+            let alert = UIAlertView()
             alert.title = "Error"
             alert.message = "Please Enter a Phone Number"
             alert.addButtonWithTitle("OK")
@@ -71,7 +71,7 @@ class RegisterVC: UIViewController {
         }
         else if(self.passwordTF.text == "")
         {
-            var alert = UIAlertView()
+            let alert = UIAlertView()
             alert.title = "Error"
             alert.message = "Please Enter a Password"
             alert.addButtonWithTitle("OK")
@@ -79,7 +79,7 @@ class RegisterVC: UIViewController {
         }
         else if(self.passwordTF.text != "" && self.passwordTF.text != self.conPasswordTF.text)
         {
-            var alert = UIAlertView()
+            let alert = UIAlertView()
             alert.title = "Error"
             alert.message = "Passwords Do Not Match Please Enter Again"
             alert.addButtonWithTitle("OK")

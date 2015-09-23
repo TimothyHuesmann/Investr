@@ -17,17 +17,17 @@ class MyGamesTVC: UIViewController {
     
     func gamesQuery()
     {
-        var query2 = PFQuery(className: "Game")       //query of games that are running and the user is in
+        let query2 = PFQuery(className: "Game")       //query of games that are running and the user is in
         query2.whereKey("Playing", equalTo:true)
         query2.whereKey("CurrentPlayers", equalTo:InvestrCore.currUser)
         query2.findObjectsInBackgroundWithBlock {
-            (objects2: [AnyObject]?, error: NSError?) -> Void in
+            (objects2: [PFObject]?, error: NSError?) -> Void in
             
             if error == nil {
                 // The find succeeded.
-                println("Successfully retrieved \(objects2!.count) scores.")
+                print("Successfully retrieved \(objects2!.count) scores.")
                 // Do something with the found objects
-                if let objects2 = objects2 as? [PFObject] {
+                if let objects2 = objects2  {
                     self.playingGamesnum = objects2.count
                     for object2 in objects2
                     {
@@ -36,11 +36,11 @@ class MyGamesTVC: UIViewController {
                 }
             } else {
                 // Log details of the failure
-                println("Error: \(error!) \(error!.userInfo!)")
+                print("Error: \(error!) \(error!.userInfo)")
             }
         }
         
-        var query3 = PFQuery(className: "Game")
+        
         
     }
     
@@ -77,7 +77,7 @@ class MyGamesTVC: UIViewController {
 
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) 
 
         // Configure the cell...
         
@@ -88,10 +88,9 @@ class MyGamesTVC: UIViewController {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath!)
     {
-        let indexPath = tableView.indexPathForSelectedRow()
+        let indexPath = tableView.indexPathForSelectedRow
         let currentCell = tableView.cellForRowAtIndexPath(indexPath!) as UITableViewCell!
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        var viewController = self.storyboard?.instantiateViewControllerWithIdentifier("CurrentGameVC") as! CurrentGameVC
+        let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("CurrentGameVC") as! CurrentGameVC
         viewController.setName(currentCell.textLabel!.text!)
         self.navigationController?.pushViewController(viewController, animated: true)
         
