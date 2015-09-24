@@ -22,6 +22,12 @@ class PlannedGameVC: UIViewController {
     var tempPotSize : Int!
     @IBAction func enterButtonPressed(sender: AnyObject)
     {
+        let alertController = UIAlertController(title: "Confirm", message:
+            "Are your sure to join the game?", preferredStyle: UIAlertControllerStyle.Alert)
+        alertController.addAction(UIAlertAction(title: "Yes", style: UIAlertActionStyle.Default,handler: nil))
+        alertController.addAction(UIAlertAction(title: "No", style: UIAlertActionStyle.Default,handler: nil))
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
         //needs to add a confirmation button
         //needs to add the function to add to the game
         

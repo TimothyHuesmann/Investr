@@ -12,9 +12,12 @@ class CurrentGameVC: UIViewController {
 
     @IBOutlet weak var StockTV: UITableView!
     @IBOutlet weak var gameName: UILabel!
+    @IBOutlet weak var wallet: UILabel!
     var tempName = ""
     var stocksNum = 0
     var stocks = [String]()
+    var tempEnd = ""
+    var tempWallet = 0
     override func viewDidLoad() {
         super.viewDidLoad()
         self.gameName.text = tempName
@@ -27,9 +30,10 @@ class CurrentGameVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func setGame(name: String)
+    func setGame(name: String, end: String)
     {
         tempName = name
+        tempEnd = end
     }
     
 

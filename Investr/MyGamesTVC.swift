@@ -16,6 +16,10 @@ class MyGamesTVC: UIViewController {
     var playingGames = [String]()
     var myUpcomingGamesnum = 0
     var myUpcomingGames = [String]()
+    var endGame = ""
+    var tempID = ""
+    var tempWallet = 0.0
+    var tempStocks = [String]()
     
     func gamesQuery()
     {
@@ -140,9 +144,48 @@ class MyGamesTVC: UIViewController {
     {
         let indexPath = tableView.indexPathForSelectedRow
         let currentCell = tableView.cellForRowAtIndexPath(indexPath!) as UITableViewCell!
-        let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("CurrentGameVC") as! CurrentGameVC
-        viewController.setGame(currentCell.textLabel!.text!)
-        self.navigationController?.pushViewController(viewController, animated: true)
+        let query3 = PFQuery(className: "Games")
+        query3.whereKey("Name", equalTo: currentCell.textLabel!.text!)
+        query3.findObjectsInBackgroundWithBlock
+        {
+            (objects: [PFObject]?, error: NSError?) -> Void in
+            if error == nil
+            {
+                if let objects = objects
+                {
+                    self.endGame = objects[0]["EndTime"] as! String
+                    self.tempID = objects[0].objectId!
+                }
+            }
+            else
+            {
+                print("Error: \(error) \(error!.userInfo)")
+            }
+            let query4 = PFQuery(className: "Transaction")
+            query4.whereKey("GameID", equalTo: self.tempID)
+            query4.whereKey("userName", equalTo: InvestrCore.currUser)
+            query4.findObjectsInBackgroundWithBlock
+            {
+                (objects2: [PFObject]?, error: NSError?) -> Void in
+                if error == nil
+                {
+                    if let objects2 = objects2
+                    {
+                        self.tempWallet = objects2[0]["Wallet"] as! Double
+                        self.tempStocks = objects2[0]["stocksInHand"] as! [String]
+                    }
+                    let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("CurrentGameVC") as! CurrentGameVC
+                    viewController.setGame(currentCell.textLabel!.text!, end: "")
+                    self.navigationController?.pushViewController(viewController, animated: true)
+                }
+                else
+                {
+                    print("Error: \(error) \(error!.userInfo)")
+                }
+                
+            }
+        }
+        
         
     }
     
