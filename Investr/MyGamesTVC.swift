@@ -141,7 +141,7 @@ class MyGamesTVC: UIViewController {
         let indexPath = tableView.indexPathForSelectedRow
         let currentCell = tableView.cellForRowAtIndexPath(indexPath!) as UITableViewCell!
         let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("CurrentGameVC") as! CurrentGameVC
-        viewController.setName(currentCell.textLabel!.text!)
+        viewController.setGame(currentCell.textLabel!.text!)
         self.navigationController?.pushViewController(viewController, animated: true)
         
     }
