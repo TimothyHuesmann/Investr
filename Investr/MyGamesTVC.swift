@@ -186,10 +186,9 @@ class MyGamesTVC: UIViewController {
                     if let objects2 = objects2
                     {
                         self.tempWallet = objects2[0]["currentMoney"] as! Double
-                        self.tempStocks = objects2[0]["stocksInHand"] as! [String]
-                        self.tempStocksnum = self.tempStocks.count
                         let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("CurrentGameVC") as! CurrentGameVC
-                        viewController.setGame(currentCell.textLabel!.text!, end: self.endGame, userWallet: self.tempWallet, theStocks: self.tempStocks, numStocks: self.tempStocksnum)
+                        viewController.setGame(currentCell.textLabel!.text!, end: self.endGame, userWallet: self.tempWallet, gameID: self.tempID)
+                        viewController.getStocks()
                         self.navigationController?.pushViewController(viewController, animated: true)
                     }
                     
