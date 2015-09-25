@@ -20,6 +20,7 @@ class PlannedGameVC: UIViewController {
     var tempNumPlayers : Int!
     var tempPriceLabel : Double!
     var tempPotSize : Int!
+    var gameID : String!
     @IBAction func enterButtonPressed(sender: AnyObject)
     {
         let alertController = UIAlertController(title: "Confirm", message:
@@ -49,12 +50,13 @@ class PlannedGameVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func setGameInfo(name: String, numPlayers: Int, potSize: Int, price: Double)
+    func setGameInfo(name: String, numPlayers: Int, potSize: Int, price: Double, gameID: String)
     {
         self.tempGameName = name
         self.tempNumPlayers = numPlayers
         self.tempPriceLabel = price
         self.tempPotSize = potSize
+        self.gameID = gameID
     }
     
     

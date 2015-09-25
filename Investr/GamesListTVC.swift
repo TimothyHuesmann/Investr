@@ -19,10 +19,7 @@ protocol GamesListTVCDelegate
 class GamesListTVC: UIViewController {
     
     
-    @IBAction func switchPressed(sender: AnyObject)
-    {
-        self.upcomingGamesTV.reloadData()
-    }
+    
     
     
     @IBOutlet weak var upcomingGamesTV: UITableView!
@@ -34,6 +31,7 @@ class GamesListTVC: UIViewController {
     var numPlayers = 0
     var potSize = 0
     var price = 0.0
+    var tempID = ""
     
     
     
@@ -180,6 +178,7 @@ class GamesListTVC: UIViewController {
                 //print("Successfully found \(objects!.count) Games")
                 if let objects = objects
                 {
+                    self.tempID = objects[0].objectId!
                     if objects[0]["CurrentPlayers"] != nil
                     {
                         self.numPlayers = objects[0]["CurrentPlayers"]!.count     //setting the number of players label
@@ -200,7 +199,7 @@ class GamesListTVC: UIViewController {
                     self.price = objects[0]["Price"]! as! Double    //setting the price label
                     let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("PlannedGameVC") as! PlannedGameVC
                     
-                    viewController.setGameInfo(currentCell.textLabel!.text!, numPlayers: self.numPlayers, potSize: self.potSize, price: self.price)
+                    viewController.setGameInfo(currentCell.textLabel!.text!, numPlayers: self.numPlayers, potSize: self.potSize, price: self.price, gameID: self.tempID)
                     self.navigationController?.pushViewController(viewController, animated: true)
                 }
                     
@@ -208,7 +207,7 @@ class GamesListTVC: UIViewController {
             else
             {
                 // Log details of the failure
-                //print("Error: \(error!) \(error!.userInfo!)")
+                print("Error: \(error!) \(error!.userInfo)")
             }
         }
     }
