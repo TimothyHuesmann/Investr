@@ -16,10 +16,11 @@ class MyGamesTVC: UIViewController {
     var playingGames = [String]()
     var myUpcomingGamesnum = 0
     var myUpcomingGames = [String]()
-    var endGame = ""
+    var endGame = NSDate()
     var tempID = ""
     var tempWallet = 0.0
     var tempStocks = [String]()
+    var tempStocksnum = 0
     
     func gamesQuery()
     {
@@ -38,8 +39,10 @@ class MyGamesTVC: UIViewController {
                     for object2 in objects2
                     {
                         self.playingGames.append(object2["Name"]! as! String)
+                        
                     }
                 }
+                self.theGamesTV.reloadData()
             } else {
                 // Log details of the failure
                 print("Error: \(error!) \(error!.userInfo)")
@@ -59,7 +62,9 @@ class MyGamesTVC: UIViewController {
                     for object in objects
                     {
                         self.myUpcomingGames.append(object["Name"]! as! String)
+                        
                     }
+                    self.theGamesTV.reloadData()
                 }
                 else
                 {
@@ -69,6 +74,12 @@ class MyGamesTVC: UIViewController {
         }
         
         
+        
+    }
+    
+    override func viewWillAppear(animated: Bool)
+    {
+        gamesQuery()
         
     }
     
@@ -125,7 +136,7 @@ class MyGamesTVC: UIViewController {
 
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) 
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
 
         // Configure the cell...
         if(indexPath.section == 0)
@@ -144,46 +155,49 @@ class MyGamesTVC: UIViewController {
     {
         let indexPath = tableView.indexPathForSelectedRow
         let currentCell = tableView.cellForRowAtIndexPath(indexPath!) as UITableViewCell!
-        let query3 = PFQuery(className: "Games")
+        let query3 = PFQuery(className: "Game")
         query3.whereKey("Name", equalTo: currentCell.textLabel!.text!)
         query3.findObjectsInBackgroundWithBlock
         {
-            (objects: [PFObject]?, error: NSError?) -> Void in
-            if error == nil
-            {
-                if let objects = objects
-                {
-                    self.endGame = objects[0]["EndTime"] as! String
-                    self.tempID = objects[0].objectId!
-                }
-            }
-            else
-            {
-                print("Error: \(error) \(error!.userInfo)")
-            }
-            let query4 = PFQuery(className: "Transaction")
-            query4.whereKey("GameID", equalTo: self.tempID)
-            query4.whereKey("userName", equalTo: InvestrCore.currUser)
-            query4.findObjectsInBackgroundWithBlock
-            {
-                (objects2: [PFObject]?, error: NSError?) -> Void in
+                (objects: [PFObject]?, error: NSError?) -> Void in
                 if error == nil
                 {
-                    if let objects2 = objects2
+                    if let objects = objects
                     {
-                        self.tempWallet = objects2[0]["Wallet"] as! Double
-                        self.tempStocks = objects2[0]["stocksInHand"] as! [String]
+                        self.endGame = objects[0]["EndTime"] as! NSDate
+                        self.tempID = objects[0].objectId!
                     }
-                    let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("CurrentGameVC") as! CurrentGameVC
-                    viewController.setGame(currentCell.textLabel!.text!, end: "")
-                    self.navigationController?.pushViewController(viewController, animated: true)
                 }
                 else
                 {
                     print("Error: \(error) \(error!.userInfo)")
                 }
                 
-            }
+                
+        }
+        let query4 = PFQuery(className: "Transaction")
+        query4.whereKey("GameID", equalTo: PFObject(withoutDataWithClassName: "Game", objectId: self.tempID))
+        query4.whereKey("userName", equalTo: InvestrCore.currUser)
+        query4.findObjectsInBackgroundWithBlock
+            {
+                (objects2: [PFObject]?, error: NSError?) -> Void in
+                if error == nil
+                {
+                    if let objects2 = objects2
+                    {
+                        self.tempWallet = objects2[0]["currentMoney"] as! Double
+                        self.tempStocks = objects2[0]["stocksInHand"] as! [String]
+                        self.tempStocksnum = self.tempStocks.count
+                        let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("CurrentGameVC") as! CurrentGameVC
+                        viewController.setGame(currentCell.textLabel!.text!, end: self.endGame, userWallet: self.tempWallet, theStocks: self.tempStocks, numStocks: self.tempStocksnum)
+                        self.navigationController?.pushViewController(viewController, animated: true)
+                    }
+                    
+                }
+                else
+                {
+                    print("Error: \(error) \(error!.userInfo)")
+                }
         }
         
         

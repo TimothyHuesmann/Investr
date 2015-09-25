@@ -16,8 +16,8 @@ class CurrentGameVC: UIViewController {
     var tempName = ""
     var stocksNum = 0
     var stocks = [String]()
-    var tempEnd = ""
-    var tempWallet = 0
+    var tempEnd = NSDate()
+    var tempWallet = 0.0
     override func viewDidLoad() {
         super.viewDidLoad()
         self.gameName.text = tempName
@@ -30,10 +30,13 @@ class CurrentGameVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func setGame(name: String, end: String)
+    func setGame(name: String, end: NSDate, userWallet: Double, theStocks: [String], numStocks: Int)
     {
         tempName = name
         tempEnd = end
+        tempWallet = userWallet
+        stocksNum = numStocks
+        stocks = theStocks
     }
     
 
@@ -58,14 +61,14 @@ class CurrentGameVC: UIViewController {
     {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return 1
+        return stocksNum
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
         
         // Configure the cell...
-        
+        cell.textLabel!.text = self.stocks[indexPath.row]
         
         return cell
     }
