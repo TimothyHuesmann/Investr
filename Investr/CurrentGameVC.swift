@@ -7,20 +7,56 @@
 //
 
 import UIKit
+import Parse
 
 class CurrentGameVC: UIViewController {
 
     @IBOutlet weak var StockTV: UITableView!
     @IBOutlet weak var gameName: UILabel!
     @IBOutlet weak var wallet: UILabel!
-    var tempName = ""
-    var stocksNum = 0
+    var tempName : String!
+    var stocksNum : Int!
     var stocks = [String]()
     var tempEnd = NSDate()
-    var tempWallet = 0.0
+    var tempWallet : Double!
+    var tempID : String!
+    
+    @IBOutlet weak var dateLabel: UILabel!
+    
+    
+    func getStocks()
+    {
+        let query = PFQuery(className: "Transaction")
+        query.whereKey("GameID", equalTo: PFObject(withoutDataWithClassName: "Game", objectId: self.tempID))
+        query.whereKey("userName", equalTo: InvestrCore.currUser)
+        query.findObjectsInBackgroundWithBlock
+        {
+            (objects: [PFObject]?, error: NSError?) -> Void in
+            if error == nil
+            {
+                if let objects = objects
+                {
+                    self.stocks = objects[0]["stocksInHand"] as! [String]
+                    self.stocksNum = self.stocks.count
+                }
+                self.StockTV.reloadData()
+            }
+            else
+            {
+                print("Error: \(error) \(error!.userInfo)")
+            }
+        }
+        
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.gameName.text = tempName
+        self.wallet.text = "$ \(self.tempWallet)"
+        self.dateLabel.text = "\(self.tempEnd)"
+        
+        
 
         // Do any additional setup after loading the view.
     }
@@ -30,13 +66,12 @@ class CurrentGameVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func setGame(name: String, end: NSDate, userWallet: Double, theStocks: [String], numStocks: Int)
+    func setGame(name: String, end: NSDate, userWallet: Double, gameID: String)
     {
         tempName = name
         tempEnd = end
         tempWallet = userWallet
-        stocksNum = numStocks
-        stocks = theStocks
+        tempID = gameID
     }
     
 
