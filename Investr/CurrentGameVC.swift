@@ -14,15 +14,26 @@ class CurrentGameVC: UIViewController {
     @IBOutlet weak var StockTV: UITableView!
     @IBOutlet weak var gameName: UILabel!
     @IBOutlet weak var wallet: UILabel!
+    @IBOutlet weak var sellButton: UIButton!
     var tempName : String!
     var stocksNum : Int!
     var stocks = [String]()
     var tempEnd = NSDate()
     var tempWallet : Double!
     var tempID : String!
+    var tempStock : NSDictionary!
     
     @IBOutlet weak var dateLabel: UILabel!
     
+    @IBAction func buyButtonPressed(sender: AnyObject)
+    {
+        
+    }
+    
+    @IBAction func sellButtonPressed(sender: AnyObject)
+    {
+        
+    }
     
     func getStocks()
     {
@@ -36,8 +47,23 @@ class CurrentGameVC: UIViewController {
             {
                 if let objects = objects
                 {
-                    self.stocks = objects[0]["stocksInHand"] as! [String]
-                    self.stocksNum = self.stocks.count
+                    if objects[0]["stocksInHand"] != nil
+                    {
+                        self.stocksNum = objects[0]["stocksInHand"].count
+                        for(var i = 0; i < self.stocksNum;i++)
+                        {
+                            self.tempStock = objects[0]["stocksInHand"][i] as! NSDictionary
+                            let tempNumStock =  self.tempStock["share"] as! NSString
+                            let tempStockName = self.tempStock["symbol"] as! NSString
+                            self.stocks.append("\(tempStockName)  -   \(tempNumStock)")
+                            
+                        }
+                    }
+                    else
+                    {
+                        self.stocksNum = 0
+                        self.stocks = []
+                    }
                 }
                 self.StockTV.reloadData()
             }
@@ -72,6 +98,7 @@ class CurrentGameVC: UIViewController {
         tempEnd = end
         tempWallet = userWallet
         tempID = gameID
+        self.stocksNum = 0
     }
     
 

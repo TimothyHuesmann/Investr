@@ -358,7 +358,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="DATE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cSQ-og-nwX">
-                                <rect key="frame" x="165" y="576" width="197" height="21"/>
+                                <rect key="frame" x="129" y="576" width="239" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -381,6 +381,20 @@
                                     <outlet property="delegate" destination="OeC-eJ-IZ1" id="ZCl-YN-skB"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9U3-tE-SnS">
+                                <rect key="frame" x="228" y="458" width="76" height="30"/>
+                                <state key="normal" title="Sell Stocks"/>
+                                <connections>
+                                    <action selector="sellButtonPressed:" destination="OeC-eJ-IZ1" eventType="touchDown" id="QQi-24-U4F"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ID4-Vx-zZt">
+                                <rect key="frame" x="41" y="458" width="89" height="30"/>
+                                <state key="normal" title="Buy Stocks"/>
+                                <connections>
+                                    <action selector="buyButtonPressed:" destination="OeC-eJ-IZ1" eventType="touchDown" id="BJC-08-ere"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -391,6 +405,7 @@
                         <outlet property="StockTV" destination="sVH-76-3i1" id="vvl-VQ-Eye"/>
                         <outlet property="dateLabel" destination="cSQ-og-nwX" id="Ast-H7-8Vt"/>
                         <outlet property="gameName" destination="R69-TD-uMh" id="Z6B-ZN-OUq"/>
+                        <outlet property="sellButton" destination="9U3-tE-SnS" id="L63-r7-lrf"/>
                         <outlet property="wallet" destination="peQ-a1-6SK" id="Rte-A3-xm2"/>
                     </connections>
                 </viewController>
