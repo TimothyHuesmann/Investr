@@ -6,53 +6,63 @@
 	<dict>
 		<key>AFNetworking.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>1</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Alamofire.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>2</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Bolts.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>3</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Parse.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>4</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>5</integer>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>SwiftyJSON.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>072200F6946CCC13B132CAD65FFC30AD</key>
+		<key>1F3E672851B3FA409BBCD500616F4791</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>1851193041105BB7FEA45E3C72514658</key>
+		<key>2B1D192B4732F1FB86FB0B2745041111</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>43DDCC30DB6494A8843AA1138600C0DE</key>
+		<key>8EE9FF44FEE17AAF9CD7C4662C7F4092</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>87E0DF6C20DB08760776077DB18AA4D3</key>
+		<key>AB7611BB887DCBA08B2D699DA2042A7E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CE191F4026E0693513F583C680EC5F53</key>
+		<key>B2EC8E5366B5C8D3387C76E271129897</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B9A04D3C9B208813656510FDA8ADAE02</key>
 		<dict>
 			<key>primary</key>
 			<true/>

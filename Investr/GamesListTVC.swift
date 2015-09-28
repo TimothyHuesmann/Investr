@@ -16,12 +16,8 @@ protocol GamesListTVCDelegate
     func VCDidFinish(controller:GamesListTVC)
 }
 
-class GamesListTVC: UIViewController {
-    
-    
-    
-    
-    
+class GamesListTVC: UIViewController
+{
     @IBOutlet weak var upcomingGamesTV: UITableView!
     var currentUser = PFUser.currentUser()
     var upcomingGamesnum = 0

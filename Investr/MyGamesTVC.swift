@@ -167,39 +167,35 @@ class MyGamesTVC: UIViewController {
                         self.endGame = objects[0]["EndTime"] as! NSDate
                         self.tempID = objects[0].objectId!
                     }
-                }
-                else
-                {
-                    print("Error: \(error) \(error!.userInfo)")
-                }
-                
-                
-        }
-        let query4 = PFQuery(className: "Transaction")
-        query4.whereKey("GameID", equalTo: PFObject(withoutDataWithClassName: "Game", objectId: self.tempID))
-        query4.whereKey("userName", equalTo: InvestrCore.currUser)
-        query4.findObjectsInBackgroundWithBlock
-            {
-                (objects2: [PFObject]?, error: NSError?) -> Void in
-                if error == nil
-                {
-                    if let objects2 = objects2
+                    let query4 = PFQuery(className: "Transaction")
+                    query4.whereKey("GameID", equalTo: PFObject(withoutDataWithClassName: "Game", objectId: self.tempID))
+                    query4.whereKey("userName", equalTo: InvestrCore.currUser)
+                    query4.findObjectsInBackgroundWithBlock
                     {
-                        self.tempWallet = objects2[0]["currentMoney"] as! Double
-                        let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("CurrentGameVC") as! CurrentGameVC
-                        viewController.setGame(currentCell.textLabel!.text!, end: self.endGame, userWallet: self.tempWallet, gameID: self.tempID)
-                        viewController.getStocks()
-                        self.navigationController?.pushViewController(viewController, animated: true)
+                        (objects2: [PFObject]?, error: NSError?) -> Void in
+                        if error == nil
+                        {
+                            if let objects2 = objects2
+                            {
+                                self.tempWallet = objects2[0]["currentMoney"] as! Double
+                                let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("CurrentGameVC") as! CurrentGameVC
+                                viewController.setGame(currentCell.textLabel!.text!, end: self.endGame, userWallet: self.tempWallet, gameID: self.tempID)
+                                viewController.getStocks()
+                                self.navigationController?.pushViewController(viewController, animated: true)
+                            }
+                        }
+                        else
+                        {
+                            print("Error: \(error) \(error!.userInfo)")
+                        }
                     }
-                    
+
                 }
                 else
                 {
                     print("Error: \(error) \(error!.userInfo)")
                 }
         }
-        
-        
     }
     
 

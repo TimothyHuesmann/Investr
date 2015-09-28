@@ -393,6 +393,7 @@
                                 <state key="normal" title="Buy Stocks"/>
                                 <connections>
                                     <action selector="buyButtonPressed:" destination="OeC-eJ-IZ1" eventType="touchDown" id="BJC-08-ere"/>
+                                    <segue destination="yac-Ra-oh6" kind="show" id="Kmd-67-je0"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -412,6 +413,49 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xtf-gS-kt0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2370.5" y="419.5"/>
+        </scene>
+        <!--Buy StockVC-->
+        <scene sceneID="Dc8-uF-v5O">
+            <objects>
+                <viewController id="yac-Ra-oh6" customClass="BuyStockVC" customModule="Investr" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Pg8-fo-ebi"/>
+                        <viewControllerLayoutGuide type="bottom" id="6cT-5V-2zK"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="gZ3-WJ-S6o">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Stock Ticker" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="o8U-Pa-gtO">
+                                <rect key="frame" x="91" y="96" width="192" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ndI-YP-ExM">
+                                <rect key="frame" x="162" y="134" width="51" height="30"/>
+                                <state key="normal" title="Lookup"/>
+                                <connections>
+                                    <action selector="lookupButtonPressed:" destination="yac-Ra-oh6" eventType="touchUpInside" id="tAd-Up-myR"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KpD-NO-f2j">
+                                <rect key="frame" x="166" y="172" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="theLabel" destination="KpD-NO-f2j" id="ooZ-gy-X5T"/>
+                        <outlet property="tickerTF" destination="o8U-Pa-gtO" id="9Xd-gf-x6b"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AxC-Oq-f0l" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2759.5" y="419.5"/>
         </scene>
         <!--RegisterVC-->
         <scene sceneID="rLE-Gs-LGk">

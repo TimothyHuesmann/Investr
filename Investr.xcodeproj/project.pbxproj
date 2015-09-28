@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		062D02382E9B9CF542649C49 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 967F751532046204B3A0BF8E /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		68935D9D1BB9794F0042795F /* BuyStockVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68935D9C1BB9794F0042795F /* BuyStockVC.swift */; settings = {ASSET_TAGS = (); }; };
 		A7F148931B972FAC00A13CE2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F148921B972FAC00A13CE2 /* AppDelegate.swift */; };
 		A7F1489A1B972FAC00A13CE2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A7F148991B972FAC00A13CE2 /* Images.xcassets */; };
 		A7F1489D1B972FAC00A13CE2 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A7F1489B1B972FAC00A13CE2 /* LaunchScreen.xib */; };
@@ -58,6 +59,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		68935D9C1BB9794F0042795F /* BuyStockVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuyStockVC.swift; sourceTree = "<group>"; };
 		78A3D6325B35703CA90C709C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		967F751532046204B3A0BF8E /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7F1488D1B972FAC00A13CE2 /* Investr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Investr.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -144,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				A7F148C01B97318800A13CE2 /* Main.storyboard */,
+				A7F148BE1B97313200A13CE2 /* InvestrCore.swift */,
 				A7F148B21B972FCF00A13CE2 /* VCs */,
 				A7F148921B972FAC00A13CE2 /* AppDelegate.swift */,
 				A7F148991B972FAC00A13CE2 /* Images.xcassets */,
@@ -189,7 +192,7 @@
 				A7F1491C1BA7009D00A13CE2 /* MyGamesTVC.swift */,
 				A7F148BC1B97311000A13CE2 /* PlannedGameVC.swift */,
 				A7F149181BA6F94B00A13CE2 /* CurrentGameVC.swift */,
-				A7F148BE1B97313200A13CE2 /* InvestrCore.swift */,
+				68935D9C1BB9794F0042795F /* BuyStockVC.swift */,
 			);
 			name = VCs;
 			sourceTree = "<group>";
@@ -379,6 +382,7 @@
 				A7F148931B972FAC00A13CE2 /* AppDelegate.swift in Sources */,
 				A7F1491D1BA7009D00A13CE2 /* MyGamesTVC.swift in Sources */,
 				A7F148BB1B9730CB00A13CE2 /* GamesListTVC.swift in Sources */,
+				68935D9D1BB9794F0042795F /* BuyStockVC.swift in Sources */,
 				A7F148BF1B97313200A13CE2 /* InvestrCore.swift in Sources */,
 				A7F149191BA6F94B00A13CE2 /* CurrentGameVC.swift in Sources */,
 				A7F148B91B97308A00A13CE2 /* LoginVC.swift in Sources */,
@@ -505,10 +509,7 @@
 			baseConfigurationReference = AC67422E0FED279EED90B0B5 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"/Users/timothyhuesmann/Dropbox/Stockr/parse-library-1.8.2",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Investr/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "THuesmann.$(PRODUCT_NAME:rfc1034identifier)";
@@ -521,10 +522,7 @@
 			baseConfigurationReference = 78A3D6325B35703CA90C709C /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"/Users/timothyhuesmann/Dropbox/Stockr/parse-library-1.8.2",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Investr/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "THuesmann.$(PRODUCT_NAME:rfc1034identifier)";

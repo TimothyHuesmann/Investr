@@ -29,7 +29,7 @@ class PlannedGameVC: UIViewController {
             "Are your sure to join the game?", preferredStyle: UIAlertControllerStyle.Alert)
         alertController.addAction(UIAlertAction(title: "Yes", style: UIAlertActionStyle.Default,handler: {
             (action: UIAlertAction!) in
-            self.joinGame(InvestrCore.userID, gameID: self.gameID)
+            InvestrCore.joinGame(InvestrCore.userID, gameID: self.gameID)
         }))
         alertController.addAction(UIAlertAction(title: "No", style: UIAlertActionStyle.Default,handler: nil))
         
@@ -62,16 +62,6 @@ class PlannedGameVC: UIViewController {
         self.tempPriceLabel = price
         self.tempPotSize = potSize
         self.gameID = gameID
-    }
-    
-    func joinGame(userID: String, gameID: String)
-    {
-        Alamofire.request(.POST, "https://investr-app.herokuapp.com/joinGame", parameters: ["user_id": userID, "game_id": gameID], encoding: .JSON)
-            .responseString { (request, response, data) in
-                print(request)
-                print(response)
-                print(data)
-        }
     }
     /*
     // MARK: - Navigation
