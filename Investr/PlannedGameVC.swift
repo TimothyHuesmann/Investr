@@ -57,7 +57,7 @@ class PlannedGameVC: UIViewController {
     
     func setGameInfo(name: String, numPlayers: Int, potSize: Int, price: Double, gameID: String)
     {
-        self.tempGameName = name
+        self.title = name
         self.tempNumPlayers = numPlayers
         self.tempPriceLabel = price
         self.tempPotSize = potSize

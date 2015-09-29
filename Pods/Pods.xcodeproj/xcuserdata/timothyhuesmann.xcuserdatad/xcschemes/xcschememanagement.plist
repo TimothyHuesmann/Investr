@@ -8,83 +8,46 @@
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>0</integer>
 		</dict>
 		<key>Alamofire.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>1</integer>
 		</dict>
 		<key>Bolts.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>2</integer>
 		</dict>
 		<key>Parse.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>3</integer>
 		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>4</integer>
 		</dict>
 		<key>SwiftyJSON.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>5</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>05047B5393703F6B0A20F70CCD78D860</key>
+		<key>6180EFCEA1692B3300079AE7E4ECFC4E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>1F3E672851B3FA409BBCD500616F4791</key>
+		<key>84AAE5DA131C5DBC739F9C28C40A4477</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2B1D192B4732F1FB86FB0B2745041111</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>437027DD352C912D57E6BF584A7ABEEE</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>8A9579E628FFAC4097B130B51AECC45E</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>8EE9FF44FEE17AAF9CD7C4662C7F4092</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>A2D9743A92963107E43F248EF987DB76</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>AB7611BB887DCBA08B2D699DA2042A7E</key>
+		<key>A15E4AE778EE8C3ACAACFEE89C6F3F31</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -95,6 +58,11 @@
 			<true/>
 		</dict>
 		<key>B9A04D3C9B208813656510FDA8ADAE02</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CA7774272A5383B811239EEAB097D3F8</key>
 		<dict>
 			<key>primary</key>
 			<true/>

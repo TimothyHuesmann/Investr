@@ -78,7 +78,7 @@ class CurrentGameVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.gameName.text = tempName
+        self.title = tempName
         self.wallet.text = "$ \(self.tempWallet)"
         self.dateLabel.text = "\(self.tempEnd)"
         

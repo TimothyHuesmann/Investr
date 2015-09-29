@@ -31,6 +31,7 @@ class InvestrCore: NSObject
             .responseJSON { response in
                 
                 label.text = (response.2.value!["Ask"]!) as! String
+                label.hidden = false
         }
     }
 
