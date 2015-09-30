@@ -51,7 +51,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="zkd-d9-FUg"/>
+                    <navigationItem key="navigationItem" id="zkd-d9-FUg">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="BzC-SK-zrP"/>
+                    </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="loginButton" destination="2rr-0X-ig9" id="bhe-bM-kTH"/>
@@ -108,7 +110,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Login" id="jye-Pg-itf"/>
+                    <navigationItem key="navigationItem" title="Login" id="jye-Pg-itf">
+                        <barButtonItem key="backBarButtonItem" title="Logout" id="mXt-2l-LNc"/>
+                    </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
@@ -161,7 +165,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="All Games" id="JWY-G0-MVX">
-                        <barButtonItem key="backBarButtonItem" title="Back" id="vbT-OP-BMC"/>
+                        <barButtonItem key="backBarButtonItem" title="All Games" id="vbT-OP-BMC"/>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
@@ -312,7 +316,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="My Games" id="dQl-bb-ga5">
-                        <barButtonItem key="backBarButtonItem" title="Back" id="Tcb-w3-Iil"/>
+                        <barButtonItem key="backBarButtonItem" title="My Games" id="Tcb-w3-Iil"/>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
@@ -325,7 +329,7 @@
             </objects>
             <point key="canvasLocation" x="1957.5" y="419.5"/>
         </scene>
-        <!--Title-->
+        <!--Current Game-->
         <scene sceneID="DRP-l7-T7N">
             <objects>
                 <viewController storyboardIdentifier="CurrentGameVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="OeC-eJ-IZ1" customClass="CurrentGameVC" customModule="Investr" customModuleProvider="target" sceneMemberID="viewController">
@@ -379,25 +383,17 @@
                                     <outlet property="delegate" destination="OeC-eJ-IZ1" id="ZCl-YN-skB"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9U3-tE-SnS">
-                                <rect key="frame" x="228" y="458" width="76" height="30"/>
-                                <state key="normal" title="Sell Stocks"/>
-                                <connections>
-                                    <action selector="sellButtonPressed:" destination="OeC-eJ-IZ1" eventType="touchDown" id="QQi-24-U4F"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ID4-Vx-zZt">
-                                <rect key="frame" x="41" y="458" width="89" height="30"/>
+                                <rect key="frame" x="143" y="452" width="89" height="30"/>
                                 <state key="normal" title="Buy Stocks"/>
                                 <connections>
                                     <action selector="buyButtonPressed:" destination="OeC-eJ-IZ1" eventType="touchDown" id="BJC-08-ere"/>
-                                    <segue destination="yac-Ra-oh6" kind="show" id="Kmd-67-je0"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Title" id="5EF-G1-ARq">
+                    <navigationItem key="navigationItem" title="Current Game" id="5EF-G1-ARq">
                         <barButtonItem key="backBarButtonItem" title="Back" id="IVd-n2-SoI"/>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
@@ -406,7 +402,6 @@
                     <connections>
                         <outlet property="StockTV" destination="sVH-76-3i1" id="vvl-VQ-Eye"/>
                         <outlet property="dateLabel" destination="cSQ-og-nwX" id="Ast-H7-8Vt"/>
-                        <outlet property="sellButton" destination="9U3-tE-SnS" id="L63-r7-lrf"/>
                         <outlet property="wallet" destination="peQ-a1-6SK" id="Rte-A3-xm2"/>
                     </connections>
                 </viewController>
@@ -417,7 +412,7 @@
         <!--Buy Stocks-->
         <scene sceneID="Dc8-uF-v5O">
             <objects>
-                <viewController id="yac-Ra-oh6" customClass="BuyStockVC" customModule="Investr" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BuyStockVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="yac-Ra-oh6" customClass="BuyStockVC" customModule="Investr" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Pg8-fo-ebi"/>
                         <viewControllerLayoutGuide type="bottom" id="6cT-5V-2zK"/>
@@ -439,26 +434,92 @@
                                 </connections>
                             </button>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Price" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KpD-NO-f2j">
-                                <rect key="frame" x="91" y="172" width="192" height="21"/>
+                                <rect key="frame" x="89" y="293" width="192" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Ticker" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i19-QW-hTi">
+                                <rect key="frame" x="89" y="187" width="192" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xgE-du-xZI">
+                                <rect key="frame" x="89" y="237" width="192" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Stocks Owned:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UKR-lI-iEG">
+                                <rect key="frame" x="89" y="351" width="192" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Max Possible Buy:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uPd-G2-hPG">
+                                <rect key="frame" x="51" y="420" width="273" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="How Many To Buy" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rWP-ub-nub">
+                                <rect key="frame" x="91" y="488" width="192" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hvh-IW-AlB">
+                                <rect key="frame" x="172" y="560" width="30" height="30"/>
+                                <state key="normal" title="Buy"/>
+                                <connections>
+                                    <action selector="buyButtonPressed:" destination="yac-Ra-oh6" eventType="touchDown" id="abq-g2-hba"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Buy Stocks" id="8nj-PY-SVd">
                         <barButtonItem key="backBarButtonItem" title="Back" id="6JG-jY-9dF"/>
                     </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
-                        <outlet property="theLabel" destination="KpD-NO-f2j" id="ooZ-gy-X5T"/>
+                        <outlet property="askLabel" destination="KpD-NO-f2j" id="f9i-XG-Rva"/>
+                        <outlet property="buyButton" destination="Hvh-IW-AlB" id="lBG-Vx-Z3c"/>
+                        <outlet property="maxBuyLabel" destination="uPd-G2-hPG" id="fWK-vE-WqO"/>
+                        <outlet property="nameLabel" destination="xgE-du-xZI" id="WDp-00-4DX"/>
+                        <outlet property="numBuyingTF" destination="rWP-ub-nub" id="X62-kX-A9z"/>
+                        <outlet property="numOwnedLabel" destination="UKR-lI-iEG" id="OCi-r9-M6k"/>
+                        <outlet property="tickerLabel" destination="i19-QW-hTi" id="A1U-vE-hY1"/>
                         <outlet property="tickerTF" destination="o8U-Pa-gtO" id="9Xd-gf-x6b"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AxC-Oq-f0l" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2759.5" y="419.5"/>
+            <point key="canvasLocation" x="2783.5" y="419.5"/>
+        </scene>
+        <!--Stock View-->
+        <scene sceneID="bO3-pY-hRT">
+            <objects>
+                <viewController storyboardIdentifier="StockVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="sla-da-MV4" customClass="StockVC" customModule="Investr" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="zGA-W7-TON"/>
+                        <viewControllerLayoutGuide type="bottom" id="jcO-iC-wS6"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="eb9-3k-jgy">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Stock View" id="H1L-Ad-DVS">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="brF-Le-PVg"/>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="i9U-ur-1K1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2783.5" y="1144.5"/>
         </scene>
         <!--Registration-->
         <scene sceneID="rLE-Gs-LGk">
@@ -588,7 +649,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Welcome, User" id="Jy7-1l-NLV"/>
+                    <navigationItem key="navigationItem" title="Welcome, User" id="Jy7-1l-NLV">
+                        <barButtonItem key="backBarButtonItem" title="Menu" id="oAJ-Z2-Lan"/>
+                    </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>

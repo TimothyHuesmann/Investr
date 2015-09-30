@@ -22,17 +22,15 @@ class CurrentGameVC: UIViewController {
     var tempWallet : Double!
     var tempID : String!
     var tempStock : NSDictionary!
+    var stockNames = [String]()
     
     @IBOutlet weak var dateLabel: UILabel!
     
     @IBAction func buyButtonPressed(sender: AnyObject)
     {
-        
-    }
-    
-    @IBAction func sellButtonPressed(sender: AnyObject)
-    {
-        
+        let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("BuyStockVC") as! BuyStockVC
+        viewController.getInfo(self.tempWallet, tempID: self.tempID)
+        self.navigationController?.pushViewController(viewController, animated: true)
     }
     
     func getStocks()
@@ -56,6 +54,7 @@ class CurrentGameVC: UIViewController {
                             let tempNumStock =  self.tempStock["share"] as! NSString
                             let tempStockName = self.tempStock["symbol"] as! NSString
                             self.stocks.append("\(tempStockName)  -   \(tempNumStock)")
+                            self.stockNames.append("\(tempStockName)")
                             
                         }
                     }

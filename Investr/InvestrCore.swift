@@ -14,6 +14,7 @@ class InvestrCore: NSObject
 {
     static var currUser = ""        //current user Username
     static var userID = ""          //current user objectID
+    static var tempValue: String!
     
     static func joinGame(userID: String, gameID: String)
     {
@@ -25,14 +26,15 @@ class InvestrCore: NSObject
         }
     }
     
-    static func getQuote(ticker: String, label: UILabel)
+    static func getQuote(ticker: String, info: String) -> NSString
     {
         Alamofire.request(.GET, "https://investr-app.herokuapp.com/quote/\(ticker)")
             .responseJSON { response in
-                
-                label.text = (response.2.value!["Ask"]!) as! String
-                label.hidden = false
+                print(response.2.value)
+                self.tempValue = (response.2.value!["\(info)"]!) as! String
+               
         }
+        return self.tempValue as NSString
     }
 
 }
