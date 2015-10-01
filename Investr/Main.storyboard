@@ -430,44 +430,39 @@
                                 <rect key="frame" x="162" y="134" width="51" height="30"/>
                                 <state key="normal" title="Lookup"/>
                                 <connections>
-                                    <action selector="lookupButtonPressed:" destination="yac-Ra-oh6" eventType="touchUpInside" id="tAd-Up-myR"/>
+                                    <action selector="lookupButtonPressed:" destination="yac-Ra-oh6" eventType="touchDown" id="w6k-ee-OSw"/>
                                 </connections>
                             </button>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Price" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KpD-NO-f2j">
-                                <rect key="frame" x="89" y="293" width="192" height="21"/>
+                                <rect key="frame" x="89" y="278" width="192" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Ticker" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i19-QW-hTi">
-                                <rect key="frame" x="89" y="187" width="192" height="21"/>
+                                <rect key="frame" x="89" y="172" width="192" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xgE-du-xZI">
-                                <rect key="frame" x="89" y="237" width="192" height="21"/>
+                                <rect key="frame" x="89" y="222" width="192" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Stocks Owned:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UKR-lI-iEG">
-                                <rect key="frame" x="89" y="351" width="192" height="21"/>
+                                <rect key="frame" x="89" y="336" width="192" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Max Possible Buy:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uPd-G2-hPG">
-                                <rect key="frame" x="51" y="420" width="273" height="21"/>
+                                <rect key="frame" x="51" y="405" width="273" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="How Many To Buy" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rWP-ub-nub">
-                                <rect key="frame" x="91" y="488" width="192" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hvh-IW-AlB">
                                 <rect key="frame" x="172" y="560" width="30" height="30"/>
                                 <state key="normal" title="Buy"/>
@@ -475,6 +470,20 @@
                                     <action selector="buyButtonPressed:" destination="yac-Ra-oh6" eventType="touchDown" id="abq-g2-hba"/>
                                 </connections>
                             </button>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="SubTotal:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pG0-Hv-THM">
+                                <rect key="frame" x="91" y="519" width="192" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="How Many To Buy" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rWP-ub-nub">
+                                <rect key="frame" x="91" y="455" width="192" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                <connections>
+                                    <action selector="numBuyingValueChanged:" destination="yac-Ra-oh6" eventType="editingChanged" id="0e5-bX-dwH"/>
+                                </connections>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -490,6 +499,7 @@
                         <outlet property="nameLabel" destination="xgE-du-xZI" id="WDp-00-4DX"/>
                         <outlet property="numBuyingTF" destination="rWP-ub-nub" id="X62-kX-A9z"/>
                         <outlet property="numOwnedLabel" destination="UKR-lI-iEG" id="OCi-r9-M6k"/>
+                        <outlet property="subTotalLabel" destination="pG0-Hv-THM" id="pZ6-VH-vj8"/>
                         <outlet property="tickerLabel" destination="i19-QW-hTi" id="A1U-vE-hY1"/>
                         <outlet property="tickerTF" destination="o8U-Pa-gtO" id="9Xd-gf-x6b"/>
                     </connections>

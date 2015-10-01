@@ -11,6 +11,7 @@ import Parse
 
 class BuyStockVC: UIViewController {
 
+    @IBOutlet weak var subTotalLabel: UILabel!
     @IBOutlet weak var numBuyingTF: UITextField!
     @IBOutlet weak var buyButton: UIButton!
     @IBOutlet weak var maxBuyLabel: UILabel!
@@ -24,15 +25,49 @@ class BuyStockVC: UIViewController {
     var tempStock: NSDictionary!
     var tempMaxNum: Int!
     var tempMax : Double!
-    
-    
-    
+    var subTotal : Double!
     
     @IBAction func buyButtonPressed(sender: AnyObject)
     {
+        InvestrCore.buyStock(Int(self.numBuyingTF.text!)!, ticker: self.tickerLabel.text!)
+        
+        if(InvestrCore.recentStocks != nil)
+        {
+            InvestrCore.recentStocks.append("\(self.tickerLabel.text!)  -   \(self.numBuyingTF.text!)")
+        }
+        else
+        {
+            InvestrCore.recentStocks = ["\(self.tickerLabel.text!)  -   \(self.numBuyingTF.text!)"]
+        }
+        self.navigationController?.popViewControllerAnimated(true)
         
     }
-    override func viewDidLoad() {
+    
+    @IBAction func numBuyingValueChanged(sender: UITextField)
+    {
+        print("touchy")
+        if(sender.text!.isEmpty)
+        {
+            self.buyButton.enabled = false
+        }
+        else
+        {
+            self.buyButton.enabled = true
+            self.subTotal = (Double(self.numBuyingTF.text!)!) * (Double(self.askLabel.text!)!)
+            self.subTotalLabel.text = "Total: $\(self.subTotal)"
+            if(self.subTotal > self.currWallet)
+            {
+                self.buyButton.enabled = false
+            }
+            else
+            {
+                self.buyButton.enabled = true
+            }
+        }
+    }
+
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
@@ -41,11 +76,18 @@ class BuyStockVC: UIViewController {
     @IBAction func lookupButtonPressed(sender: AnyObject)
     {
         checkStocks(self.tickerTF!.text!)
-        self.askLabel.text = InvestrCore.getQuote(self.tickerTF!.text!, info:"Ask") as String
-        self.tickerLabel.text = InvestrCore.getQuote(self.tickerTF!.text!, info:"symbol") as String
-        self.nameLabel.text = InvestrCore.getQuote(self.tickerTF!.text!, info:"Name") as String
-        self.tempMax = self.currWallet/(InvestrCore.getQuote(self.tickerTF.text!, info: "Ask") as NSString).doubleValue
-        self.maxBuyLabel.text = "Max Possible Buy: \(self.tempMax)"
+        
+        //prestage widgets
+        InvestrCore.setLabel = self.maxBuyLabel
+        InvestrCore.currWallet = self.currWallet
+        InvestrCore.numSharesTF = self.numBuyingTF
+        
+        //make the Ask call which relies on the staged widgets
+        InvestrCore.getQuote(self.tickerTF!.text!, label:self.askLabel, value:"Ask")
+        
+        //do the rest
+        InvestrCore.getQuote(self.tickerTF!.text!, label:self.tickerLabel, value:"symbol")
+        InvestrCore.getQuote(self.tickerTF!.text!, label:self.nameLabel, value:"Name")
         activateLabels()
         
     }
@@ -113,6 +155,7 @@ class BuyStockVC: UIViewController {
         self.askLabel.hidden = false
         self.numOwnedLabel.hidden = false
         self.maxBuyLabel.hidden = false
+        self.subTotalLabel.hidden = false
     }
     
 

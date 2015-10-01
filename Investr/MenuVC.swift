@@ -14,9 +14,6 @@ class MenuVC: UIViewController {
     
     var currentUser = PFUser.currentUser()
     
-    @IBOutlet weak var welcomeLabel: UILabel!
-    
-    
     @IBAction func upcomingGamesButtonPressed(sender: AnyObject)
     {
         let gameslistVC = self.storyboard?.instantiateViewControllerWithIdentifier("GamesListTVC") as! GamesListTVC

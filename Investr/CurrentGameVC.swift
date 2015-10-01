@@ -12,9 +12,7 @@ import Parse
 class CurrentGameVC: UIViewController {
 
     @IBOutlet weak var StockTV: UITableView!
-    @IBOutlet weak var gameName: UILabel!
     @IBOutlet weak var wallet: UILabel!
-    @IBOutlet weak var sellButton: UIButton!
     var tempName : String!
     var stocksNum : Int!
     var stocks = [String]()
@@ -45,6 +43,7 @@ class CurrentGameVC: UIViewController {
             {
                 if let objects = objects
                 {
+                    InvestrCore.transactionID = objects[0].objectId
                     if objects[0]["stocksInHand"] != nil
                     {
                         self.stocksNum = objects[0]["stocksInHand"].count
@@ -74,6 +73,15 @@ class CurrentGameVC: UIViewController {
         
     }
     
+    override func viewWillAppear(animated: Bool)
+    {
+        if(InvestrCore.recentStocks != nil)
+        {
+            self.stocks.appendContentsOf(InvestrCore.recentStocks)
+            InvestrCore.recentStocks = []
+        }
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
