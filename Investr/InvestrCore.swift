@@ -16,6 +16,7 @@ class InvestrCore: NSObject
     static var userID = ""          //current user objectID
     static var tempValue: String!
     
+    
     static func joinGame(userID: String, gameID: String)
     {
         Alamofire.request(.POST, "https://investr-app.herokuapp.com/joinGame", parameters: ["user_id": userID, "game_id": gameID], encoding: .JSON)
@@ -26,15 +27,14 @@ class InvestrCore: NSObject
         }
     }
     
-    static func getQuote(ticker: String, info: String) -> NSString
+    static func getQuote(ticker: String, info: String)
     {
         Alamofire.request(.GET, "https://investr-app.herokuapp.com/quote/\(ticker)")
-            .responseJSON { response in
+            .responseJSON
+        { response in
                 print(response.2.value)
                 self.tempValue = (response.2.value!["\(info)"]!) as! String
-               
         }
-        return self.tempValue as NSString
     }
 
 }
