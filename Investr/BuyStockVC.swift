@@ -11,6 +11,7 @@ import Parse
 
 class BuyStockVC: UIViewController {
 
+    @IBOutlet weak var lookupButton: UIButton!
     @IBOutlet weak var subTotalLabel: UILabel!
     @IBOutlet weak var numBuyingTF: UITextField!
     @IBOutlet weak var buyButton: UIButton!
@@ -27,9 +28,13 @@ class BuyStockVC: UIViewController {
     var tempMax : Double!
     var subTotal : Double!
     
+    
     @IBAction func buyButtonPressed(sender: AnyObject)
     {
         InvestrCore.buyStock(Int(self.numBuyingTF.text!)!, ticker: self.tickerLabel.text!)
+        InvestrCore.newlyPurchasedStocks = "\(self.tickerLabel.text!)  -   \(self.numBuyingTF.text!)"
+        
+        InvestrCore.myObservableString.stringValue = "\(self.tickerLabel.text!)  -   \(self.numBuyingTF.text!)"
         
         if(InvestrCore.recentStocks != nil)
         {
@@ -43,9 +48,21 @@ class BuyStockVC: UIViewController {
         
     }
     
+    @IBAction func tickerValueChanged(sender: UITextField)
+    {
+        if(sender.text!.isEmpty)
+        {
+            self.lookupButton.enabled = false
+        }
+        else
+        {
+            self.lookupButton.enabled = true
+        }
+    }
+    
+    
     @IBAction func numBuyingValueChanged(sender: UITextField)
     {
-        print("touchy")
         if(sender.text!.isEmpty)
         {
             self.buyButton.enabled = false
@@ -75,7 +92,8 @@ class BuyStockVC: UIViewController {
 
     @IBAction func lookupButtonPressed(sender: AnyObject)
     {
-        checkStocks(self.tickerTF!.text!)
+        self.tickerTF!.text = self.tickerTF!.text?.uppercaseString
+        InvestrCore.checkOwnedStocks(self.numOwnedLabel,tempID: self.tempID, stockName: self.tickerTF!.text!)
         
         //prestage widgets
         InvestrCore.setLabel = self.maxBuyLabel
@@ -101,51 +119,6 @@ class BuyStockVC: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-
-    
-    func checkStocks(ticker: String)
-    {
-        let query = PFQuery(className: "Transaction")
-        query.whereKey("GameID", equalTo: PFObject(withoutDataWithClassName: "Game", objectId: self.tempID))
-        query.whereKey("userName", equalTo: InvestrCore.currUser)
-        do
-        {
-            let theObjects =  try query.findObjects()
-            if theObjects[0]["stocksInHand"] != nil
-            {
-                
-                for(var i = 0; i < theObjects[0]["stocksInHand"].count!;i++)
-                {
-                    self.tempStock = theObjects[0]["stocksInHand"][i] as! NSDictionary
-                    let tempStockName = self.tempStock["symbol"] as! NSString
-                    if tempStockName == self.tickerTF.text!
-                    {
-                        let tempName = self.tempStock["share"] as! NSString
-                        self.numOwnedLabel.text = "Stocks Owned: \(tempName)"
-                        i = 1000000000
-                    }
-                    else
-                    {
-                        self.numOwnedLabel.text = "Stocks Owned: 0"
-                    }
-                    
-                }
-            }
-            else
-            {
-                self.numOwnedLabel.text = "Stocks Owned: 0"
-            }
-        }
-        catch
-        {
-            
-        }
-        
-        
-        self.numOwnedLabel.hidden = false
-        
     }
     
     func activateLabels()

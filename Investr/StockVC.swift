@@ -11,6 +11,55 @@ import UIKit
 class StockVC: UIViewController
 {
 
+    @IBOutlet weak var numSellingTF: UITextField!
+    @IBOutlet weak var payoutLabel: UILabel!
+    @IBOutlet weak var totalWorthLabel: UILabel!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var numStocksOwnedLabel: UILabel!
+    @IBOutlet weak var currPriceLabel: UILabel!
+    
+    @IBOutlet weak var sellButton: UIButton!
+    @IBOutlet weak var sellAllButton: UIButton!
+    
+    var currPrice : Double!
+    var numStocksOwned : Int!
+    var totalWorth : Double!
+    var name : String!
+    var payout : Double!
+    
+    @IBAction func sellButtonPressed(sender: AnyObject)
+    {
+        
+    }
+    
+    @IBAction func sellAllButtonPressed(sender: AnyObject)
+    {
+        
+    }
+    
+    @IBAction func sellValueChanged(sender: UITextField)
+    {
+        if(sender.text == nil)
+        {
+            self.sellButton.enabled = false
+        }
+        else
+        {
+            self.payout = self.currPrice * (Double(self.numSellingTF.text!)!)
+            self.sellButton.enabled = true
+            self.payoutLabel.text = "Payout: $\(self.payout)"
+        }
+    }
+    
+    func setUp(ticker: String, numStocks: Int, gameID: String)
+    {
+        InvestrCore.checkOwnedStocks(self.numStocksOwnedLabel, tempID: gameID, stockName: ticker)
+        InvestrCore.getQuote(ticker, label: self.currPriceLabel, value: "Ask")
+        InvestrCore.getQuote(ticker, label: self.nameLabel, value: "Name")
+        self.currPrice = (Double(self.currPriceLabel.text!)!)
+        self.totalWorth = (self.currPrice) * (Double(self.numStocksOwnedLabel.text!)!)
+    }
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()

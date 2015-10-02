@@ -80,6 +80,7 @@ class CurrentGameVC: UIViewController {
             self.stocks.appendContentsOf(InvestrCore.recentStocks)
             InvestrCore.recentStocks = []
         }
+        self.StockTV.reloadData()
         
     }
     
@@ -89,7 +90,8 @@ class CurrentGameVC: UIViewController {
         self.wallet.text = "$ \(self.tempWallet)"
         self.dateLabel.text = "\(self.tempEnd)"
         
-        
+        //setup the observable string with newly purchased stocks
+        InvestrCore.myObservableString.addObserver("Observer 1", observer:InvestrCore.genericStringObserver)
 
         // Do any additional setup after loading the view.
     }

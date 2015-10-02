@@ -13,11 +13,6 @@ class MainVC: UIViewController {
     
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var registerButton: UIButton!
-    @IBAction func blah(sender: AnyObject)
-    {
-        let currGameVC = self.storyboard?.instantiateViewControllerWithIdentifier("CurrentGameVC") as! CurrentGameVC
-        self.navigationController?.pushViewController(currGameVC, animated: true)
-    }
     
     
     @IBAction func loginButtonPressed(sender: AnyObject)        //login button
