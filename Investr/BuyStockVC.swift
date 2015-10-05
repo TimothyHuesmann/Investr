@@ -32,19 +32,10 @@ class BuyStockVC: UIViewController {
     @IBAction func buyButtonPressed(sender: AnyObject)
     {
         InvestrCore.buyStock(Int(self.numBuyingTF.text!)!, ticker: self.tickerLabel.text!)
-        InvestrCore.newlyPurchasedStocks = "\(self.tickerLabel.text!)  -   \(self.numBuyingTF.text!)"
-        
-        InvestrCore.myObservableString.stringValue = "\(self.tickerLabel.text!)  -   \(self.numBuyingTF.text!)"
-        
-        if(InvestrCore.recentStocks != nil)
-        {
-            InvestrCore.recentStocks.append("\(self.tickerLabel.text!)  -   \(self.numBuyingTF.text!)")
-        }
-        else
-        {
-            InvestrCore.recentStocks = ["\(self.tickerLabel.text!)  -   \(self.numBuyingTF.text!)"]
-        }
+        InvestrCore.observableString.updateValue ("\(self.tickerLabel.text!)-\(self.numBuyingTF.text!)")
         self.navigationController?.popViewControllerAnimated(true)
+        self.currWallet = self.currWallet - self.subTotal
+        InvestrCore.currWallet = self.currWallet
         
     }
     
@@ -97,7 +88,6 @@ class BuyStockVC: UIViewController {
         
         //prestage widgets
         InvestrCore.setLabel = self.maxBuyLabel
-        InvestrCore.currWallet = self.currWallet
         InvestrCore.numSharesTF = self.numBuyingTF
         
         //make the Ask call which relies on the staged widgets

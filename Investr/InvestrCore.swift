@@ -20,38 +20,17 @@ class InvestrCore: NSObject
     static var currWallet: Double!
     static var numSharesTF: UITextField!
     static var transactionID: String!
-    static var recentStocks: [String]!
-    static var newlyPurchasedStocks: String = ""{willSet(newValue){
-        print("newlyPurchasedStocks will change from "+newlyPurchasedStocks+" to "+newValue)
-        }
-        didSet{
-            print("newlyPurchasedStocks did change from "+oldValue+" to "+newlyPurchasedStocks)
-        }
-    }
-    
-    static var genericStringObserver : ObservableString.Observer = (willSetObserver,didSetObserver)
-    
-    static var myObservableString = ObservableString(initialValue:"initalValue")
-    
-    
-    
-    static var willSetObserver : ObservableString.WillSet = {
-        (currentValue:String?, tobeValue:String?) ->() in
-       print("New value will be: \(tobeValue)")    }
-    
-    
-    static var didSetObserver : ObservableString.DidSet = {
-        (oldValue:String?,currentValue:String?) -> () in
-        print("New value is: \(currentValue)")    }
+    static var observableString = ObservableString(value:"")
+    static var tempID : String!
     
     static func buyStock(numStocks: Int, ticker: String)
     {
         print("numStocks: \(numStocks) ticker: \(ticker)")
         Alamofire.request(.POST, "https://investr-app.herokuapp.com/mobile/buy", parameters: ["transaction_id": self.transactionID, "buy_number": numStocks, "stock_symbol":ticker], encoding: .JSON)
             .responseString { (request, response, data) in
-                print(request)
-                print(response)
-                print(data)
+                //print(request)
+                //print(response)
+                //print(data)
         }
     }
     
@@ -127,6 +106,23 @@ class InvestrCore: NSObject
             
             numOwnedLabel.hidden = false
             
+    }
+    
+    static func indexOfStock(array: [Stock], name: String) -> Int
+    {
+        for(var i = 0; i<array.count;i++)
+        {
+            if(array[i].name == name)
+            {
+                return i
+            }
+            else
+            {
+                
+            }
+        }
+        
+        return -1
     }
     
 }

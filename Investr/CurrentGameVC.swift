@@ -15,9 +15,8 @@ class CurrentGameVC: UIViewController {
     @IBOutlet weak var wallet: UILabel!
     var tempName : String!
     var stocksNum : Int!
-    var stocks = [String]()
+    var stocks = [Stock]()
     var tempEnd = NSDate()
-    var tempWallet : Double!
     var tempID : String!
     var tempStock : NSDictionary!
     var stockNames = [String]()
@@ -27,7 +26,7 @@ class CurrentGameVC: UIViewController {
     @IBAction func buyButtonPressed(sender: AnyObject)
     {
         let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("BuyStockVC") as! BuyStockVC
-        viewController.getInfo(self.tempWallet, tempID: self.tempID)
+        viewController.getInfo(InvestrCore.currWallet, tempID: self.tempID)
         self.navigationController?.pushViewController(viewController, animated: true)
     }
     
@@ -52,7 +51,8 @@ class CurrentGameVC: UIViewController {
                             self.tempStock = objects[0]["stocksInHand"][i] as! NSDictionary
                             let tempNumStock =  self.tempStock["share"] as! NSString
                             let tempStockName = self.tempStock["symbol"] as! NSString
-                            self.stocks.append("\(tempStockName)  -   \(tempNumStock)")
+                            let newStock = Stock(name: tempStockName as String, value: (Int(tempNumStock as String))!)
+                            self.stocks.append(newStock)
                             self.stockNames.append("\(tempStockName)")
                             
                         }
@@ -73,25 +73,30 @@ class CurrentGameVC: UIViewController {
         
     }
     
-    override func viewWillAppear(animated: Bool)
+    func observableStringUpdate(newValue: String)
     {
-        if(InvestrCore.recentStocks != nil)
+        print("I received \(newValue)")
+        let tempVal = newValue.componentsSeparatedByString("-")
+        let tempStock = Stock(name: tempVal[0], value: (Int(tempVal[1]))!)
+        if(InvestrCore.indexOfStock(self.stocks, name: tempStock.name) != -1)
         {
-            self.stocks.appendContentsOf(InvestrCore.recentStocks)
-            InvestrCore.recentStocks = []
+            let tempIndex = InvestrCore.indexOfStock(self.stocks, name: tempStock.name)
+            self.stocks[tempIndex].value = self.stocks[tempIndex].value + tempStock.value
         }
+        else
+        {
+            self.stocks.append(tempStock)
+        }
+        self.wallet.text = "$ \(InvestrCore.currWallet)"
         self.StockTV.reloadData()
-        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        InvestrCore.observableString.addObserver(self)
         self.title = tempName
-        self.wallet.text = "$ \(self.tempWallet)"
+        self.wallet.text = "$ \(InvestrCore.currWallet)"
         self.dateLabel.text = "\(self.tempEnd)"
-        
-        //setup the observable string with newly purchased stocks
-        InvestrCore.myObservableString.addObserver("Observer 1", observer:InvestrCore.genericStringObserver)
 
         // Do any additional setup after loading the view.
     }
@@ -105,7 +110,7 @@ class CurrentGameVC: UIViewController {
     {
         tempName = name
         tempEnd = end
-        tempWallet = userWallet
+        InvestrCore.currWallet = userWallet
         tempID = gameID
         self.stocksNum = 0
     }
@@ -132,20 +137,24 @@ class CurrentGameVC: UIViewController {
     {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return stocksNum
+        return self.stocks.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! StockTVCell
         
         // Configure the cell...
-        cell.textLabel!.text = self.stocks[indexPath.row]
+        cell.nameLabel.text = self.stocks[indexPath.row].name
+        cell.numberLabel.text = "\(self.stocks[indexPath.row].value)"
         
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath!)
     {
+        let indexPath = tableView.indexPathForSelectedRow
+        let currentCell = tableView.cellForRowAtIndexPath(indexPath!) as UITableViewCell!
+        let stockVC = self.storyboard?.instantiateViewControllerWithIdentifier("StockVC")
         
         
     }
