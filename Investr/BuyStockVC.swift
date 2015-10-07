@@ -31,6 +31,7 @@ class BuyStockVC: UIViewController {
     
     @IBAction func buyButtonPressed(sender: AnyObject)
     {
+        InvestrCore.selling = false
         InvestrCore.buyStock(Int(self.numBuyingTF.text!)!, ticker: self.tickerLabel.text!)
         InvestrCore.observableString.updateValue ("\(self.tickerLabel.text!)-\(self.numBuyingTF.text!)")
         self.navigationController?.popViewControllerAnimated(true)

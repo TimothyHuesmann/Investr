@@ -450,6 +450,13 @@
                                     <outlet property="delegate" destination="OeC-eJ-IZ1" id="ZCl-YN-skB"/>
                                 </connections>
                             </tableView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j7K-je-EnI">
+                                <rect key="frame" x="150" y="576" width="42" height="21"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -463,6 +470,7 @@
                     <connections>
                         <outlet property="StockTV" destination="sVH-76-3i1" id="vvl-VQ-Eye"/>
                         <outlet property="dateLabel" destination="cSQ-og-nwX" id="Ast-H7-8Vt"/>
+                        <outlet property="hiddenLabel" destination="j7K-je-EnI" id="HMM-Lz-bef"/>
                         <outlet property="wallet" destination="peQ-a1-6SK" id="Rte-A3-xm2"/>
                     </connections>
                 </viewController>

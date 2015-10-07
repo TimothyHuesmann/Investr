@@ -26,9 +26,17 @@ class StockVC: UIViewController
     var totalWorth : Double!
     var name : String!
     var payout : Double!
+    var ticker: String!
+    var gameID: String!
     
     @IBAction func sellButtonPressed(sender: AnyObject)
     {
+        InvestrCore.selling = true
+        InvestrCore.sellStock((Int(self.numSellingTF.text!)!), ticker: self.ticker)
+        InvestrCore.observableString.updateValue ("\(self.ticker)-\(self.numSellingTF.text!)")
+        self.navigationController?.popViewControllerAnimated(true)
+        
+        
         
     }
     
@@ -53,16 +61,26 @@ class StockVC: UIViewController
     
     func setUp(ticker: String, numStocks: Int, gameID: String)
     {
-        InvestrCore.checkOwnedStocks(self.numStocksOwnedLabel, tempID: gameID, stockName: ticker)
-        InvestrCore.getQuote(ticker, label: self.currPriceLabel, value: "Ask")
-        InvestrCore.getQuote(ticker, label: self.nameLabel, value: "Name")
-        self.currPrice = (Double(self.currPriceLabel.text!)!)
-        self.totalWorth = (self.currPrice) * (Double(self.numStocksOwnedLabel.text!)!)
+        self.numStocksOwned = numStocks
+        self.ticker = ticker
+        self.gameID = gameID
+        //self.currPrice = ask
+        //self.name = name
+    }
+    
+    override func viewWillAppear(animated: Bool)
+    {
+        
     }
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        self.currPrice = (Double(InvestrCore.tempAsk)!)
+        self.totalWorth = (self.currPrice) * (Double(self.numStocksOwned))
+        self.currPriceLabel.text = "\(self.currPrice)"
+        
+        self.totalWorthLabel.text = "\(self.totalWorth)"
 
         // Do any additional setup after loading the view.
     }

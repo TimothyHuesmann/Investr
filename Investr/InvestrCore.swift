@@ -22,6 +22,9 @@ class InvestrCore: NSObject
     static var transactionID: String!
     static var observableString = ObservableString(value:"")
     static var tempID : String!
+    static var selling = false
+    static var tempAsk: String!
+    static var tempName: String!
     
     static func buyStock(numStocks: Int, ticker: String)
     {
@@ -31,6 +34,15 @@ class InvestrCore: NSObject
                 //print(request)
                 //print(response)
                 //print(data)
+        }
+    }
+    
+    static func sellStock(amount: Int, ticker: String)
+    {
+        Alamofire.request(.POST, "https://investr-app.herokuapp.com/mobile/sell", parameters: ["transaction_id": self.transactionID, "sell_number": amount, "stock_symbol": ticker],
+            encoding: .JSON)
+            .responseString { (request, response, data) in
+        
         }
     }
     
@@ -50,8 +62,10 @@ class InvestrCore: NSObject
                 .responseJSON { response in
     
                     label.text = ((response.2.value![value]!) as! String)
+                    
                     if(value == "Ask")
                     {
+                        InvestrCore.tempAsk = (response.2.value![value]!) as! String
                         let num = Int(InvestrCore.currWallet / Double(label.text!)!)
                         InvestrCore.setLabel.text = "\(num)"
                         self.numSharesTF.hidden = false
@@ -61,6 +75,11 @@ class InvestrCore: NSObject
                         InvestrCore.setLabel = nil
                         InvestrCore.currWallet = nil
                         InvestrCore.numSharesTF = nil
+                        
+                    }
+                    else if(value == "Name")
+                    {
+                        self.tempName = (response.2.value![value]!) as! String
                     }
             }
     }

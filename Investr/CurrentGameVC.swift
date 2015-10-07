@@ -11,6 +11,8 @@ import Parse
 
 class CurrentGameVC: UIViewController {
 
+    
+    @IBOutlet weak var hiddenLabel: UILabel!
     @IBOutlet weak var StockTV: UITableView!
     @IBOutlet weak var wallet: UILabel!
     var tempName : String!
@@ -20,6 +22,7 @@ class CurrentGameVC: UIViewController {
     var tempID : String!
     var tempStock : NSDictionary!
     var stockNames = [String]()
+    
     
     @IBOutlet weak var dateLabel: UILabel!
     
@@ -78,16 +81,28 @@ class CurrentGameVC: UIViewController {
         print("I received \(newValue)")
         let tempVal = newValue.componentsSeparatedByString("-")
         let tempStock = Stock(name: tempVal[0], value: (Int(tempVal[1]))!)
-        if(InvestrCore.indexOfStock(self.stocks, name: tempStock.name) != -1)
+        if InvestrCore.selling == false
         {
-            let tempIndex = InvestrCore.indexOfStock(self.stocks, name: tempStock.name)
-            self.stocks[tempIndex].value = self.stocks[tempIndex].value + tempStock.value
+            if(InvestrCore.indexOfStock(self.stocks, name: tempStock.name) != -1)
+            {
+                let tempIndex = InvestrCore.indexOfStock(self.stocks, name: tempStock.name)
+                self.stocks[tempIndex].value = self.stocks[tempIndex].value + tempStock.value
+            }
+            else
+            {
+                self.stocks.append(tempStock)
+            }
+            
         }
         else
         {
-            self.stocks.append(tempStock)
+            let tempIndex = InvestrCore.indexOfStock(self.stocks, name: tempStock.name)
+            self.stocks[tempIndex].value = self.stocks[tempIndex].value - tempStock.value
+            if(self.stocks[tempIndex] == 0)
+            {
+                self.stocks.removeAtIndex(tempIndex)
+            }
         }
-        self.wallet.text = "$ \(InvestrCore.currWallet)"
         self.StockTV.reloadData()
     }
     
@@ -153,10 +168,12 @@ class CurrentGameVC: UIViewController {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath!)
     {
         let indexPath = tableView.indexPathForSelectedRow
-        let currentCell = tableView.cellForRowAtIndexPath(indexPath!) as UITableViewCell!
-        let stockVC = self.storyboard?.instantiateViewControllerWithIdentifier("StockVC")
-        
-        
+        let currentCell = tableView.cellForRowAtIndexPath(indexPath!) as! StockTVCell
+        let stockVC = self.storyboard?.instantiateViewControllerWithIdentifier("StockVC") as! StockVC
+        stockVC.setUp(currentCell.nameLabel.text!, numStocks: (Int(currentCell.numberLabel.text!)!), gameID: self.tempID)
+        InvestrCore.getQuote(currentCell.nameLabel.text!, label: self.hiddenLabel, value: "Ask")
+        //InvestrCore.getQuote(currentCell.nameLabel.text!, label:, value: "Name")
+        self.navigationController?.pushViewController(stockVC, animated: true)        
     }
     /*
     // In a storyboard-based application, you will often want to do a little preparation before navigation
