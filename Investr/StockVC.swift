@@ -42,9 +42,11 @@ class StockVC: UIViewController, Observable
         }
         else if(identifier == "tempName")
         {
-            self.name = InvestrCore.tempName.value
+            self.name = newValue
             self.navigationItem.title = self.name
         }
+        self.nameLabel.text = self.ticker
+        
     }
     
     @IBAction func sellButtonPressed(sender: AnyObject)

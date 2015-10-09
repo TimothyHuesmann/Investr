@@ -66,12 +66,11 @@ class InvestrCore: NSObject
                     if(value == "Ask")
                     {
                         self.tempAsk.value = ((response.2.value![value]!) as! String)
-                        let num = Int(InvestrCore.currWallet / Double(label.text!)!)
+                        let num = Int(InvestrCore.currWallet / Double(self.tempAsk.value)!)
                         
                         if((InvestrCore.setLabel) != nil)
                         {
                             InvestrCore.setLabel.text = "\(num)"
-                            self.numSharesTF.hidden = false
                             self.numSharesTF.becomeFirstResponder()
                         
                         //unstage prestaged widgets
@@ -124,9 +123,6 @@ class InvestrCore: NSObject
             {
                 
             }
-            
-            
-            numOwnedLabel.hidden = false
             
     }
     

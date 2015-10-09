@@ -9,7 +9,7 @@
 import UIKit
 import Parse
 
-class BuyStockVC: UIViewController {
+class BuyStockVC: UIViewController, Observable {
 
     @IBOutlet weak var lookupButton: UIButton!
     @IBOutlet weak var subTotalLabel: UILabel!
@@ -27,6 +27,7 @@ class BuyStockVC: UIViewController {
     var tempMaxNum: Int!
     var tempMax : Double!
     var subTotal : Double!
+    var price : String!
     
     
     @IBAction func buyButtonPressed(sender: AnyObject)
@@ -62,7 +63,7 @@ class BuyStockVC: UIViewController {
         else
         {
             self.buyButton.enabled = true
-            self.subTotal = (Double(self.numBuyingTF.text!)!) * (Double(self.askLabel.text!)!)
+            self.subTotal = (Double(self.numBuyingTF.text!)!) * (Double(self.price)!)
             self.subTotalLabel.text = "Total: $\(self.subTotal)"
             if(self.subTotal > self.currWallet)
             {
@@ -78,6 +79,8 @@ class BuyStockVC: UIViewController {
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        InvestrCore.tempName.addObserver(self)
+        InvestrCore.tempAsk.addObserver(self)
 
         // Do any additional setup after loading the view.
     }
@@ -97,7 +100,7 @@ class BuyStockVC: UIViewController {
         //do the rest
         InvestrCore.getQuote(self.tickerTF!.text!, label:self.tickerLabel, value:"symbol")
         InvestrCore.getQuote(self.tickerTF!.text!, label:self.nameLabel, value:"Name")
-        activateLabels()
+        
         
     }
     
@@ -120,6 +123,18 @@ class BuyStockVC: UIViewController {
         self.numOwnedLabel.hidden = false
         self.maxBuyLabel.hidden = false
         self.subTotalLabel.hidden = false
+        self.numBuyingTF.hidden = false
+    }
+    
+    func observableStringUpdate(newValue: String, identifier: String)
+    {
+        self.askLabel.text = "Stock Price: $\(self.askLabel.text!)"
+        if(identifier == "tempAsk")
+        {
+            self.price = newValue
+        }
+        self.maxBuyLabel.text = "Maximum Stocks Affordable: \(self.maxBuyLabel.text!)"
+        activateLabels()
     }
     
 
