@@ -9,7 +9,7 @@
 import UIKit
 import Parse
 
-class CurrentGameVC: UIViewController {
+class CurrentGameVC: UIViewController, Observable {
 
     
     @IBOutlet weak var hiddenLabel: UILabel!
@@ -76,9 +76,9 @@ class CurrentGameVC: UIViewController {
         
     }
     
-    func observableStringUpdate(newValue: String)
+    func observableStringUpdate(newValue: String, identifier: String)
     {
-        print("I received \(newValue)")
+        print("I received \(newValue) for variable: \(identifier)")
         let tempVal = newValue.componentsSeparatedByString("-")
         let tempStock = Stock(name: tempVal[0], value: (Int(tempVal[1]))!)
         if InvestrCore.selling == false
@@ -172,7 +172,7 @@ class CurrentGameVC: UIViewController {
         let stockVC = self.storyboard?.instantiateViewControllerWithIdentifier("StockVC") as! StockVC
         stockVC.setUp(currentCell.nameLabel.text!, numStocks: (Int(currentCell.numberLabel.text!)!), gameID: self.tempID)
         InvestrCore.getQuote(currentCell.nameLabel.text!, label: self.hiddenLabel, value: "Ask")
-        //InvestrCore.getQuote(currentCell.nameLabel.text!, label:, value: "Name")
+        InvestrCore.getQuote(currentCell.nameLabel.text!, label:self.hiddenLabel, value: "Name")
         self.navigationController?.pushViewController(stockVC, animated: true)        
     }
     /*

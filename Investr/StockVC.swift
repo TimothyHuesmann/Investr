@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StockVC: UIViewController
+class StockVC: UIViewController, Observable
 {
 
     @IBOutlet weak var numSellingTF: UITextField!
@@ -28,6 +28,24 @@ class StockVC: UIViewController
     var payout : Double!
     var ticker: String!
     var gameID: String!
+    
+    func observableStringUpdate(newValue: String, identifier: String)
+    {
+        print("StockVC: newval: \(newValue) for var: \(identifier)")
+        if(identifier == "tempAsk")
+        {
+            self.currPrice = (Double(newValue)!)
+            self.totalWorth = (self.currPrice) * (Double(self.numStocksOwned))
+            self.currPriceLabel.text = "Current Price: $\(self.currPrice)"
+            
+            self.totalWorthLabel.text = "Total Worth $\(self.totalWorth)"
+        }
+        else if(identifier == "tempName")
+        {
+            self.name = InvestrCore.tempName.value
+            self.navigationItem.title = self.name
+        }
+    }
     
     @IBAction func sellButtonPressed(sender: AnyObject)
     {
@@ -64,8 +82,6 @@ class StockVC: UIViewController
         self.numStocksOwned = numStocks
         self.ticker = ticker
         self.gameID = gameID
-        //self.currPrice = ask
-        //self.name = name
     }
     
     override func viewWillAppear(animated: Bool)
@@ -76,11 +92,13 @@ class StockVC: UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        self.currPrice = (Double(InvestrCore.tempAsk)!)
-        self.totalWorth = (self.currPrice) * (Double(self.numStocksOwned))
-        self.currPriceLabel.text = "\(self.currPrice)"
         
-        self.totalWorthLabel.text = "\(self.totalWorth)"
+        //register as observers
+        InvestrCore.tempAsk.addObserver(self)
+        InvestrCore.tempName.addObserver(self)
+        
+        
+        
 
         // Do any additional setup after loading the view.
     }
@@ -92,6 +110,7 @@ class StockVC: UIViewController
     }
     
 
+    
     /*
     // MARK: - Navigation
 

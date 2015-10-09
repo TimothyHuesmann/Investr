@@ -8,15 +8,22 @@
 
 import UIKit
 
+
+protocol Observable
+{
+    func observableStringUpdate(newValue: String, identifier: String);
+}
+
 class ObservableString: NSObject
 {
     var observers = NSMutableArray()
+    var identifier = ""
     
     var value = ""{willSet(newValue){
         print("About to set")
         for observer in observers
         {
-            (observer as! CurrentGameVC).observableStringUpdate(newValue)
+            (observer as! Observable).observableStringUpdate(newValue, identifier: identifier)
         }
 
         }
@@ -31,9 +38,10 @@ class ObservableString: NSObject
         self.value = value
     }
     
-    init(value: String)
+    init(value: String, identifier: String)
     {
         self.value = value
+        self.identifier = identifier
     }
     
     func addObserver(observer: AnyObject)

@@ -20,11 +20,11 @@ class InvestrCore: NSObject
     static var currWallet: Double!
     static var numSharesTF: UITextField!
     static var transactionID: String!
-    static var observableString = ObservableString(value:"")
+    static var observableString = ObservableString(value:"", identifier:"buyStock")
     static var tempID : String!
     static var selling = false
-    static var tempAsk: String!
-    static var tempName: String!
+    static var tempAsk = ObservableString(value:"", identifier:"tempAsk")
+    static var tempName = ObservableString(value:"", identifier:"tempName")
     
     static func buyStock(numStocks: Int, ticker: String)
     {
@@ -65,21 +65,24 @@ class InvestrCore: NSObject
                     
                     if(value == "Ask")
                     {
-                        InvestrCore.tempAsk = (response.2.value![value]!) as! String
+                        self.tempAsk.value = ((response.2.value![value]!) as! String)
                         let num = Int(InvestrCore.currWallet / Double(label.text!)!)
-                        InvestrCore.setLabel.text = "\(num)"
-                        self.numSharesTF.hidden = false
-                        self.numSharesTF.becomeFirstResponder()
+                        
+                        if((InvestrCore.setLabel) != nil)
+                        {
+                            InvestrCore.setLabel.text = "\(num)"
+                            self.numSharesTF.hidden = false
+                            self.numSharesTF.becomeFirstResponder()
                         
                         //unstage prestaged widgets
-                        InvestrCore.setLabel = nil
-                        InvestrCore.currWallet = nil
-                        InvestrCore.numSharesTF = nil
+                            InvestrCore.setLabel = nil
+                            InvestrCore.numSharesTF = nil
+                        }
                         
                     }
                     else if(value == "Name")
                     {
-                        self.tempName = (response.2.value![value]!) as! String
+                        self.tempName.value = ((response.2.value![value]!) as! String)
                     }
             }
     }
