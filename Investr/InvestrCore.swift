@@ -26,6 +26,15 @@ class InvestrCore: NSObject
     static var tempAsk = ObservableString(value:"", identifier:"tempAsk")
     static var tempName = ObservableString(value:"", identifier:"tempName")
     
+    static func endGame()
+    {
+        Alamofire.request(.POST, "https://investr-app.heroku.com/mobile/checkout",parameters: ["transaction_id": self.transactionID], encoding: .JSON)
+            .responseString {(request, response, data) in
+                
+        
+        }
+    }
+    
     static func buyStock(numStocks: Int, ticker: String)
     {
         print("numStocks: \(numStocks) ticker: \(ticker)")

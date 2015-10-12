@@ -12,6 +12,7 @@ import Parse
 class CurrentGameVC: UIViewController, Observable {
 
     
+    @IBOutlet weak var historyButton: UIButton!
     @IBOutlet weak var hiddenLabel: UILabel!
     @IBOutlet weak var StockTV: UITableView!
     @IBOutlet weak var wallet: UILabel!
@@ -25,6 +26,13 @@ class CurrentGameVC: UIViewController, Observable {
     
     
     @IBOutlet weak var dateLabel: UILabel!
+    
+    @IBAction func historyButtonPressed(sender: AnyObject)
+    {
+        let currHistoryVC = self.storyboard?.instantiateViewControllerWithIdentifier("CurrHistoryVC") as! CurrHistoryVC
+        currHistoryVC.setUp(self.tempID)
+        self.navigationController?.pushViewController(currHistoryVC, animated: true)
+    }
     
     @IBAction func buyButtonPressed(sender: AnyObject)
     {
