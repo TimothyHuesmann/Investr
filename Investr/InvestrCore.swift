@@ -17,7 +17,7 @@ class InvestrCore: NSObject
     static var userID = ""          //current user objectID
     static var tempValue: String!
     static var setLabel: UILabel!
-    static var currWallet: Double!
+    static var currWallet = ObservableString(value: "", identifier: "wallet")
     static var numSharesTF: UITextField!
     static var transactionID: String!
     static var observableString = ObservableString(value:"", identifier:"buyStock")
@@ -66,7 +66,7 @@ class InvestrCore: NSObject
                     if(value == "Ask")
                     {
                         self.tempAsk.value = ((response.2.value![value]!) as! String)
-                        let num = Int(InvestrCore.currWallet / Double(self.tempAsk.value)!)
+                        let num = Int((Double(InvestrCore.currWallet.value)!) / Double(self.tempAsk.value)!)
                         
                         if((InvestrCore.setLabel) != nil)
                         {
@@ -99,7 +99,7 @@ class InvestrCore: NSObject
                     
                     for(var i = 0; i < theObjects[0]["stocksInHand"].count!;i++)
                     {
-                        var tempStock = theObjects[0]["stocksInHand"][i] as! NSDictionary
+                        let tempStock = theObjects[0]["stocksInHand"][i] as! NSDictionary
                         let tempStockName = tempStock["symbol"] as! NSString
                         if tempStockName == stockName
                         {

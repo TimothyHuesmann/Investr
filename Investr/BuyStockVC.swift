@@ -37,7 +37,7 @@ class BuyStockVC: UIViewController, Observable {
         InvestrCore.observableString.updateValue ("\(self.tickerLabel.text!)-\(self.numBuyingTF.text!)")
         self.navigationController?.popViewControllerAnimated(true)
         self.currWallet = self.currWallet - self.subTotal
-        InvestrCore.currWallet = self.currWallet
+        InvestrCore.currWallet.value = "\(self.currWallet)"
         
     }
     
@@ -128,13 +128,20 @@ class BuyStockVC: UIViewController, Observable {
     
     func observableStringUpdate(newValue: String, identifier: String)
     {
-        self.askLabel.text = "Stock Price: $\(self.askLabel.text!)"
+        
+        
         if(identifier == "tempAsk")
         {
             self.price = newValue
         }
-        self.maxBuyLabel.text = "Maximum Stocks Affordable: \(self.maxBuyLabel.text!)"
-        activateLabels()
+        if(identifier == "tempName")
+        {
+            self.maxBuyLabel.text = "Maximum Stocks Affordable: \(self.maxBuyLabel.text!)"
+            self.askLabel.text = "Stock Price: $\(self.askLabel.text!)"
+            activateLabels()
+        }
+        
+        
     }
     
 

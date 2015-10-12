@@ -29,7 +29,7 @@ class CurrentGameVC: UIViewController, Observable {
     @IBAction func buyButtonPressed(sender: AnyObject)
     {
         let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("BuyStockVC") as! BuyStockVC
-        viewController.getInfo(InvestrCore.currWallet, tempID: self.tempID)
+        viewController.getInfo((Double(InvestrCore.currWallet.value))!, tempID: self.tempID)
         self.navigationController?.pushViewController(viewController, animated: true)
     }
     
@@ -79,29 +79,37 @@ class CurrentGameVC: UIViewController, Observable {
     func observableStringUpdate(newValue: String, identifier: String)
     {
         print("I received \(newValue) for variable: \(identifier)")
-        let tempVal = newValue.componentsSeparatedByString("-")
-        let tempStock = Stock(name: tempVal[0], value: (Int(tempVal[1]))!)
-        if InvestrCore.selling == false
+        if(identifier == "buyStock")
         {
-            if(InvestrCore.indexOfStock(self.stocks, name: tempStock.name) != -1)
+            let tempVal = newValue.componentsSeparatedByString("-")
+            let tempStock = Stock(name: tempVal[0], value: (Int(tempVal[1]))!)
+            if InvestrCore.selling == false
             {
-                let tempIndex = InvestrCore.indexOfStock(self.stocks, name: tempStock.name)
-                self.stocks[tempIndex].value = self.stocks[tempIndex].value + tempStock.value
+                if(InvestrCore.indexOfStock(self.stocks, name: tempStock.name) != -1)
+                {
+                    let tempIndex = InvestrCore.indexOfStock(self.stocks, name: tempStock.name)
+                    self.stocks[tempIndex].value = self.stocks[tempIndex].value + tempStock.value
+                }
+                else
+                {
+                    self.stocks.append(tempStock)
+                }
+                
             }
             else
             {
-                self.stocks.append(tempStock)
+                let tempIndex = InvestrCore.indexOfStock(self.stocks, name: tempStock.name)
+                self.stocks[tempIndex].value = self.stocks[tempIndex].value - tempStock.value
+                if(self.stocks[tempIndex].value == 0)
+                {
+                    self.stocks.removeAtIndex(tempIndex)
+                }
             }
-            
         }
-        else
+        
+        if(identifier == "wallet")
         {
-            let tempIndex = InvestrCore.indexOfStock(self.stocks, name: tempStock.name)
-            self.stocks[tempIndex].value = self.stocks[tempIndex].value - tempStock.value
-            if(self.stocks[tempIndex] == 0)
-            {
-                self.stocks.removeAtIndex(tempIndex)
-            }
+           self.wallet.text = "$\(newValue)"
         }
         self.StockTV.reloadData()
     }
@@ -109,8 +117,9 @@ class CurrentGameVC: UIViewController, Observable {
     override func viewDidLoad() {
         super.viewDidLoad()
         InvestrCore.observableString.addObserver(self)
+        InvestrCore.currWallet.addObserver(self)
         self.title = tempName
-        self.wallet.text = "$ \(InvestrCore.currWallet)"
+        self.wallet.text = "$\(InvestrCore.currWallet.value)"
         self.dateLabel.text = "\(self.tempEnd)"
 
         // Do any additional setup after loading the view.
@@ -125,7 +134,7 @@ class CurrentGameVC: UIViewController, Observable {
     {
         tempName = name
         tempEnd = end
-        InvestrCore.currWallet = userWallet
+        InvestrCore.currWallet.value = "\(userWallet)"
         tempID = gameID
         self.stocksNum = 0
     }

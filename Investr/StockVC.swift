@@ -43,9 +43,9 @@ class StockVC: UIViewController, Observable
         else if(identifier == "tempName")
         {
             self.name = newValue
-            self.navigationItem.title = self.name
+            self.nameLabel.text = self.ticker
+            activateLabels()
         }
-        self.nameLabel.text = self.ticker
         
     }
     
@@ -54,15 +54,19 @@ class StockVC: UIViewController, Observable
         InvestrCore.selling = true
         InvestrCore.sellStock((Int(self.numSellingTF.text!)!), ticker: self.ticker)
         InvestrCore.observableString.updateValue ("\(self.ticker)-\(self.numSellingTF.text!)")
+        InvestrCore.currWallet.value = "\(((Double(InvestrCore.currWallet.value))! + self.payout))"
         self.navigationController?.popViewControllerAnimated(true)
-        
         
         
     }
     
     @IBAction func sellAllButtonPressed(sender: AnyObject)
     {
-        
+        InvestrCore.selling = true
+        InvestrCore.sellStock(self.numStocksOwned, ticker: self.ticker)
+        InvestrCore.observableString.updateValue("\(self.ticker)-\(self.numStocksOwned)")
+        InvestrCore.currWallet.value = "\(((Double(InvestrCore.currWallet.value))! + self.totalWorth))"
+        self.navigationController?.popViewControllerAnimated(true)
     }
     
     @IBAction func sellValueChanged(sender: UITextField)
@@ -70,6 +74,7 @@ class StockVC: UIViewController, Observable
         if(sender.text == nil)
         {
             self.sellButton.enabled = false
+            self.payoutLabel.text = ""
         }
         else
         {
@@ -94,10 +99,12 @@ class StockVC: UIViewController, Observable
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
+        self.payoutLabel.text = ""
+        self.navigationItem.title = ""
         //register as observers
         InvestrCore.tempAsk.addObserver(self)
         InvestrCore.tempName.addObserver(self)
+        InvestrCore.checkOwnedStocks(self.numStocksOwnedLabel,tempID: self.gameID, stockName: self.ticker)
         
         
         
@@ -112,6 +119,18 @@ class StockVC: UIViewController, Observable
     }
     
 
+    func activateLabels()
+    {
+        self.numSellingTF.hidden = false
+        self.payoutLabel.hidden = false
+        self.totalWorthLabel.hidden = false
+        self.nameLabel.hidden = false
+        self.numStocksOwnedLabel.hidden = false
+        self.currPriceLabel.hidden = false
+        self.sellButton.hidden = false
+        self.sellAllButton.hidden = false
+        self.navigationItem.title = self.name
+    }
     
     /*
     // MARK: - Navigation
