@@ -31,6 +31,8 @@ class CurrentGameVC: UIViewController, Observable {
     {
         let currHistoryVC = self.storyboard?.instantiateViewControllerWithIdentifier("CurrHistoryVC") as! CurrHistoryVC
         currHistoryVC.setUp(self.tempID)
+        currHistoryVC.navigationController?.title = "Transaction History"
+        currHistoryVC.getHistory()
         self.navigationController?.pushViewController(currHistoryVC, animated: true)
     }
     
@@ -145,6 +147,7 @@ class CurrentGameVC: UIViewController, Observable {
         InvestrCore.currWallet.value = "\(userWallet)"
         tempID = gameID
         self.stocksNum = 0
+        self.navigationController?.navigationItem.backBarButtonItem?.title = self.tempName
     }
     
 

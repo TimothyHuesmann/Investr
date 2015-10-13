@@ -11,7 +11,11 @@ import Parse
 
 class CurrHistoryVC: UIViewController
 {
+    
+    @IBOutlet weak var historyTVC: UITableView!
     var gameID: String!
+    var theTransactions = [Transaction]()
+    
 
     override func viewDidLoad()
     {
@@ -30,20 +34,101 @@ class CurrHistoryVC: UIViewController
     {
         let query = PFQuery(className: "Transaction")
         query.whereKey("userName", equalTo: InvestrCore.currUser)
-        query.whereKey("GameID", equalTo: self.gameID)
+        query.whereKey("GameID", equalTo: PFObject(withoutDataWithClassName: "Game", objectId: self.gameID))
         query.findObjectsInBackgroundWithBlock
-        {
-            (objects: [PFObject]?, error: NSError?) -> Void in
-            
-            
+            {
+                (objects: [PFObject]?, error: NSError?) -> Void in
+                if(error == nil)
+                {
+                    if let objects = objects
+                    {
+                        if(objects[0]["log"] != nil)
+                        {
+                            for(var i = 0; i < objects[0]["log"].count; i++)
+                            {
+                                var logString = objects[0]["log"][i]
+                                var tempVal = logString["operation"]!!.componentsSeparatedByString("-")
+                                print(tempVal)
+                                var tempTime: NSString!
+                                tempTime = logString["time"] as! NSString
+                                print(tempTime!)
+                                if(tempVal[0] == "join")
+                                {
+                                    self.theTransactions.append(Transaction(type: "Joined the Game", ticker: "", value: "", date: logString["time"] as! String))
+                                }
+                                else if(tempVal[0] == "checkout")
+                                {
+                                    self.theTransactions.append(Transaction(type: "Game End", ticker: "", value: "", date: logString["time"] as! String))
+                                }
+                                else
+                                {
+                                    self.theTransactions.append(Transaction(type: tempVal[0], ticker: tempVal[1], value: tempVal[2], date: logString["time"] as! String))
+                                }
+                                
+                            }
+                        }
+                        else
+                        {
+                            
+                        }
+                        
+                    }
+                    self.historyTVC.reloadData()
+                }
+                else
+                {
+                    print("Error: \(error) \(error!.userInfo)")
+                }
+                
         }
-        
     }
     
     func setUp(gameID: String)
     {
         self.gameID = gameID
     }
+    
+
+    //UnComment  if we need to manipulate the title of the TV
+
+    /*
+    func tableView(tableView: UITableView,
+        titleForHeaderInSection section: Int) -> String?
+    {
+        return "Owned Stocks"
+    }
+    */
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int
+    {
+        // #warning Potentially incomplete method implementation.
+        // Return the number of sections.
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
+        // #warning Incomplete method implementation.
+        // Return the number of rows in the section.
+        return self.theTransactions.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! TransTVCell
+        
+        // Configure the cell...
+        cell.typeLabel.text = self.theTransactions[indexPath.row].type.uppercaseString
+        cell.numLabel.text = self.theTransactions[indexPath.row].value
+        cell.tickerLabel.text = self.theTransactions[indexPath.row].ticker.uppercaseString
+        
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath!)
+    {
+        
+    }
+    
     
 
     /*
