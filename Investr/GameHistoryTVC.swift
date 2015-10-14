@@ -17,7 +17,7 @@ class GameHistoryTVC: UIViewController
     
     override func viewDidLoad()
     {
-        theGamesTV.reloadData()
+        
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
@@ -46,8 +46,9 @@ class GameHistoryTVC: UIViewController
                     print("Successfully found \(objects.count) games")
                     for(var i = 0; i<objects.count;i++)
                     {
-                        self.theGames.append(GameRecord(name: objects[i]["Name"] as! String, numPlayers: objects[i]["CurrentPlayers"].count, pot: objects[i]["PotSize"] as! Double, end: objects[i]["EndTime"] as! NSDate, place: objects[i]["finalStandings"].indexOfObjectIdenticalTo(InvestrCore.currUser)))
+                        self.theGames.append(GameRecord(name: objects[i]["Name"] as! String, numPlayers: objects[i]["CurrentPlayers"].count, pot: objects[i]["PotSize"] as! Double, end: objects[i]["EndTime"] as! NSDate, place: objects[i]["finalStandings"].indexOfObjectIdenticalTo(InvestrCore.currUser)+1))
                     }
+                    self.theGamesTV.reloadData()
                 }
             }
             else
@@ -89,7 +90,7 @@ class GameHistoryTVC: UIViewController
         
         // Configure the cell...
         cell.gameNameLabel.text = theGames[indexPath.row].name
-        cell.placeLabel.text = "\(theGames[indexPath.row].place)"
+        cell.placeLabel.text = "Place: \(theGames[indexPath.row].place)"
         
         return cell
     }
