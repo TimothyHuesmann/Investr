@@ -26,13 +26,19 @@ class MenuVC: UIViewController {
         self.navigationController?.pushViewController(myGamesVC, animated: true)
     }
     
+    @IBAction func gameHistoryButtonPressed(sender: AnyObject)
+    {
+        
+    }
     
     
     
     
     
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
+        self.navigationItem.title = "Welcome, \(InvestrCore.currUser)"
 
         // Do any additional setup after loading the view.
     }

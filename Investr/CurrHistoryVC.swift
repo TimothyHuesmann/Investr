@@ -126,7 +126,9 @@ class CurrHistoryVC: UIViewController
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath!)
     {
-        
+        let historyVC = self.storyboard?.instantiateViewControllerWithIdentifier("HistoryVC") as! HistoryVC
+        historyVC.getInfo(theTransactions[indexPath.row])
+        self.navigationController?.pushViewController(historyVC, animated: true)
     }
     
     

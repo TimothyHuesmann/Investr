@@ -419,7 +419,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Transaction History" id="Igf-9s-yn0">
-                        <barButtonItem key="backBarButtonItem" title="Current Game" id="cgh-xF-SSx"/>
+                        <barButtonItem key="backBarButtonItem" title="Game History" id="cgh-xF-SSx"/>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
@@ -431,6 +431,73 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xs0-NR-xZj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2783.5" y="1896.5"/>
+        </scene>
+        <!--Info-->
+        <scene sceneID="Efm-So-QDs">
+            <objects>
+                <viewController storyboardIdentifier="HistoryVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="DXD-a5-1O9" customClass="HistoryVC" customModule="Investr" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="J9g-gW-Qoe"/>
+                        <viewControllerLayoutGuide type="bottom" id="lJF-aG-3Sd"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="jpN-B4-z7T">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Type" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vRw-Uf-e4y">
+                                <rect key="frame" x="144" y="114" width="87" height="21"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Ticker" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="biV-ja-tO5">
+                                <rect key="frame" x="116" y="185" width="142" height="21"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Number" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nik-j3-Fq4">
+                                <rect key="frame" x="95" y="266" width="183" height="21"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Amount" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u8d-Qz-hH5">
+                                <rect key="frame" x="105" y="347" width="165" height="21"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9f1-eH-k3e">
+                                <rect key="frame" x="39" y="445" width="297" height="21"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Info" id="tTB-Uw-bZ9"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="moneyLabel" destination="u8d-Qz-hH5" id="iU3-b4-0Zi"/>
+                        <outlet property="nameLabel" destination="biV-ja-tO5" id="yCw-Pw-OvU"/>
+                        <outlet property="stocksLabel" destination="Nik-j3-Fq4" id="jhJ-a0-wXP"/>
+                        <outlet property="timeLabel" destination="9f1-eH-k3e" id="ekH-X7-AxX"/>
+                        <outlet property="typeLabel" destination="vRw-Uf-e4y" id="xQH-To-CFf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cZr-tD-heH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3209.5" y="1896.5"/>
         </scene>
         <!--Current Game-->
         <scene sceneID="DRP-l7-T7N">
@@ -895,16 +962,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gV4-cX-kaj">
-                                <rect key="frame" x="150" y="195" width="74" height="30"/>
-                                <animations/>
-                                <state key="normal" title="My Games">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="myGamesButtonPressed:" destination="PMD-aa-psZ" eventType="touchDown" id="h7L-4F-VfO"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BCd-Tt-yLH">
                                 <rect key="frame" x="125" y="146" width="124" height="30"/>
                                 <animations/>
@@ -913,6 +970,24 @@
                                 </state>
                                 <connections>
                                     <action selector="upcomingGamesButtonPressed:" destination="PMD-aa-psZ" eventType="touchDown" id="KcE-Os-gWX"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YMq-Ic-Jhj">
+                                <rect key="frame" x="140" y="280" width="94" height="30"/>
+                                <animations/>
+                                <state key="normal" title="Game History"/>
+                                <connections>
+                                    <action selector="gameHistoryButtonPressed:" destination="PMD-aa-psZ" eventType="touchDown" id="yyY-mh-E3i"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gV4-cX-kaj">
+                                <rect key="frame" x="150" y="211" width="74" height="30"/>
+                                <animations/>
+                                <state key="normal" title="My Games">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="myGamesButtonPressed:" destination="PMD-aa-psZ" eventType="touchDown" id="h7L-4F-VfO"/>
                                 </connections>
                             </button>
                         </subviews>
