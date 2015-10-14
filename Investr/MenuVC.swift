@@ -28,6 +28,9 @@ class MenuVC: UIViewController {
     
     @IBAction func gameHistoryButtonPressed(sender: AnyObject)
     {
+        let gameHistoryTVC = self.storyboard?.instantiateViewControllerWithIdentifier("GameHistoryTVC") as! GameHistoryTVC
+        gameHistoryTVC.queryGames()
+        self.navigationController?.pushViewController(gameHistoryTVC, animated: true)
         
     }
     

@@ -26,6 +26,7 @@ class MyGamesTVC: UIViewController {
     {
         let query2 = PFQuery(className: "Game")       //query of games that are running and the user is in
         query2.whereKey("Playing", equalTo:true)
+        query2.whereKey("isFinished", equalTo: false)
         query2.whereKey("CurrentPlayers", equalTo:InvestrCore.currUser)
         query2.findObjectsInBackgroundWithBlock {
             (objects2: [PFObject]?, error: NSError?) -> Void in
@@ -51,6 +52,7 @@ class MyGamesTVC: UIViewController {
         
         let query = PFQuery(className: "Game")
         query.whereKey("Playing", equalTo:false)
+        query.whereKey("isFinished", equalTo: false)
         query.whereKey("CurrentPlayers", equalTo:InvestrCore.currUser)
         query.findObjectsInBackgroundWithBlock{
             (objects: [PFObject]?, error: NSError?) -> Void in
@@ -156,6 +158,7 @@ class MyGamesTVC: UIViewController {
         let indexPath = tableView.indexPathForSelectedRow
         let currentCell = tableView.cellForRowAtIndexPath(indexPath!) as UITableViewCell!
         let query3 = PFQuery(className: "Game")
+        query3.whereKey("isFinished", equalTo: false)
         query3.whereKey("Name", equalTo: currentCell.textLabel!.text!)
         query3.findObjectsInBackgroundWithBlock
         {

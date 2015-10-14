@@ -14,6 +14,9 @@
 		A7000F4C1BCBF57C009E1FDD /* TransTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7000F4B1BCBF57C009E1FDD /* TransTVCell.swift */; settings = {ASSET_TAGS = (); }; };
 		A7000F4E1BCBFA13009E1FDD /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7000F4D1BCBFA13009E1FDD /* Transaction.swift */; settings = {ASSET_TAGS = (); }; };
 		A7000F501BCE82BE009E1FDD /* HistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7000F4F1BCE82BE009E1FDD /* HistoryVC.swift */; settings = {ASSET_TAGS = (); }; };
+		A7000F521BCE88E5009E1FDD /* GameHistoryTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7000F511BCE88E5009E1FDD /* GameHistoryTVC.swift */; settings = {ASSET_TAGS = (); }; };
+		A7000F541BCE8ABD009E1FDD /* GameRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7000F531BCE8ABD009E1FDD /* GameRecord.swift */; settings = {ASSET_TAGS = (); }; };
+		A7000F561BCE946D009E1FDD /* GameRecordTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7000F551BCE946D009E1FDD /* GameRecordTVCell.swift */; settings = {ASSET_TAGS = (); }; };
 		A72042711BC2AC4C00808FF5 /* StockTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72042701BC2AC4C00808FF5 /* StockTVCell.swift */; settings = {ASSET_TAGS = (); }; };
 		A72042731BC2B02600808FF5 /* Stock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72042721BC2B02600808FF5 /* Stock.swift */; settings = {ASSET_TAGS = (); }; };
 		A756B9171BBC10510019A990 /* StockVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A756B9161BBC10510019A990 /* StockVC.swift */; settings = {ASSET_TAGS = (); }; };
@@ -75,6 +78,9 @@
 		A7000F4B1BCBF57C009E1FDD /* TransTVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransTVCell.swift; sourceTree = "<group>"; };
 		A7000F4D1BCBFA13009E1FDD /* Transaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		A7000F4F1BCE82BE009E1FDD /* HistoryVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryVC.swift; sourceTree = "<group>"; };
+		A7000F511BCE88E5009E1FDD /* GameHistoryTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameHistoryTVC.swift; sourceTree = "<group>"; };
+		A7000F531BCE8ABD009E1FDD /* GameRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameRecord.swift; sourceTree = "<group>"; };
+		A7000F551BCE946D009E1FDD /* GameRecordTVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameRecordTVCell.swift; sourceTree = "<group>"; };
 		A72042701BC2AC4C00808FF5 /* StockTVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StockTVCell.swift; sourceTree = "<group>"; };
 		A72042721BC2B02600808FF5 /* Stock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stock.swift; sourceTree = "<group>"; };
 		A756B9161BBC10510019A990 /* StockVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StockVC.swift; sourceTree = "<group>"; };
@@ -146,6 +152,8 @@
 				A72042721BC2B02600808FF5 /* Stock.swift */,
 				A7000F4B1BCBF57C009E1FDD /* TransTVCell.swift */,
 				A7000F4D1BCBFA13009E1FDD /* Transaction.swift */,
+				A7000F531BCE8ABD009E1FDD /* GameRecord.swift */,
+				A7000F551BCE946D009E1FDD /* GameRecordTVCell.swift */,
 			);
 			name = "Helper Objects";
 			sourceTree = "<group>";
@@ -225,6 +233,7 @@
 				A756B9161BBC10510019A990 /* StockVC.swift */,
 				A7000F491BCBED92009E1FDD /* CurrHistoryVC.swift */,
 				A7000F4F1BCE82BE009E1FDD /* HistoryVC.swift */,
+				A7000F511BCE88E5009E1FDD /* GameHistoryTVC.swift */,
 			);
 			name = VCs;
 			sourceTree = "<group>";
@@ -417,11 +426,14 @@
 				A7F1491D1BA7009D00A13CE2 /* MyGamesTVC.swift in Sources */,
 				A7F148BB1B9730CB00A13CE2 /* GamesListTVC.swift in Sources */,
 				A7000F4A1BCBED92009E1FDD /* CurrHistoryVC.swift in Sources */,
+				A7000F541BCE8ABD009E1FDD /* GameRecord.swift in Sources */,
 				68935D9D1BB9794F0042795F /* BuyStockVC.swift in Sources */,
 				A7000F501BCE82BE009E1FDD /* HistoryVC.swift in Sources */,
+				A7000F561BCE946D009E1FDD /* GameRecordTVCell.swift in Sources */,
 				A7000F4E1BCBFA13009E1FDD /* Transaction.swift in Sources */,
 				A7F148BF1B97313200A13CE2 /* InvestrCore.swift in Sources */,
 				A7F149191BA6F94B00A13CE2 /* CurrentGameVC.swift in Sources */,
+				A7000F521BCE88E5009E1FDD /* GameHistoryTVC.swift in Sources */,
 				A72042731BC2B02600808FF5 /* Stock.swift in Sources */,
 				A7F148B91B97308A00A13CE2 /* LoginVC.swift in Sources */,
 				6816B7B61BBEF64400FE2B94 /* ObservableString.swift in Sources */,

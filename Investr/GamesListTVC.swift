@@ -35,6 +35,7 @@ class GamesListTVC: UIViewController
     {
         let query = PFQuery(className: "Game")
         query.whereKey("Playing", equalTo:false)
+        query.whereKey("isFinished", equalTo: false)
         query.findObjectsInBackgroundWithBlock {
             (objects: [PFObject]?, error: NSError?) -> Void in
             
@@ -61,6 +62,7 @@ class GamesListTVC: UIViewController
        
         let query2 = PFQuery(className: "Game")
         query2.whereKey("Playing", equalTo:true)
+        query2.whereKey("isFinished", equalTo: false)
         query2.findObjectsInBackgroundWithBlock {
             (objects2: [PFObject]?, error: NSError?) -> Void in
             
