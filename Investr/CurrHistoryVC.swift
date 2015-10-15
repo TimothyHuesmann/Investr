@@ -54,15 +54,15 @@ class CurrHistoryVC: UIViewController
                                 print(tempTime!)
                                 if(tempVal[0] == "join")
                                 {
-                                    self.theTransactions.append(Transaction(type: "Joined the Game", ticker: "", value: "", date: logString["time"] as! String))
+                                    self.theTransactions.append(Transaction(type: "Joined the Game", ticker: "", value: "", date: logString["time"] as! String, amount: ""))
                                 }
                                 else if(tempVal[0] == "checkout")
                                 {
-                                    self.theTransactions.append(Transaction(type: "Game End", ticker: "", value: "", date: logString["time"] as! String))
+                                    self.theTransactions.append(Transaction(type: "Game End", ticker: "", value: "", date: logString["time"] as! String, amount: ""))
                                 }
                                 else
                                 {
-                                    self.theTransactions.append(Transaction(type: tempVal[0], ticker: tempVal[1], value: tempVal[2], date: logString["time"] as! String))
+                                    self.theTransactions.append(Transaction(type: tempVal[0], ticker: tempVal[1], value: tempVal[2], date: logString["time"] as! String, amount: tempVal[3]))
                                 }
                                 
                             }

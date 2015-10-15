@@ -15,13 +15,15 @@ class GameRecord: NSObject
     var pot: Double!
     var end: NSDate!
     var place: Int!
+    var id: String!
     
-    init(name: String, numPlayers: Int, pot: Double, end: NSDate, place: Int)
+    init(name: String, numPlayers: Int, pot: Double, end: NSDate, place: Int, gameID: String)
     {
         self.name = name
         self.numPlayers = numPlayers
         self.pot = pot
         self.end = end
         self.place = place
+        self.id = gameID
     }
 }

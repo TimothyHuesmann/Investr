@@ -25,7 +25,7 @@ class HistoryVC: UIViewController
         self.typeLabel.text = "\(self.theTransaction.type.uppercaseString)"
         self.nameLabel.text = "\(self.theTransaction.ticker.uppercaseString)"
         self.stocksLabel.text = "\(self.theTransaction.value)"
-        //self.moneyLabel.text = "\(self.theTransaction.amount)"
+        self.moneyLabel.text = "\(self.theTransaction.amount)"
         self.timeLabel.text = "\(self.theTransaction.time)"
 
         // Do any additional setup after loading the view.
