@@ -25,6 +25,7 @@ class InvestrCore: NSObject
     static var selling = false
     static var tempAsk = ObservableString(value:"", identifier:"tempAsk")
     static var tempName = ObservableString(value:"", identifier:"tempName")
+    static var finalMoney = ObservableString(value:"", identifier:"finalMoney")
     
     static func endGame()
     {

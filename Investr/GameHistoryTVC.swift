@@ -14,6 +14,7 @@ class GameHistoryTVC: UIViewController
     
     @IBOutlet weak var theGamesTV: UITableView!
     var theGames = [GameRecord]()
+    var tempFinal: NSString!
     
     override func viewDidLoad()
     {
@@ -97,7 +98,49 @@ class GameHistoryTVC: UIViewController
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath!)
     {
-        
+        let query2 = PFQuery(className: "Transaction")
+        query2.whereKey("userName", equalTo: InvestrCore.currUser)
+        query2.whereKey("GameID", equalTo: PFObject(withoutDataWithClassName: "Game", objectId: theGames[indexPath.row].id))
+        query2.findObjectsInBackgroundWithBlock
+        {
+            (objects: [PFObject]?, error: NSError?) -> Void in
+            if(error == nil)
+            {
+                if let objects = objects
+                {
+                    self.tempFinal = String(objects[0]["currentMoney"])
+                    for(var i = 0;i<objects[0]["log"].count;i++)
+                    {
+                        let logString = objects[0]["log"][i]
+                        var tempVal = logString["operation"]!!.componentsSeparatedByString("-")
+                        print(tempVal)
+                        var tempTime: NSString!
+                        tempTime = logString["time"] as! NSString
+                        print(tempTime!)
+                        if(tempVal[0] == "join")
+                        {
+                            self.theGames[indexPath.row].theTransactions.append(Transaction(type: "Joined the Game", ticker: "", value: "", date: logString["time"] as! String, amount: ""))
+                        }
+                        else if(tempVal[0] == "checkout")
+                        {
+                            self.theGames[indexPath.row].theTransactions.append(Transaction(type: "Game End", ticker: "", value: "", date: logString["time"] as! String, amount: ""))
+                        }
+                        else
+                        {
+                            self.theGames[indexPath.row].theTransactions.append(Transaction(type: tempVal[0], ticker: tempVal[1], value: tempVal[2], date: logString["time"] as! String, amount: tempVal[3]))
+                        }
+                    }
+                    InvestrCore.finalMoney.updateValue("\(self.tempFinal)")
+                }
+            }
+            else
+            {
+                
+            }
+        }
+        let gameRecordVC = self.storyboard?.instantiateViewControllerWithIdentifier("GameRecordVC") as! GameRecordVC
+        gameRecordVC.getInfo(theGames[indexPath.row])
+        self.navigationController?.pushViewController(gameRecordVC, animated: true)
     }
     
     /*

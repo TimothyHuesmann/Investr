@@ -16,6 +16,7 @@ class GameRecord: NSObject
     var end: NSDate!
     var place: Int!
     var id: String!
+    var theTransactions = [Transaction]()
     
     init(name: String, numPlayers: Int, pot: Double, end: NSDate, place: Int, gameID: String)
     {
