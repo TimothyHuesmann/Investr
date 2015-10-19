@@ -47,7 +47,8 @@ class GameHistoryTVC: UIViewController
                     print("Successfully found \(objects.count) games")
                     for(var i = 0; i<objects.count;i++)
                     {
-                        self.theGames.append(GameRecord(name: objects[i]["Name"] as! String, numPlayers: objects[i]["CurrentPlayers"].count, pot: objects[i]["PotSize"] as! Double, end: objects[i]["EndTime"] as! NSDate, place: objects[i]["finalStandings"].indexOfObjectIdenticalTo(InvestrCore.currUser)+1, gameID: objects[i].objectId!))
+                        let tempID = objects[i].objectId
+                        self.theGames.append(GameRecord(name: objects[i]["Name"] as! String, numPlayers: objects[i]["CurrentPlayers"].count, pot: objects[i]["PotSize"] as! Double, end: objects[i]["EndTime"] as! NSDate, place: objects[i]["finalStandings"].indexOfObjectIdenticalTo(InvestrCore.currUser)+1, gameID: tempID!))
                     }
                     self.theGamesTV.reloadData()
                 }
