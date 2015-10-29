@@ -96,6 +96,7 @@ class InvestrCore: NSObject
             }
     }
     
+    
     static func checkOwnedStocks(numOwnedLabel: UILabel, tempID: String, stockName: String)
     {
             let query = PFQuery(className: "Transaction")
@@ -152,5 +153,6 @@ class InvestrCore: NSObject
         
         return -1
     }
+    
     
 }

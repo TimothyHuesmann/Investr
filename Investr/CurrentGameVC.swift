@@ -12,6 +12,7 @@ import Parse
 class CurrentGameVC: UIViewController, Observable {
 
     
+    @IBOutlet weak var portfolioWorthLabel: UILabel!
     @IBOutlet weak var historyButton: UIButton!
     @IBOutlet weak var hiddenLabel: UILabel!
     @IBOutlet weak var StockTV: UITableView!
@@ -23,9 +24,14 @@ class CurrentGameVC: UIViewController, Observable {
     var tempID : String!
     var tempStock : NSDictionary!
     var stockNames = [String]()
-    
-    
     @IBOutlet weak var dateLabel: UILabel!
+    
+    @IBAction func leaderboardButtonPressed(sender: AnyObject)
+    {
+        
+    }
+    
+    
     
     @IBAction func historyButtonPressed(sender: AnyObject)
     {
@@ -122,6 +128,13 @@ class CurrentGameVC: UIViewController, Observable {
            self.wallet.text = "$\(newValue)"
         }
         self.StockTV.reloadData()
+        
+        if(identifier == "portValue")
+        {
+            self.portfolioWorthLabel.text = "Current Worth: $\(newValue)"
+        }
+        
+        
     }
     
     override func viewDidLoad() {
@@ -131,6 +144,8 @@ class CurrentGameVC: UIViewController, Observable {
         self.title = tempName
         self.wallet.text = "$\(InvestrCore.currWallet.value)"
         self.dateLabel.text = "\(self.tempEnd)"
+        self.portfolioWorthLabel.text = "Calculating Portfolio Value"
+      
 
         // Do any additional setup after loading the view.
     }
@@ -142,10 +157,10 @@ class CurrentGameVC: UIViewController, Observable {
     
     func setGame(name: String, end: NSDate, userWallet: Double, gameID: String)
     {
-        tempName = name
-        tempEnd = end
+        self.tempName = name
+        self.tempEnd = end
         InvestrCore.currWallet.value = "\(userWallet)"
-        tempID = gameID
+        self.tempID = gameID
         self.stocksNum = 0
         self.navigationController?.navigationItem.backBarButtonItem?.title = self.tempName
     }
