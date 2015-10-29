@@ -23,7 +23,9 @@ class GamesListTVC: UIViewController
     var upcomingGamesnum = 0
     var playingGamesnum = 0
     var upcomingGames = [String]()
+    var newUpcomingGames = [Game]()
     var playingGames = [String]()
+    var newPlayingGames = [Game]()
     var numPlayers = 0
     var potSize = 0
     var price = 0.0
@@ -49,6 +51,7 @@ class GamesListTVC: UIViewController
                     for object in objects
                     {
                         self.upcomingGames.append(object["Name"]! as! String)
+                        self.newUpcomingGames.append(Game(name: object["Name"] as! String, id: object.objectId!, end: object["EndTime"] as! NSDate, numPLayers: object["CurrentPlayers"].count, pot: object["PotSize"] as! Double, price: object["Price"] as! Double))
                     }
                     self.upcomingGamesTV.reloadData()
                 }
@@ -73,6 +76,7 @@ class GamesListTVC: UIViewController
                     for object2 in objects2
                     {
                         self.playingGames.append(object2["Name"]! as! String)
+                        self.newPlayingGames.append(Game(name: object2["Name"] as! String, id: object2.objectId!, end: object2["EndTime"] as! NSDate, numPLayers: object2["CurrentPlayers"].count, pot: object2["PotSize"] as! Double, price: object2["Price"] as! Double))
                     }
                     self.upcomingGamesTV.reloadData()
                 }
@@ -132,11 +136,11 @@ class GamesListTVC: UIViewController
         
         if(section == 0)
         {
-            return playingGamesnum
+            return newPlayingGames.count
         }
         else
         {
-            return upcomingGamesnum
+            return newUpcomingGames.count
         }
         
        
@@ -149,11 +153,11 @@ class GamesListTVC: UIViewController
         // Configure the cell...
         if(indexPath.section == 0)
         {
-            cell.textLabel!.text = self.playingGames[indexPath.row] //display upcoming games
+            cell.textLabel!.text = self.newPlayingGames[indexPath.row].name //display upcoming games
         }
         else
         {
-            cell.textLabel!.text = self.upcomingGames[indexPath.row] //display currently running games
+            cell.textLabel!.text = self.newUpcomingGames[indexPath.row].name //display currently running games
         }
         
         return cell
@@ -166,7 +170,14 @@ class GamesListTVC: UIViewController
         let currentCell = tableView.cellForRowAtIndexPath(indexPath!) as UITableViewCell!
         let query = PFQuery(className: "Game")
         print(currentCell.textLabel!.text!, terminator: "")
-        query.whereKey("Name", equalTo: currentCell.textLabel!.text!)
+        if(indexPath!.section == 0)
+        {
+            query.whereKey("objectId", equalTo: self.newPlayingGames[(indexPath?.row)!].id)
+        }
+        else
+        {
+            query.whereKey("objectId", equalTo: self.newUpcomingGames[(indexPath?.row)!].id)
+        }
         query.findObjectsInBackgroundWithBlock
         {
             (objects: [PFObject]?, error: NSError?) -> Void in
@@ -200,6 +211,8 @@ class GamesListTVC: UIViewController
                     viewController.setGameInfo(currentCell.textLabel!.text!, numPlayers: self.numPlayers, potSize: self.potSize, price: self.price, gameID: self.tempID)
                     self.navigationController?.pushViewController(viewController, animated: true)
                 }
+                self.newPlayingGames = []
+                self.newUpcomingGames = []
                     
             }
             else

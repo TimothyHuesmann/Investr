@@ -14,8 +14,10 @@ class MyGamesTVC: UIViewController {
     @IBOutlet weak var theGamesTV: UITableView!
     var playingGamesnum = 0
     var playingGames = [String]()
+    var newPlayingGames = [Game]()
     var myUpcomingGamesnum = 0
     var myUpcomingGames = [String]()
+    var newUpcomingGames = [Game]()
     var endGame = NSDate()
     var tempID = ""
     var tempWallet = 0.0
@@ -40,7 +42,7 @@ class MyGamesTVC: UIViewController {
                     for object2 in objects2
                     {
                         self.playingGames.append(object2["Name"]! as! String)
-                        
+                        self.newPlayingGames.append(Game(name: object2["Name"] as! String, id: object2.objectId!, end: object2["EndTime"] as! NSDate, numPLayers: object2["CurrentPlayers"].count, pot: object2["PotSize"] as! Double, price: object2["Price"] as! Double))
                     }
                 }
                 self.theGamesTV.reloadData()
@@ -64,6 +66,7 @@ class MyGamesTVC: UIViewController {
                     for object in objects
                     {
                         self.myUpcomingGames.append(object["Name"]! as! String)
+                        self.newUpcomingGames.append(Game(name: object["Name"] as! String, id: object.objectId!, end: object["EndTime"] as! NSDate, numPLayers: object["CurrentPlayers"].count, pot: object["PotSize"] as! Double, price: object["Price"] as! Double))
                         
                     }
                     self.theGamesTV.reloadData()
@@ -128,11 +131,11 @@ class MyGamesTVC: UIViewController {
         // Return the number of rows in the section.
         if(section == 0)
         {
-            return playingGamesnum
+            return newPlayingGames.count
         }
         else
         {
-            return myUpcomingGamesnum
+            return newUpcomingGames.count
         }
     }
 
@@ -143,11 +146,11 @@ class MyGamesTVC: UIViewController {
         // Configure the cell...
         if(indexPath.section == 0)
         {
-            cell.textLabel!.text = self.playingGames[indexPath.row]
+            cell.textLabel!.text = self.newPlayingGames[indexPath.row].name
         }
         else
         {
-            cell.textLabel!.text = self.myUpcomingGames[indexPath.row]
+            cell.textLabel!.text = self.newUpcomingGames[indexPath.row].name
         }
         
         return cell
@@ -157,42 +160,40 @@ class MyGamesTVC: UIViewController {
     {
         let indexPath = tableView.indexPathForSelectedRow
         let currentCell = tableView.cellForRowAtIndexPath(indexPath!) as UITableViewCell!
-        let query3 = PFQuery(className: "Game")
-        query3.whereKey("isFinished", equalTo: false)
-        query3.whereKey("Name", equalTo: currentCell.textLabel!.text!)
-        query3.findObjectsInBackgroundWithBlock
+        
+        let query4 = PFQuery(className: "Transaction")
+        if(indexPath!.section == 0)
         {
-                (objects: [PFObject]?, error: NSError?) -> Void in
+        query4.whereKey("GameID", equalTo: PFObject(withoutDataWithClassName: "Game", objectId: self.newPlayingGames[(indexPath?.row)!].id))
+        }
+        else
+        {
+          query4.whereKey("GameID", equalTo: PFObject(withoutDataWithClassName: "Game", objectId: self.newUpcomingGames[(indexPath?.row)!].id))
+        }
+        query4.whereKey("userName", equalTo: InvestrCore.currUser)
+        query4.findObjectsInBackgroundWithBlock
+            {
+                (objects2: [PFObject]?, error: NSError?) -> Void in
                 if error == nil
                 {
-                    if let objects = objects
+                    if let objects2 = objects2
                     {
-                        self.endGame = objects[0]["EndTime"] as! NSDate
-                        self.tempID = objects[0].objectId!
-                    }
-                    let query4 = PFQuery(className: "Transaction")
-                    query4.whereKey("GameID", equalTo: PFObject(withoutDataWithClassName: "Game", objectId: self.tempID))
-                    query4.whereKey("userName", equalTo: InvestrCore.currUser)
-                    query4.findObjectsInBackgroundWithBlock
-                    {
-                        (objects2: [PFObject]?, error: NSError?) -> Void in
-                        if error == nil
+                        self.tempWallet = objects2[0]["currentMoney"] as! Double
+                        let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("CurrentGameVC") as! CurrentGameVC
+                        if(indexPath!.section == 0)
                         {
-                            if let objects2 = objects2
-                            {
-                                self.tempWallet = objects2[0]["currentMoney"] as! Double
-                                let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("CurrentGameVC") as! CurrentGameVC
-                                viewController.setGame(currentCell.textLabel!.text!, end: self.endGame, userWallet: self.tempWallet, gameID: self.tempID)
-                                viewController.getStocks()
-                                self.navigationController?.pushViewController(viewController, animated: true)
-                            }
+                          viewController.setGame(self.newPlayingGames[(indexPath?.row)!], userWallet: self.tempWallet)
                         }
                         else
                         {
-                            print("Error: \(error) \(error!.userInfo)")
+                            viewController.setGame(self.newUpcomingGames[(indexPath?.row)!], userWallet: self.tempWallet)
                         }
+                        
+                        viewController.getStocks()
+                        self.navigationController?.pushViewController(viewController, animated: true)
+                        self.newUpcomingGames = []
+                        self.newPlayingGames = []
                     }
-
                 }
                 else
                 {

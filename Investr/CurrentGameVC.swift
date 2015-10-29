@@ -155,12 +155,12 @@ class CurrentGameVC: UIViewController, Observable {
         // Dispose of any resources that can be recreated.
     }
     
-    func setGame(name: String, end: NSDate, userWallet: Double, gameID: String)
+    func setGame(game: Game, userWallet: Double)
     {
-        self.tempName = name
-        self.tempEnd = end
+        self.tempName = game.name
+        self.tempEnd = game.end
         InvestrCore.currWallet.value = "\(userWallet)"
-        self.tempID = gameID
+        self.tempID = game.id
         self.stocksNum = 0
         self.navigationController?.navigationItem.backBarButtonItem?.title = self.tempName
     }
