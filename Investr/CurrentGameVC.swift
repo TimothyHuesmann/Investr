@@ -24,6 +24,7 @@ class CurrentGameVC: UIViewController, Observable {
     var tempID : String!
     var tempStock : NSDictionary!
     var stockNames = [String]()
+    var transID: String!
     @IBOutlet weak var dateLabel: UILabel!
     
     @IBAction func leaderboardButtonPressed(sender: AnyObject)
@@ -61,7 +62,7 @@ class CurrentGameVC: UIViewController, Observable {
             {
                 if let objects = objects
                 {
-                    InvestrCore.transactionID = objects[0].objectId
+                    
                     if objects[0]["stocksInHand"] != nil
                     {
                         self.stocksNum = objects[0]["stocksInHand"].count
@@ -81,8 +82,10 @@ class CurrentGameVC: UIViewController, Observable {
                         self.stocksNum = 0
                         self.stocks = []
                     }
+                    InvestrCore.transactionID.updateValue(objects[0].objectId!)
                 }
                 self.StockTV.reloadData()
+                
             }
             else
             {
@@ -123,6 +126,13 @@ class CurrentGameVC: UIViewController, Observable {
             }
         }
         
+        
+        if(identifier == "transactionID")
+        {
+            InvestrCore.getPortfolio(newValue, portfolioLabel: self.portfolioWorthLabel)
+        }
+        
+        
         if(identifier == "wallet")
         {
            self.wallet.text = "$\(newValue)"
@@ -141,10 +151,12 @@ class CurrentGameVC: UIViewController, Observable {
         super.viewDidLoad()
         InvestrCore.observableString.addObserver(self)
         InvestrCore.currWallet.addObserver(self)
+        InvestrCore.transactionID.addObserver(self)
         self.title = tempName
         self.wallet.text = "$\(InvestrCore.currWallet.value)"
         self.dateLabel.text = "\(self.tempEnd)"
         self.portfolioWorthLabel.text = "Calculating Portfolio Value"
+        
       
 
         // Do any additional setup after loading the view.
@@ -206,7 +218,7 @@ class CurrentGameVC: UIViewController, Observable {
         let currentCell = tableView.cellForRowAtIndexPath(indexPath!) as! StockTVCell
         let stockVC = self.storyboard?.instantiateViewControllerWithIdentifier("StockVC") as! StockVC
         stockVC.setUp(currentCell.nameLabel.text!, numStocks: (Int(currentCell.numberLabel.text!)!), gameID: self.tempID)
-        InvestrCore.getQuote(currentCell.nameLabel.text!, label: self.hiddenLabel, value: "Ask")
+        InvestrCore.getQuote(currentCell.nameLabel.text!, label: self.hiddenLabel, value: "Bid")
         InvestrCore.getQuote(currentCell.nameLabel.text!, label:self.hiddenLabel, value: "Name")
         self.navigationController?.pushViewController(stockVC, animated: true)        
     }

@@ -30,6 +30,7 @@ class GamesListTVC: UIViewController
     var potSize = 0
     var price = 0.0
     var tempID = ""
+    var tempWallet: Double!
     
     
     
@@ -179,47 +180,54 @@ class GamesListTVC: UIViewController
             query.whereKey("objectId", equalTo: self.newUpcomingGames[(indexPath?.row)!].id)
         }
         query.findObjectsInBackgroundWithBlock
-        {
-            (objects: [PFObject]?, error: NSError?) -> Void in
-            if error == nil
             {
-                //the find succeeded
-                //print("Successfully found \(objects!.count) Games")
-                if let objects = objects
+                (objects: [PFObject]?, error: NSError?) -> Void in
+                if error == nil
                 {
-                    self.tempID = objects[0].objectId!
-                    if objects[0]["CurrentPlayers"] != nil
-                    {
-                        self.numPlayers = objects[0]["CurrentPlayers"]!.count     //setting the number of players label
-                    }
-                    else
-                    {
-                        self.numPlayers = 0
-                    }
+                    //the find succeeded
+                    //print("Successfully found \(objects!.count) Games"
                     
-                    if objects[0]["PotSize"] != nil
-                    {
-                        self.potSize = objects[0]["PotSize"]! as! Int   //setting the potSize label
-                    }
-                    else
-                    {
-                        self.potSize = 0
-                    }
-                    self.price = objects[0]["Price"]! as! Double    //setting the price label
-                    let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("PlannedGameVC") as! PlannedGameVC
                     
-                    viewController.setGameInfo(currentCell.textLabel!.text!, numPlayers: self.numPlayers, potSize: self.potSize, price: self.price, gameID: self.tempID)
-                    self.navigationController?.pushViewController(viewController, animated: true)
+                    if let objects = objects
+                    {
+                        self.tempID = objects[0].objectId!
+                        if objects[0]["CurrentPlayers"] != nil
+                        {
+                            self.numPlayers = objects[0]["CurrentPlayers"]!.count     //setting the number of players label
+                        }
+                        else
+                        {
+                            self.numPlayers = 0
+                        }
+                        
+                        if objects[0]["PotSize"] != nil
+                        {
+                            self.potSize = objects[0]["PotSize"]! as! Int   //setting the potSize label
+                        }
+                        else
+                        {
+                            self.potSize = 0
+                        }
+                        self.price = objects[0]["Price"]! as! Double    //setting the price label
+                        
+                        
+                        let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("PlannedGameVC") as! PlannedGameVC
+                        
+                        
+                        
+                        viewController.setGameInfo(currentCell.textLabel!.text!, numPlayers: self.numPlayers, potSize: self.potSize, price: self.price, gameID: self.tempID)
+                        self.navigationController?.pushViewController(viewController, animated: true)
+                        
+                        self.newPlayingGames = []
+                        self.newUpcomingGames = []
+                        
+                    }
                 }
-                self.newPlayingGames = []
-                self.newUpcomingGames = []
-                    
-            }
-            else
-            {
-                // Log details of the failure
-                print("Error: \(error!) \(error!.userInfo)")
-            }
+                else
+                {
+                    // Log details of the failure
+                    print("Error: \(error!) \(error!.userInfo)")
+                }
         }
     }
     

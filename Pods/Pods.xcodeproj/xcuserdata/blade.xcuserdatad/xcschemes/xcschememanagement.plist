@@ -8,93 +8,61 @@
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>0</integer>
 		</dict>
 		<key>Alamofire.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>1</integer>
 		</dict>
 		<key>Bolts.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>2</integer>
 		</dict>
 		<key>Parse.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>3</integer>
 		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>4</integer>
 		</dict>
 		<key>SwiftyJSON.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>5</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>294DC77EF05A89EC4CE9A2808A0C2DDA</key>
+		<key>0273D203BC8AB3CB9071AB0F6427AC73</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3983E1D04C08E88F510BA192F853F433</key>
+		<key>4878C70B21CA37D7CB8A476BF986741B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3DA569A7C52ECAEE14AE416E7023E34D</key>
+		<key>4B2F30D90D85A544E9EFE2A49D392C25</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5B4277B7C0AE00BD24A4B36F4C981155</key>
+		<key>708E01B006A9F88B3C13711562282B5E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>984573C47872419A01D2EFB5895965FB</key>
+		<key>89DF5276CC26B065E61EC5D995A2A314</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A528101EF915DDEB22EAB804772D879F</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>ADC64EEA6D1857520CDC26895FE695CB</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>B2EC8E5366B5C8D3387C76E271129897</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>B9A04D3C9B208813656510FDA8ADAE02</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>C8D45EF5D037B452B502C20E4F9FA391</key>
+		<key>B8A759F57254B6094CF99273E5ECEE8B</key>
 		<dict>
 			<key>primary</key>
 			<true/>

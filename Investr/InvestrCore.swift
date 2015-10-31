@@ -19,7 +19,7 @@ class InvestrCore: NSObject
     static var setLabel: UILabel!
     static var currWallet = ObservableString(value: "", identifier: "wallet")
     static var numSharesTF: UITextField!
-    static var transactionID: String!
+    static var transactionID = ObservableString(value:"", identifier:"transactionID")
     static var observableString = ObservableString(value:"", identifier:"buyStock")
     static var tempID : String!
     static var selling = false
@@ -39,7 +39,7 @@ class InvestrCore: NSObject
     static func buyStock(numStocks: Int, ticker: String)
     {
         print("numStocks: \(numStocks) ticker: \(ticker)")
-        Alamofire.request(.POST, "https://investr-app.herokuapp.com/mobile/buy", parameters: ["transaction_id": self.transactionID, "buy_number": numStocks, "stock_symbol":ticker], encoding: .JSON)
+        Alamofire.request(.POST, "https://investr-app.herokuapp.com/mobile/buy", parameters: ["transaction_id": self.transactionID.value, "buy_number": numStocks, "stock_symbol":ticker], encoding: .JSON)
             .responseString { (request, response, data) in
                 //print(request)
                 //print(response)
@@ -84,6 +84,22 @@ class InvestrCore: NSObject
                             self.numSharesTF.becomeFirstResponder()
                         
                         //unstage prestaged widgets
+                            InvestrCore.setLabel = nil
+                            InvestrCore.numSharesTF = nil
+                        }
+                        
+                    }
+                    else if(value == "Bid")
+                    {
+                        self.tempAsk.value = ((response.2.value![value]!) as! String)
+                        let num = Int((Double(InvestrCore.currWallet.value)!) / Double(self.tempAsk.value)!)
+                        
+                        if((InvestrCore.setLabel) != nil)
+                        {
+                            InvestrCore.setLabel.text = "\(num)"
+                            self.numSharesTF.becomeFirstResponder()
+                            
+                            //unstage prestaged widgets
                             InvestrCore.setLabel = nil
                             InvestrCore.numSharesTF = nil
                         }
@@ -152,6 +168,17 @@ class InvestrCore: NSObject
         }
         
         return -1
+    }
+    
+    static func getPortfolio(transID: String, portfolioLabel: UILabel)
+    {
+        Alamofire.request(.GET, "https://investr-app.herokuapp.com/mobile/portfolio/\(transID)", encoding: .JSON)
+            .responseJSON { response in
+                print(response)
+                let tempPort = ((response.2.value!["portfolio"]!) as! Double)
+                print(tempPort)
+                portfolioLabel.text = "Portfolio Worth: $\(tempPort)"
+        }
     }
     
     

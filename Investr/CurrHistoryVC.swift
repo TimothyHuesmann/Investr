@@ -46,7 +46,7 @@ class CurrHistoryVC: UIViewController
                         {
                             for(var i = 0; i < objects[0]["log"].count; i++)
                             {
-                                var logString = objects[0]["log"][i]
+                                let logString = objects[0]["log"][i]
                                 var tempVal = logString["operation"]!!.componentsSeparatedByString("-")
                                 print(tempVal)
                                 var tempTime: NSString!
