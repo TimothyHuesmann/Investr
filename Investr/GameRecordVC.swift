@@ -16,6 +16,7 @@ class GameRecordVC: UIViewController, Observable
     @IBOutlet weak var userPlaceLabel: UILabel!
     @IBOutlet weak var numPlayersLabel: UILabel!
     @IBOutlet weak var endTimeLabel: UILabel!
+    @IBOutlet weak var finalStandingsButton: UIButton!
     @IBOutlet weak var gameTransactionsButton: UIButton!
     var tempMoney: Double!
     var tempPot: Double!
@@ -29,6 +30,11 @@ class GameRecordVC: UIViewController, Observable
         let currHistoryVC = self.storyboard?.instantiateViewControllerWithIdentifier("CurrHistoryVC") as! CurrHistoryVC
         currHistoryVC.theTransactions = self.record.theTransactions
         self.navigationController?.pushViewController(currHistoryVC, animated: true)
+        
+    }
+    
+    @IBAction func finalStandingsButtonPressed(sender: AnyObject)
+    {
         
     }
     
@@ -74,6 +80,7 @@ class GameRecordVC: UIViewController, Observable
         self.endTimeLabel.hidden = false
         self.finalMoneyLabel.hidden = false
         self.gameTransactionsButton.hidden = false
+        self.finalStandingsButton.hidden = false
     }
 
     /*
