@@ -183,7 +183,7 @@ class InvestrCore: NSObject
         }
     }
     
-    static func getStandings(gameID: String)
+    static func getStandings(gameID: String, names: NSMutableArray, wallets: NSMutableArray)
     {
         Alamofire.request(.GET, "https://investr-app.herokuapp.com/mobile/rank/\(gameID)", encoding: .JSON)
             .responseJSON { response in
@@ -192,7 +192,8 @@ class InvestrCore: NSObject
                 
                 for(var i = 0; i < count; i++)
                 {
-                    
+                    names.addObject(response.2.value!["ranking"]!![i]["username"] as! String)
+                    wallets.addObject(response.2.value!["ranking"]!![i]["wallet"] as! Double)
                 }
                self.tempString.updateValue("1")
                 

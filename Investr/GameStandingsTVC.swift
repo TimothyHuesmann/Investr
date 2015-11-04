@@ -13,8 +13,8 @@ class GameStandingsTVC: UIViewController, Observable
 {
     
     @IBOutlet weak var standingsTV: UITableView!
-    var names = [String]()
-    var wallets = [Double]()
+    var names: NSMutableArray = []
+    var wallets: NSMutableArray = []
     var gameID: String!
     
     func getStandings(gameID: String)
@@ -27,7 +27,7 @@ class GameStandingsTVC: UIViewController, Observable
     {
         super.viewDidLoad()
         InvestrCore.tempString.addObserver(self)
-        InvestrCore.getStandings(gameID)
+        InvestrCore.getStandings(gameID, names: self.names, wallets: self.wallets)
 
         // Do any additional setup after loading the view.
     }
@@ -56,8 +56,9 @@ class GameStandingsTVC: UIViewController, Observable
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! GameStandingsTVCell
         
         // Configure the cell...
-        cell.username.text = self.names[indexPath.row]
-        cell.wallet.text = "\(self.wallets[indexPath.row])"
+        cell.username.text = "\(self.names[indexPath.row])" 
+        cell.wallet.text = "$\(self.wallets[indexPath.row])"
+        cell.numTF.text = "\(indexPath.row + 1)"
         
         return cell
     }

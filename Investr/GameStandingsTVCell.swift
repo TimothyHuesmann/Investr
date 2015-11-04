@@ -12,6 +12,7 @@ class GameStandingsTVCell: UITableViewCell {
 
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var wallet: UILabel!
+    @IBOutlet weak var numTF: UILabel!
     
     override func awakeFromNib()
     {
