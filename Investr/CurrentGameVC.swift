@@ -74,9 +74,17 @@ class CurrentGameVC: UIViewController, Observable {
                             self.tempStock = objects[0]["stocksInHand"][i] as! NSDictionary
                             let tempNumStock =  self.tempStock["share"] as! NSString
                             let tempStockName = self.tempStock["symbol"] as! NSString
-                            let newStock = Stock(name: tempStockName as String, value: (Int(tempNumStock as String))!)
-                            self.stocks.append(newStock)
-                            self.stockNames.append("\(tempStockName)")
+                            if(tempNumStock == "0")
+                            {
+                                //stock won't show up if you don't own any of them anymore
+                                //only happens when people sell all of a kind of stock before the game is over
+                            }
+                            else
+                            {
+                                let newStock = Stock(name: tempStockName as String, value: (Int(tempNumStock as String))!)
+                                self.stocks.append(newStock)
+                                self.stockNames.append("\(tempStockName)")
+                            }
                             
                         }
                     }
