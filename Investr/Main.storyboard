@@ -703,6 +703,10 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="evB-o1-YAu">
+                                <rect key="frame" x="178" y="515" width="20" height="20"/>
+                                <animations/>
+                            </activityIndicatorView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -716,6 +720,7 @@
                         <outlet property="dateLabel" destination="cSQ-og-nwX" id="Ast-H7-8Vt"/>
                         <outlet property="hiddenLabel" destination="j7K-je-EnI" id="HMM-Lz-bef"/>
                         <outlet property="historyButton" destination="pTz-5p-qkZ" id="Car-bs-gFs"/>
+                        <outlet property="portfolioWorthAIV" destination="evB-o1-YAu" id="Sv3-83-9kc"/>
                         <outlet property="portfolioWorthLabel" destination="jf7-V6-Sws" id="wpj-eS-UbN"/>
                         <outlet property="wallet" destination="peQ-a1-6SK" id="Rte-A3-xm2"/>
                     </connections>
@@ -745,42 +750,42 @@
                                 </connections>
                             </button>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Ticker" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i19-QW-hTi">
-                                <rect key="frame" x="89" y="172" width="192" height="21"/>
+                                <rect key="frame" x="91" y="172" width="192" height="21"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xgE-du-xZI">
-                                <rect key="frame" x="89" y="201" width="192" height="21"/>
+                                <rect key="frame" x="91" y="201" width="192" height="21"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Stocks Owned:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UKR-lI-iEG">
-                                <rect key="frame" x="87" y="259" width="192" height="21"/>
+                                <rect key="frame" x="91" y="259" width="192" height="21"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Max Possible Buy:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uPd-G2-hPG">
-                                <rect key="frame" x="49" y="288" width="273" height="21"/>
+                                <rect key="frame" x="51" y="288" width="273" height="21"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="SubTotal:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pG0-Hv-THM">
-                                <rect key="frame" x="89" y="349" width="192" height="21"/>
+                                <rect key="frame" x="91" y="349" width="192" height="21"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="How Many To Buy" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rWP-ub-nub">
-                                <rect key="frame" x="89" y="317" width="192" height="30"/>
+                                <rect key="frame" x="91" y="317" width="192" height="30"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
@@ -798,14 +803,18 @@
                                 </connections>
                             </textField>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Price" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KpD-NO-f2j">
-                                <rect key="frame" x="89" y="230" width="192" height="21"/>
+                                <rect key="frame" x="91" y="230" width="192" height="21"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="MU4-cJ-AGt">
+                                <rect key="frame" x="177" y="242" width="20" height="20"/>
+                                <animations/>
+                            </activityIndicatorView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hvh-IW-AlB">
-                                <rect key="frame" x="168" y="378" width="30" height="30"/>
+                                <rect key="frame" x="172" y="378" width="30" height="30"/>
                                 <animations/>
                                 <state key="normal" title="Buy"/>
                                 <connections>
@@ -830,6 +839,7 @@
                         <outlet property="nameLabel" destination="xgE-du-xZI" id="WDp-00-4DX"/>
                         <outlet property="numBuyingTF" destination="rWP-ub-nub" id="X62-kX-A9z"/>
                         <outlet property="numOwnedLabel" destination="UKR-lI-iEG" id="OCi-r9-M6k"/>
+                        <outlet property="spinnerAIV" destination="MU4-cJ-AGt" id="84c-qa-ef5"/>
                         <outlet property="subTotalLabel" destination="pG0-Hv-THM" id="pZ6-VH-vj8"/>
                         <outlet property="tickerLabel" destination="i19-QW-hTi" id="A1U-vE-hY1"/>
                         <outlet property="tickerTF" destination="o8U-Pa-gtO" id="9Xd-gf-x6b"/>
@@ -910,6 +920,10 @@
                                     <action selector="sellAllButtonPressed:" destination="sla-da-MV4" eventType="touchDown" id="MyY-Hn-30I"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="uOe-DE-TcE">
+                                <rect key="frame" x="177" y="340" width="20" height="20"/>
+                                <animations/>
+                            </activityIndicatorView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -928,6 +942,7 @@
                         <outlet property="payoutLabel" destination="zfv-Jz-8ZK" id="a7x-IH-9ye"/>
                         <outlet property="sellAllButton" destination="U2v-Sw-Q5t" id="i5D-7y-PP0"/>
                         <outlet property="sellButton" destination="1Ax-Bf-lLE" id="Bag-CF-9q2"/>
+                        <outlet property="spinnerAIV" destination="uOe-DE-TcE" id="NaO-p5-jmp"/>
                         <outlet property="totalWorthLabel" destination="Nsp-Vb-U1h" id="eUe-oA-2Qk"/>
                     </connections>
                 </viewController>

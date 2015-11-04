@@ -12,6 +12,7 @@ import Parse
 class CurrentGameVC: UIViewController, Observable {
 
     
+    @IBOutlet weak var portfolioWorthAIV: UIActivityIndicatorView!
     @IBOutlet weak var portfolioWorthLabel: UILabel!
     @IBOutlet weak var historyButton: UIButton!
     @IBOutlet weak var hiddenLabel: UILabel!
@@ -131,7 +132,7 @@ class CurrentGameVC: UIViewController, Observable {
         
         if(identifier == "transactionID")
         {
-            InvestrCore.getPortfolio(newValue, portfolioLabel: self.portfolioWorthLabel)
+            InvestrCore.getPortfolio(newValue, portfolioLabel: self.portfolioWorthLabel, spinner: self.portfolioWorthAIV)
         }
         
         

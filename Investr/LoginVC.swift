@@ -27,6 +27,11 @@ class LoginVC: UIViewController{
                 if user != nil
                 {
                     //success
+                    let defaults = NSUserDefaults.standardUserDefaults()
+                    defaults.setObject(username, forKey: "username")
+                    defaults.setObject(password, forKey: "password")
+                    defaults.synchronize()
+                    
                     let menuVC = self.storyboard?.instantiateViewControllerWithIdentifier("MenuVC") as! MenuVC
                     self.navigationController?.pushViewController(menuVC, animated: true)
                     // Do stuff after successful login.
@@ -74,6 +79,14 @@ class LoginVC: UIViewController{
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        let defaults = NSUserDefaults.standardUserDefaults()
+        let username = defaults.objectForKey("username")
+        if(username != nil)
+        {
+            userNameTF.text = username as! String
+            passwordTF.text = defaults.objectForKey("password") as! String
+        }
+
         
         
         // Do any additional setup after loading the view.

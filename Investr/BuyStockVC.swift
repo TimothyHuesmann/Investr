@@ -21,6 +21,7 @@ class BuyStockVC: UIViewController, Observable {
     @IBOutlet weak var tickerLabel: UILabel!
     @IBOutlet weak var askLabel: UILabel!
     @IBOutlet weak var tickerTF: UITextField!
+    @IBOutlet weak var spinnerAIV: UIActivityIndicatorView!
     var currWallet : Double!
     var tempID: String!
     var tempStock: NSDictionary!
@@ -87,7 +88,10 @@ class BuyStockVC: UIViewController, Observable {
 
     @IBAction func lookupButtonPressed(sender: AnyObject)
     {
+        self.hideLabels()
         self.tickerTF!.text = self.tickerTF!.text?.uppercaseString
+        self.spinnerAIV.hidden = false
+        self.spinnerAIV.startAnimating()
         InvestrCore.checkOwnedStocks(self.numOwnedLabel,tempID: self.tempID, stockName: self.tickerTF!.text!)
         
         //prestage widgets
@@ -117,6 +121,7 @@ class BuyStockVC: UIViewController, Observable {
     
     func activateLabels()
     {
+        self.spinnerAIV.stopAnimating()
         self.tickerLabel.hidden = false
         self.nameLabel.hidden = false
         self.askLabel.hidden = false
@@ -125,6 +130,19 @@ class BuyStockVC: UIViewController, Observable {
         self.subTotalLabel.hidden = false
         self.numBuyingTF.hidden = false
         self.numBuyingTF.enabled = true
+    }
+    
+    func hideLabels()
+    {
+        self.spinnerAIV.startAnimating()
+        self.tickerLabel.hidden = true
+        self.nameLabel.hidden = true
+        self.askLabel.hidden = true
+        self.numOwnedLabel.hidden = true
+        self.maxBuyLabel.hidden = true
+        self.subTotalLabel.hidden = true
+        self.numBuyingTF.hidden = true
+        self.numBuyingTF.enabled = false
     }
     
     func observableStringUpdate(newValue: String, identifier: String)

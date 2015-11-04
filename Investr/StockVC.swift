@@ -20,6 +20,7 @@ class StockVC: UIViewController, Observable
     
     @IBOutlet weak var sellButton: UIButton!
     @IBOutlet weak var sellAllButton: UIButton!
+    @IBOutlet weak var spinnerAIV: UIActivityIndicatorView!
     
     var currPrice : Double!
     var numStocksOwned : Int!
@@ -44,6 +45,7 @@ class StockVC: UIViewController, Observable
         {
             self.name = newValue
             self.nameLabel.text = self.ticker
+            self.spinnerAIV.stopAnimating()
             activateLabels()
         }
         

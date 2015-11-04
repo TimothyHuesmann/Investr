@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		062D02382E9B9CF542649C49 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 967F751532046204B3A0BF8E /* Pods.framework */; };
 		6816B7B61BBEF64400FE2B94 /* ObservableString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6816B7B51BBEF64400FE2B94 /* ObservableString.swift */; };
+		6891256B1BEA4FB500A9F452 /* SpinCentral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6891256A1BEA4FB500A9F452 /* SpinCentral.swift */; };
 		68935D9D1BB9794F0042795F /* BuyStockVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68935D9C1BB9794F0042795F /* BuyStockVC.swift */; };
 		A7000F4A1BCBED92009E1FDD /* CurrHistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7000F491BCBED92009E1FDD /* CurrHistoryVC.swift */; };
 		A7000F4C1BCBF57C009E1FDD /* TransTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7000F4B1BCBF57C009E1FDD /* TransTVCell.swift */; };
@@ -75,6 +76,7 @@
 
 /* Begin PBXFileReference section */
 		6816B7B51BBEF64400FE2B94 /* ObservableString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservableString.swift; sourceTree = "<group>"; };
+		6891256A1BEA4FB500A9F452 /* SpinCentral.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpinCentral.swift; sourceTree = "<group>"; };
 		68935D9C1BB9794F0042795F /* BuyStockVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuyStockVC.swift; sourceTree = "<group>"; };
 		78A3D6325B35703CA90C709C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		967F751532046204B3A0BF8E /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -164,6 +166,7 @@
 				A7000F551BCE946D009E1FDD /* GameRecordTVCell.swift */,
 				A70728331BE25A7B00EDDC85 /* Game.swift */,
 				A784C5141BE7B66F00C21692 /* GameStandingsTVCell.swift */,
+				6891256A1BEA4FB500A9F452 /* SpinCentral.swift */,
 			);
 			name = "Helper Objects";
 			sourceTree = "<group>";
@@ -441,6 +444,7 @@
 				A7F148BB1B9730CB00A13CE2 /* GamesListTVC.swift in Sources */,
 				A7000F4A1BCBED92009E1FDD /* CurrHistoryVC.swift in Sources */,
 				A70728341BE25A7B00EDDC85 /* Game.swift in Sources */,
+				6891256B1BEA4FB500A9F452 /* SpinCentral.swift in Sources */,
 				A7000F541BCE8ABD009E1FDD /* GameRecord.swift in Sources */,
 				68935D9D1BB9794F0042795F /* BuyStockVC.swift in Sources */,
 				A7000F501BCE82BE009E1FDD /* HistoryVC.swift in Sources */,
