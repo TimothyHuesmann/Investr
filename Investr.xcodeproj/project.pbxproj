@@ -23,6 +23,7 @@
 		A72042731BC2B02600808FF5 /* Stock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72042721BC2B02600808FF5 /* Stock.swift */; };
 		A756B9171BBC10510019A990 /* StockVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A756B9161BBC10510019A990 /* StockVC.swift */; };
 		A784C5111BE7AD8700C21692 /* GameStandingsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A784C5101BE7AD8700C21692 /* GameStandingsTVC.swift */; };
+		A784C5151BE7B66F00C21692 /* GameStandingsTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A784C5141BE7B66F00C21692 /* GameStandingsTVCell.swift */; };
 		A7F148931B972FAC00A13CE2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F148921B972FAC00A13CE2 /* AppDelegate.swift */; };
 		A7F1489A1B972FAC00A13CE2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A7F148991B972FAC00A13CE2 /* Images.xcassets */; };
 		A7F1489D1B972FAC00A13CE2 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A7F1489B1B972FAC00A13CE2 /* LaunchScreen.xib */; };
@@ -90,6 +91,7 @@
 		A72042721BC2B02600808FF5 /* Stock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stock.swift; sourceTree = "<group>"; };
 		A756B9161BBC10510019A990 /* StockVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StockVC.swift; sourceTree = "<group>"; };
 		A784C5101BE7AD8700C21692 /* GameStandingsTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameStandingsTVC.swift; sourceTree = "<group>"; };
+		A784C5141BE7B66F00C21692 /* GameStandingsTVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameStandingsTVCell.swift; sourceTree = "<group>"; };
 		A7F1488D1B972FAC00A13CE2 /* Investr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Investr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7F148911B972FAC00A13CE2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A7F148921B972FAC00A13CE2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 				A7000F531BCE8ABD009E1FDD /* GameRecord.swift */,
 				A7000F551BCE946D009E1FDD /* GameRecordTVCell.swift */,
 				A70728331BE25A7B00EDDC85 /* Game.swift */,
+				A784C5141BE7B66F00C21692 /* GameStandingsTVCell.swift */,
 			);
 			name = "Helper Objects";
 			sourceTree = "<group>";
@@ -432,6 +435,7 @@
 				A72042711BC2AC4C00808FF5 /* StockTVCell.swift in Sources */,
 				A7F148B71B97306200A13CE2 /* RegisterVC.swift in Sources */,
 				A7000F4C1BCBF57C009E1FDD /* TransTVCell.swift in Sources */,
+				A784C5151BE7B66F00C21692 /* GameStandingsTVCell.swift in Sources */,
 				A7F148931B972FAC00A13CE2 /* AppDelegate.swift in Sources */,
 				A7F1491D1BA7009D00A13CE2 /* MyGamesTVC.swift in Sources */,
 				A7F148BB1B9730CB00A13CE2 /* GamesListTVC.swift in Sources */,

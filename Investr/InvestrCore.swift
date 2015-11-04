@@ -26,6 +26,8 @@ class InvestrCore: NSObject
     static var tempAsk = ObservableString(value:"", identifier:"tempAsk")
     static var tempName = ObservableString(value:"", identifier:"tempName")
     static var finalMoney = ObservableString(value:"", identifier:"finalMoney")
+    static var tempString = ObservableString(value: "", identifier: "tempString")
+    
     
     static func endGame()
     {
@@ -49,7 +51,7 @@ class InvestrCore: NSObject
     
     static func sellStock(amount: Int, ticker: String)
     {
-        Alamofire.request(.POST, "https://investr-app.herokuapp.com/mobile/sell", parameters: ["transaction_id": self.transactionID, "sell_number": amount, "stock_symbol": ticker],
+        Alamofire.request(.POST, "https://investr-app.herokuapp.com/mobile/sell", parameters: ["transaction_id": self.transactionID.value, "sell_number": amount, "stock_symbol": ticker],
             encoding: .JSON)
             .responseString { (request, response, data) in
         
@@ -178,6 +180,22 @@ class InvestrCore: NSObject
                 let tempPort = ((response.2.value!["portfolio"]!) as! Double)
                 print(tempPort)
                 portfolioLabel.text = "Portfolio Worth: $\(tempPort)"
+        }
+    }
+    
+    static func getStandings(gameID: String)
+    {
+        Alamofire.request(.GET, "https://investr-app.herokuapp.com/mobile/rank/\(gameID)", encoding: .JSON)
+            .responseJSON { response in
+                print(response.2.value!["ranking"])
+                let count = (response.2.value!["ranking"]!!.count)
+                
+                for(var i = 0; i < count; i++)
+                {
+                    
+                }
+               self.tempString.updateValue("1")
+                
         }
     }
     

@@ -124,6 +124,7 @@ class BuyStockVC: UIViewController, Observable {
         self.maxBuyLabel.hidden = false
         self.subTotalLabel.hidden = false
         self.numBuyingTF.hidden = false
+        self.numBuyingTF.enabled = true
     }
     
     func observableStringUpdate(newValue: String, identifier: String)

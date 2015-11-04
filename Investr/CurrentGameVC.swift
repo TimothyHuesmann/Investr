@@ -29,7 +29,9 @@ class CurrentGameVC: UIViewController, Observable {
     
     @IBAction func leaderboardButtonPressed(sender: AnyObject)
     {
-        
+        let gameStandingsTVC = self.storyboard?.instantiateViewControllerWithIdentifier("GameStandingsTVC") as! GameStandingsTVC
+        gameStandingsTVC.getStandings(self.tempID)
+        self.navigationController?.pushViewController(gameStandingsTVC, animated: true)
     }
     
     
