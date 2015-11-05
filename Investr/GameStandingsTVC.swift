@@ -12,6 +12,7 @@ import Parse
 class GameStandingsTVC: UIViewController, Observable
 {
     
+    @IBOutlet weak var spinnerAIV: UIActivityIndicatorView!
     @IBOutlet weak var standingsTV: UITableView!
     var names: NSMutableArray = []
     var wallets: NSMutableArray = []
@@ -70,6 +71,7 @@ class GameStandingsTVC: UIViewController, Observable
     
     func observableStringUpdate(newValue: String, identifier: String)
     {
+        self.spinnerAIV.stopAnimating()
         self.standingsTV.reloadData()
         print(self.names)
         print(self.wallets)
