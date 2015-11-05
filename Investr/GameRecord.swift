@@ -14,17 +14,17 @@ class GameRecord: NSObject
     var numPlayers: Int!
     var pot: Double!
     var end: NSDate!
-    var place: Int!
     var id: String!
+    var place: Int!
     var theTransactions = [Transaction]()
     
-    init(name: String, numPlayers: Int, pot: Double, end: NSDate, place: Int, gameID: String)
+    init(name: String, numPlayers: Int, pot: Double, end: NSDate, gameID: String, place: Int)
     {
         self.name = name
         self.numPlayers = numPlayers
         self.pot = pot
         self.end = end
-        self.place = place
         self.id = gameID
+        self.place = place
     }
 }

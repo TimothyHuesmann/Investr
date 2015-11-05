@@ -11,9 +11,9 @@ import UIKit
 class GameRecordVC: UIViewController, Observable
 {
 
+    @IBOutlet weak var placeLabel: UILabel!
     @IBOutlet weak var finalMoneyLabel: UILabel!
     @IBOutlet weak var potSizeLabel: UILabel!
-    @IBOutlet weak var userPlaceLabel: UILabel!
     @IBOutlet weak var numPlayersLabel: UILabel!
     @IBOutlet weak var endTimeLabel: UILabel!
     @IBOutlet weak var finalStandingsButton: UIButton!
@@ -24,6 +24,7 @@ class GameRecordVC: UIViewController, Observable
     var tempPlayers: Int!
     var tempEnd: NSDate!
     var record: GameRecord!
+    var place: Int!
     
     @IBAction func transactionsButtonPressed(sender: AnyObject)
     {
@@ -35,7 +36,9 @@ class GameRecordVC: UIViewController, Observable
     
     @IBAction func finalStandingsButtonPressed(sender: AnyObject)
     {
-        
+        let gameStandingsTVC = self.storyboard?.instantiateViewControllerWithIdentifier("GameStandingsTVC") as! GameStandingsTVC
+        gameStandingsTVC.getStandings(self.record.id)
+        self.navigationController?.pushViewController(gameStandingsTVC, animated: true)
     }
     
     override func viewDidLoad()
@@ -56,26 +59,26 @@ class GameRecordVC: UIViewController, Observable
     func getInfo(record: GameRecord)
     {
         self.tempPot = record.pot
-        self.tempPlace = record.place
         self.tempPlayers = record.numPlayers
         self.tempEnd = record.end
         self.record = record
+        self.place = record.place
     }
     
     func observableStringUpdate(newValue: String, identifier: String)
     {
         self.potSizeLabel.text = "Pot Size: $\(self.tempPot)"
-        self.userPlaceLabel.text = "Place: \(self.tempPlace)"
         self.numPlayersLabel.text = "Number of Players: \(self.tempPlayers)"
         self.endTimeLabel.text = "End Time: \(self.tempEnd)"
+        self.placeLabel.text = "Place: \(self.place)"
         self.finalMoneyLabel.text = "Ending Money: $\(newValue)"
         activateLabels()
     }
     
     func activateLabels()
     {
+        self.placeLabel.hidden = false
         self.potSizeLabel.hidden = false
-        self.userPlaceLabel.hidden = false
         self.numPlayersLabel.hidden = false
         self.endTimeLabel.hidden = false
         self.finalMoneyLabel.hidden = false

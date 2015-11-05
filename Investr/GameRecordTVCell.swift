@@ -12,7 +12,7 @@ class GameRecordTVCell: UITableViewCell
 {
 
     @IBOutlet weak var gameNameLabel: UILabel!
-    @IBOutlet weak var placeLabel: UILabel!
+    @IBOutlet weak var gamePlaceLabel: UILabel!
     override func awakeFromNib()
     {
         super.awakeFromNib()

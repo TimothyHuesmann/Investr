@@ -15,6 +15,7 @@ class GameHistoryTVC: UIViewController
     @IBOutlet weak var theGamesTV: UITableView!
     var theGames = [GameRecord]()
     var tempFinal: NSString!
+    var theDates = [String]()
     
     override func viewDidLoad()
     {
@@ -47,8 +48,19 @@ class GameHistoryTVC: UIViewController
                     print("Successfully found \(objects.count) games")
                     for(var i = 0; i<objects.count;i++)
                     {
+                        var tempPlace = 0
+                        for(var j = 0; j < objects[i]["finalStandings"].count; j++)
+                        {
+                            
+                            if(objects[i]["finalStandings"][j]["username"] as! String == InvestrCore.currUser)
+                            {
+                                tempPlace = j+1
+                                j = 1000000000
+                            }
+                        }
+                        print(tempPlace)
                         let tempID = objects[i].objectId
-                        self.theGames.append(GameRecord(name: objects[i]["Name"] as! String, numPlayers: objects[i]["CurrentPlayers"].count, pot: objects[i]["PotSize"] as! Double, end: objects[i]["EndTime"] as! NSDate, place: objects[i]["finalStandings"].indexOfObject(InvestrCore.currUser)+1, gameID: tempID!))
+                        self.theGames.append(GameRecord(name: objects[i]["Name"] as! String, numPlayers: objects[i]["CurrentPlayers"].count, pot: objects[i]["PotSize"] as! Double, end: objects[i]["EndTime"] as! NSDate, gameID: tempID!, place: tempPlace))
                     }
                     self.theGamesTV.reloadData()
                 }
@@ -92,7 +104,8 @@ class GameHistoryTVC: UIViewController
         
         // Configure the cell...
         cell.gameNameLabel.text = theGames[indexPath.row].name
-        cell.placeLabel.text = "Place: \(theGames[indexPath.row].place)"
+        cell.gamePlaceLabel.text = "Place:\(theGames[indexPath.row].place)"
+        
         
         return cell
     }
