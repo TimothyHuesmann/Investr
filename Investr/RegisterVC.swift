@@ -41,7 +41,7 @@ class RegisterVC: UIViewController {
                     alert.message = "You have now registered"
                     alert.addButtonWithTitle("OK")
                     alert.show()
-                    self.navigationController?.pushViewController(MainVC(), animated: true)
+                    self.navigationController?.popToRootViewControllerAnimated(true)
                 }
             }
         }                                       //error checking and responses

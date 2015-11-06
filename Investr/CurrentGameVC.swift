@@ -26,6 +26,7 @@ class CurrentGameVC: UIViewController, Observable {
     var tempStock : NSDictionary!
     var stockNames = [String]()
     var transID: String!
+    var shortDate: String!
     @IBOutlet weak var dateLabel: UILabel!
     
     @IBAction func leaderboardButtonPressed(sender: AnyObject)
@@ -165,7 +166,7 @@ class CurrentGameVC: UIViewController, Observable {
         InvestrCore.transactionID.addObserver(self)
         self.title = tempName
         self.wallet.text = "$\(InvestrCore.currWallet.value)"
-        self.dateLabel.text = "\(self.tempEnd)"
+        self.dateLabel.text = "\(self.shortDate)"
         self.portfolioWorthLabel.text = "Calculating Portfolio Value"
         
       
@@ -182,6 +183,7 @@ class CurrentGameVC: UIViewController, Observable {
     {
         self.tempName = game.name
         self.tempEnd = game.end
+        self.shortDate = NSDateFormatter.localizedStringFromDate(self.tempEnd, dateStyle: .ShortStyle, timeStyle: .ShortStyle)
         InvestrCore.currWallet.value = "\(userWallet)"
         self.tempID = game.id
         self.stocksNum = 0

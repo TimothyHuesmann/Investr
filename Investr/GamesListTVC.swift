@@ -31,6 +31,8 @@ class GamesListTVC: UIViewController
     var price = 0.0
     var tempID = ""
     var tempWallet: Double!
+    var startDate: NSDate!
+    var endDate: NSDate!
     
     
     
@@ -209,13 +211,14 @@ class GamesListTVC: UIViewController
                             self.potSize = 0
                         }
                         self.price = objects[0]["Price"]! as! Double    //setting the price label
-                        
+                        self.startDate = objects[0]["StartTime"]! as! NSDate
+                        self.endDate = objects[0]["EndTime"]! as! NSDate
                         
                         let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("PlannedGameVC") as! PlannedGameVC
                         
                         
                         
-                        viewController.setGameInfo(currentCell.textLabel!.text!, numPlayers: self.numPlayers, potSize: self.potSize, price: self.price, gameID: self.tempID)
+                        viewController.setGameInfo(currentCell.textLabel!.text!, numPlayers: self.numPlayers, potSize: self.potSize, price: self.price, gameID: self.tempID, start: self.startDate, end: self.endDate)
                         self.navigationController?.pushViewController(viewController, animated: true)
                         
                         self.newPlayingGames = []

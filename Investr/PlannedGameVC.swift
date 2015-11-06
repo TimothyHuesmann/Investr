@@ -18,11 +18,14 @@ class PlannedGameVC: UIViewController {
     @IBOutlet weak var startDate: UILabel!
     @IBOutlet weak var enterGameButton: UIButton!
     @IBOutlet weak var gameName: UILabel!
+    @IBOutlet weak var endDate: UILabel!
     var tempGameName : String!
     var tempNumPlayers : Int!
     var tempPriceLabel : Double!
     var tempPotSize : Int!
     var gameID : String!
+    var startTime: String!
+    var endTime: String!
     @IBAction func enterButtonPressed(sender: AnyObject)
     {
         let alertController = UIAlertController(title: "Confirm", message:
@@ -44,6 +47,8 @@ class PlannedGameVC: UIViewController {
         self.numPlayers.text = "\(self.tempNumPlayers)"
         self.priceLabel.text = "\(self.tempPriceLabel)"
         self.potSizeLabel.text = "\(self.tempPotSize)"
+        self.endDate.text = self.endTime
+        self.startDate.text = self.startTime
         
         
 
@@ -55,13 +60,15 @@ class PlannedGameVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func setGameInfo(name: String, numPlayers: Int, potSize: Int, price: Double, gameID: String)
+    func setGameInfo(name: String, numPlayers: Int, potSize: Int, price: Double, gameID: String, start: NSDate, end: NSDate)
     {
         self.title = name
         self.tempNumPlayers = numPlayers
         self.tempPriceLabel = price
         self.tempPotSize = potSize
         self.gameID = gameID
+        self.startTime = NSDateFormatter.localizedStringFromDate(start, dateStyle: .ShortStyle, timeStyle: .ShortStyle)
+        self.endTime = NSDateFormatter.localizedStringFromDate(end, dateStyle: .ShortStyle, timeStyle: .ShortStyle)
     }
     /*
     // MARK: - Navigation
