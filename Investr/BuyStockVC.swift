@@ -38,7 +38,7 @@ class BuyStockVC: UIViewController, Observable {
         InvestrCore.observableString.updateValue ("\(self.tickerLabel.text!)-\(self.numBuyingTF.text!)")
         self.navigationController?.popViewControllerAnimated(true)
         self.currWallet = self.currWallet - self.subTotal
-        InvestrCore.currWallet.value = "\(self.currWallet)"
+        InvestrCore.currWallet.value = (NSString(format:"%.2f", self.currWallet)) as String
         
     }
     
@@ -82,6 +82,7 @@ class BuyStockVC: UIViewController, Observable {
         super.viewDidLoad()
         InvestrCore.tempName.addObserver(self)
         InvestrCore.tempAsk.addObserver(self)
+        InvestrCore.alertString.addObserver(self)
 
         // Do any additional setup after loading the view.
     }
@@ -158,6 +159,16 @@ class BuyStockVC: UIViewController, Observable {
             self.maxBuyLabel.text = "Maximum Stocks Affordable: \(self.maxBuyLabel.text!)"
             self.askLabel.text = "Stock Price: $\(self.askLabel.text!)"
             activateLabels()
+        }
+        if(identifier == "alert")
+        {
+            if(newValue == "No Ask")
+            {
+                self.spinnerAIV.stopAnimating()
+                let alertController = UIAlertController(title: "Market Error", message: "This stock is not currently for sale.", preferredStyle: UIAlertControllerStyle.Alert)
+                alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(alertController, animated: true, completion: nil)
+            }
         }
         
         

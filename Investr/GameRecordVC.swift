@@ -25,6 +25,7 @@ class GameRecordVC: UIViewController, Observable
     var tempEnd: NSDate!
     var record: GameRecord!
     var place: Int!
+    var tempTitle: String!
     
     @IBAction func transactionsButtonPressed(sender: AnyObject)
     {
@@ -45,6 +46,8 @@ class GameRecordVC: UIViewController, Observable
     {
         super.viewDidLoad()
         InvestrCore.finalMoney.addObserver(self)
+        self.navigationItem.title = self.tempTitle
+        self.navigationItem.backBarButtonItem?.title = self.tempTitle
         
 
         // Do any additional setup after loading the view.
@@ -63,6 +66,7 @@ class GameRecordVC: UIViewController, Observable
         self.tempEnd = record.end
         self.record = record
         self.place = record.place
+        self.tempTitle = record.name
     }
     
     func observableStringUpdate(newValue: String, identifier: String)

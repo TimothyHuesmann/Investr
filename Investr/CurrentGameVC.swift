@@ -12,6 +12,7 @@ import Parse
 class CurrentGameVC: UIViewController, Observable {
 
     
+    @IBOutlet weak var refreshButton: UIBarButtonItem!
     @IBOutlet weak var portfolioWorthAIV: UIActivityIndicatorView!
     @IBOutlet weak var portfolioWorthLabel: UILabel!
     @IBOutlet weak var historyButton: UIButton!
@@ -36,6 +37,12 @@ class CurrentGameVC: UIViewController, Observable {
         self.navigationController?.pushViewController(gameStandingsTVC, animated: true)
     }
     
+    @IBAction func refreshButtonPressed(sender: AnyObject)
+    {
+        self.portfolioWorthAIV.startAnimating()
+        self.portfolioWorthLabel.text = "Calculating Portfolio Value"
+        InvestrCore.getPortfolio(InvestrCore.transactionID.value, portfolioLabel: self.portfolioWorthLabel, spinner: self.portfolioWorthAIV)
+    }
     
     
     @IBAction func historyButtonPressed(sender: AnyObject)

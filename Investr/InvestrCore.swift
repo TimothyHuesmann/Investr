@@ -27,6 +27,7 @@ class InvestrCore: NSObject
     static var tempName = ObservableString(value:"", identifier:"tempName")
     static var finalMoney = ObservableString(value:"", identifier:"finalMoney")
     static var tempString = ObservableString(value: "", identifier: "tempString")
+    static var alertString = ObservableString(value: "", identifier: "alert")
     
     
     static func endGame()
@@ -72,45 +73,53 @@ class InvestrCore: NSObject
     {
             Alamofire.request(.GET, "https://investr-app.herokuapp.com/mobile/quote/\(ticker)")
                 .responseJSON { response in
-    
-                    label.text = ((response.2.value![value]!) as! String)
                     
-                    if(value == "Ask")
+                    if((response.2.value![value]!) != nil)
                     {
-                        self.tempAsk.value = ((response.2.value![value]!) as! String)
-                        let num = Int((Double(InvestrCore.currWallet.value)!) / Double(self.tempAsk.value)!)
-                        
-                        if((InvestrCore.setLabel) != nil)
+                        label.text = ((response.2.value![value]!) as! String)
+                        if(value == "Ask")
                         {
-                            InvestrCore.setLabel.text = "\(num)"
-                            self.numSharesTF.becomeFirstResponder()
-                        
-                        //unstage prestaged widgets
-                            InvestrCore.setLabel = nil
-                            InvestrCore.numSharesTF = nil
-                        }
-                        
-                    }
-                    else if(value == "Bid")
-                    {
-                        self.tempAsk.value = ((response.2.value![value]!) as! String)
-                        let num = Int((Double(InvestrCore.currWallet.value)!) / Double(self.tempAsk.value)!)
-                        
-                        if((InvestrCore.setLabel) != nil)
-                        {
-                            InvestrCore.setLabel.text = "\(num)"
-                            self.numSharesTF.becomeFirstResponder()
+                            self.tempAsk.value = ((response.2.value![value]!) as! String)
+                            let num = Int((Double(InvestrCore.currWallet.value)!) / Double(self.tempAsk.value)!)
                             
-                            //unstage prestaged widgets
-                            InvestrCore.setLabel = nil
-                            InvestrCore.numSharesTF = nil
+                            if((InvestrCore.setLabel) != nil)
+                            {
+                                InvestrCore.setLabel.text = "\(num)"
+                                self.numSharesTF.becomeFirstResponder()
+                                
+                                //unstage prestaged widgets
+                                InvestrCore.setLabel = nil
+                                InvestrCore.numSharesTF = nil
+                            }
+                            
                         }
-                        
+                        else if(value == "Bid")
+                        {
+                            self.tempAsk.value = ((response.2.value![value]!) as! String)
+                            let num = Int((Double(InvestrCore.currWallet.value)!) / Double(self.tempAsk.value)!)
+                            
+                            if((InvestrCore.setLabel) != nil)
+                            {
+                                InvestrCore.setLabel.text = "\(num)"
+                                self.numSharesTF.becomeFirstResponder()
+                                
+                                //unstage prestaged widgets
+                                InvestrCore.setLabel = nil
+                                InvestrCore.numSharesTF = nil
+                            }
+                            
+                        }
+                        else if(value == "Name")
+                        {
+                            self.tempName.value = ((response.2.value![value]!) as! String)
+                        }
                     }
-                    else if(value == "Name")
+                    else
                     {
-                        self.tempName.value = ((response.2.value![value]!) as! String)
+                        InvestrCore.alertString.updateValue("No Ask")
                     }
+                    
+                    
             }
     }
     

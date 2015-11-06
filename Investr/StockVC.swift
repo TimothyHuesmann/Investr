@@ -56,7 +56,7 @@ class StockVC: UIViewController, Observable
         InvestrCore.selling = true
         InvestrCore.sellStock((Int(self.numSellingTF.text!)!), ticker: self.ticker)
         InvestrCore.observableString.updateValue ("\(self.ticker)-\(self.numSellingTF.text!)")
-        InvestrCore.currWallet.value = "\(((Double(InvestrCore.currWallet.value))! + self.payout))"
+        InvestrCore.currWallet.value = (NSString(format:"%.2f", ((Double(InvestrCore.currWallet.value))! + self.payout))) as String
         self.navigationController?.popViewControllerAnimated(true)
         
         
