@@ -37,7 +37,7 @@
                                     <action selector="loginButtonPressed:" destination="Bwy-AC-5O8" eventType="touchDown" id="Q8g-GN-Gew"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="NYCStockr" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="thc-Zc-J6n">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Investr" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="thc-Zc-J6n">
                                 <rect key="frame" x="123" y="78" width="128" height="33"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
@@ -437,11 +437,18 @@
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Standings" id="ssh-jT-dBg"/>
+                    <navigationItem key="navigationItem" title="Standings" id="ssh-jT-dBg">
+                        <barButtonItem key="rightBarButtonItem" title="Refresh" id="bCB-yq-xjL">
+                            <connections>
+                                <action selector="refreshButtonPressed:" destination="B07-JM-NoH" id="QiO-24-Tf4"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="refreshButton" destination="bCB-yq-xjL" id="wav-tn-Rmz"/>
                         <outlet property="spinnerAIV" destination="JTp-fY-2ts" id="DeO-GA-nap"/>
                         <outlet property="standingsTV" destination="idh-BE-aes" id="Vrd-Yc-vyB"/>
                     </connections>

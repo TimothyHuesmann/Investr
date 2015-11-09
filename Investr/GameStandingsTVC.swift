@@ -12,6 +12,7 @@ import Parse
 class GameStandingsTVC: UIViewController, Observable
 {
     
+    @IBOutlet weak var refreshButton: UIBarButtonItem!
     @IBOutlet weak var spinnerAIV: UIActivityIndicatorView!
     @IBOutlet weak var standingsTV: UITableView!
     var names: NSMutableArray = []
@@ -23,6 +24,13 @@ class GameStandingsTVC: UIViewController, Observable
         self.gameID = gameID
     }
     
+    @IBAction func refreshButtonPressed(sender: AnyObject)
+    {
+        self.names = []
+        self.wallets = []
+        self.spinnerAIV.startAnimating()
+        InvestrCore.getStandings(gameID, names: self.names, wallets: self.wallets)
+    }
     
     override func viewDidLoad()
     {
@@ -57,7 +65,7 @@ class GameStandingsTVC: UIViewController, Observable
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! GameStandingsTVCell
         
         // Configure the cell...
-        cell.username.text = "\(self.names[indexPath.row])" 
+        cell.username.text = "\(self.names[indexPath.row])"
         cell.wallet.text = "$\(self.wallets[indexPath.row])"
         cell.numTF.text = "\(indexPath.row + 1)"
         
