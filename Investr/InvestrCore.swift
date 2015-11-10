@@ -74,8 +74,9 @@ class InvestrCore: NSObject
             Alamofire.request(.GET, "https://investr-app.herokuapp.com/mobile/quote/\(ticker)")
                 .responseJSON { response in
                     
-                    if((response.2.value![value]!) != nil)
+                    if(!((response.2.value![value]!) is NSNull))
                     {
+                        print(response.2.value![value]!)
                         label.text = ((response.2.value![value]!) as! String)
                         if(value == "Ask")
                         {

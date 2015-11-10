@@ -165,7 +165,7 @@ class BuyStockVC: UIViewController, Observable {
             if(newValue == "No Ask")
             {
                 self.spinnerAIV.stopAnimating()
-                let alertController = UIAlertController(title: "Market Error", message: "This stock is not currently for sale.", preferredStyle: UIAlertControllerStyle.Alert)
+                let alertController = UIAlertController(title: "Market Error", message: "This stock is not currently for sale or does not exist.", preferredStyle: UIAlertControllerStyle.Alert)
                 alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
                 self.presentViewController(alertController, animated: true, completion: nil)
             }
