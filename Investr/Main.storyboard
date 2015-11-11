@@ -827,15 +827,6 @@
                                     <action selector="numBuyingValueChanged:" destination="yac-Ra-oh6" eventType="editingChanged" id="0e5-bX-dwH"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Stock Ticker" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="o8U-Pa-gtO">
-                                <rect key="frame" x="91" y="96" width="192" height="30"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
-                                <connections>
-                                    <action selector="tickerValueChanged:" destination="yac-Ra-oh6" eventType="editingChanged" id="Gca-yM-Awc"/>
-                                </connections>
-                            </textField>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Price" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KpD-NO-f2j">
                                 <rect key="frame" x="91" y="230" width="192" height="21"/>
                                 <animations/>
@@ -855,6 +846,15 @@
                                     <action selector="buyButtonPressed:" destination="yac-Ra-oh6" eventType="touchDown" id="abq-g2-hba"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Stock Ticker" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="o8U-Pa-gtO">
+                                <rect key="frame" x="91" y="96" width="192" height="30"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                                <connections>
+                                    <action selector="tickerValueChanged:" destination="yac-Ra-oh6" eventType="editingChanged" id="Gca-yM-Awc"/>
+                                </connections>
+                            </textField>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -881,7 +881,68 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AxC-Oq-f0l" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2783.5" y="419.5"/>
+            <point key="canvasLocation" x="3179.5" y="439.5"/>
+        </scene>
+        <!--Stock Lookup-->
+        <scene sceneID="x1G-Nb-NDm">
+            <objects>
+                <viewController storyboardIdentifier="LookupStockVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="3C6-L1-caj" customClass="LookupStockVC" customModule="Investr" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Wpb-uu-Kbj"/>
+                        <viewControllerLayoutGuide type="bottom" id="SC7-qr-7ov"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="YsR-93-aHv">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Stock Ticker" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6wd-PO-yYG">
+                                <rect key="frame" x="91" y="79" width="192" height="30"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                                <connections>
+                                    <action selector="tickerValueChanged:" destination="3C6-L1-caj" eventType="valueChanged" id="3ob-ka-Z7y"/>
+                                </connections>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QyU-K1-cYu">
+                                <rect key="frame" x="162" y="117" width="51" height="30"/>
+                                <animations/>
+                                <state key="normal" title="Lookup"/>
+                                <connections>
+                                    <action selector="lookupButtonPressed:" destination="3C6-L1-caj" eventType="touchDown" id="dXJ-EO-KxZ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ETq-IV-VkB">
+                                <rect key="frame" x="149" y="558" width="77" height="30"/>
+                                <animations/>
+                                <state key="normal" title="Buy Stocks"/>
+                                <connections>
+                                    <action selector="buyStockButtonPressed:" destination="3C6-L1-caj" eventType="touchDown" id="oq6-vk-uPv"/>
+                                </connections>
+                            </button>
+                            <webView hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b7w-ab-yVF">
+                                <rect key="frame" x="0.0" y="155" width="375" height="381"/>
+                                <animations/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
+                            </webView>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Stock Lookup" id="Y4x-IL-krx"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="buyStockButton" destination="ETq-IV-VkB" id="um2-YU-VFU"/>
+                        <outlet property="lookupButton" destination="QyU-K1-cYu" id="RmY-zj-skC"/>
+                        <outlet property="stockWV" destination="b7w-ab-yVF" id="sm7-56-zDg"/>
+                        <outlet property="tickerTF" destination="6wd-PO-yYG" id="OZa-8A-zJ7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mWH-eh-xCe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2783.5" y="439.5"/>
         </scene>
         <!--Stock View-->
         <scene sceneID="bO3-pY-hRT">
