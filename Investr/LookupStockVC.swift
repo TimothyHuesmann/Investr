@@ -16,14 +16,22 @@ class LookupStockVC: UIViewController, UIWebViewDelegate
     @IBOutlet weak var buyStockButton: UIButton!
     var currURL: String!
     var currTicker: String!
+    var tempID: String!
+    var wallet: Double!
     
     
     @IBAction func buyStockButtonPressed(sender: AnyObject)
     {
         let buyStockVC = self.storyboard?.instantiateViewControllerWithIdentifier("BuyStockVC") as! BuyStockVC
+        buyStockVC.getInfo(self.tempID, ticker: self.currTicker)
         self.navigationController?.pushViewController(buyStockVC, animated: true)
     }
     
+    
+    func getInfo(id: String)
+    {
+        self.tempID = id
+    }
     
     override func viewDidLoad()
     {
@@ -76,6 +84,7 @@ class LookupStockVC: UIViewController, UIWebViewDelegate
                 while(tempTickerString.containsString("&"))
             }
             self.currTicker = tempTickerString
+            self.buyStockButton.enabled = true
         }
         print(self.currURL)
         
@@ -83,7 +92,7 @@ class LookupStockVC: UIViewController, UIWebViewDelegate
         {
             print(self.currTicker)
         }
-        self.buyStockButton.enabled = true
+        
     }
 
     /*

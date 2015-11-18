@@ -643,14 +643,6 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ID4-Vx-zZt">
-                                <rect key="frame" x="41" y="452" width="89" height="30"/>
-                                <animations/>
-                                <state key="normal" title="Buy Stocks"/>
-                                <connections>
-                                    <action selector="buyButtonPressed:" destination="OeC-eJ-IZ1" eventType="touchDown" id="BJC-08-ere"/>
-                                </connections>
-                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="sVH-76-3i1">
                                 <rect key="frame" x="0.0" y="102" width="375" height="342"/>
                                 <animations/>
@@ -735,9 +727,9 @@
                                 <animations/>
                             </activityIndicatorView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="idX-Ac-nVF">
-                                <rect key="frame" x="243" y="490" width="46" height="30"/>
+                                <rect key="frame" x="22" y="452" width="125" height="30"/>
                                 <animations/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="Stock Lookup/Info"/>
                                 <connections>
                                     <action selector="tempLookupButtonPressed:" destination="OeC-eJ-IZ1" eventType="touchDown" id="BFU-vE-cFC"/>
                                 </connections>
@@ -783,51 +775,36 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ndI-YP-ExM">
-                                <rect key="frame" x="162" y="134" width="51" height="30"/>
-                                <animations/>
-                                <state key="normal" title="Lookup"/>
-                                <connections>
-                                    <action selector="lookupButtonPressed:" destination="yac-Ra-oh6" eventType="touchDown" id="w6k-ee-OSw"/>
-                                </connections>
-                            </button>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Ticker" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i19-QW-hTi">
-                                <rect key="frame" x="91" y="172" width="192" height="21"/>
+                                <rect key="frame" x="91" y="94" width="192" height="21"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xgE-du-xZI">
-                                <rect key="frame" x="91" y="201" width="192" height="21"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Stocks Owned:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UKR-lI-iEG">
-                                <rect key="frame" x="91" y="259" width="192" height="21"/>
+                                <rect key="frame" x="7" y="135" width="360" height="21"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Max Possible Buy:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uPd-G2-hPG">
-                                <rect key="frame" x="51" y="288" width="273" height="21"/>
+                                <rect key="frame" x="13" y="254" width="348" height="21"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="SubTotal:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pG0-Hv-THM">
-                                <rect key="frame" x="91" y="349" width="192" height="21"/>
+                                <rect key="frame" x="7" y="344" width="360" height="21"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="How Many To Buy" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rWP-ub-nub">
-                                <rect key="frame" x="91" y="317" width="192" height="30"/>
+                                <rect key="frame" x="91" y="293" width="192" height="30"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
@@ -836,7 +813,7 @@
                                 </connections>
                             </textField>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Price" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KpD-NO-f2j">
-                                <rect key="frame" x="91" y="230" width="192" height="21"/>
+                                <rect key="frame" x="20" y="179" width="335" height="21"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -854,15 +831,13 @@
                                     <action selector="buyButtonPressed:" destination="yac-Ra-oh6" eventType="touchDown" id="abq-g2-hba"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Stock Ticker" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="o8U-Pa-gtO">
-                                <rect key="frame" x="91" y="96" width="192" height="30"/>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Stocks Owned:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UKR-lI-iEG">
+                                <rect key="frame" x="20" y="213" width="335" height="21"/>
                                 <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
-                                <connections>
-                                    <action selector="tickerValueChanged:" destination="yac-Ra-oh6" eventType="editingChanged" id="Gca-yM-Awc"/>
-                                </connections>
-                            </textField>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -876,7 +851,6 @@
                     <connections>
                         <outlet property="askLabel" destination="KpD-NO-f2j" id="f9i-XG-Rva"/>
                         <outlet property="buyButton" destination="Hvh-IW-AlB" id="lBG-Vx-Z3c"/>
-                        <outlet property="lookupButton" destination="ndI-YP-ExM" id="HdE-hN-VIg"/>
                         <outlet property="maxBuyLabel" destination="uPd-G2-hPG" id="fWK-vE-WqO"/>
                         <outlet property="nameLabel" destination="xgE-du-xZI" id="WDp-00-4DX"/>
                         <outlet property="numBuyingTF" destination="rWP-ub-nub" id="X62-kX-A9z"/>
@@ -884,7 +858,6 @@
                         <outlet property="spinnerAIV" destination="MU4-cJ-AGt" id="84c-qa-ef5"/>
                         <outlet property="subTotalLabel" destination="pG0-Hv-THM" id="pZ6-VH-vj8"/>
                         <outlet property="tickerLabel" destination="i19-QW-hTi" id="A1U-vE-hY1"/>
-                        <outlet property="tickerTF" destination="o8U-Pa-gtO" id="9Xd-gf-x6b"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AxC-Oq-f0l" userLabel="First Responder" sceneMemberID="firstResponder"/>

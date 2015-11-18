@@ -33,6 +33,7 @@ class CurrentGameVC: UIViewController, Observable {
     @IBAction func tempLookupButtonPressed(sender: AnyObject)
     {
         let lookupStockVC = self.storyboard?.instantiateViewControllerWithIdentifier("LookupStockVC") as! LookupStockVC
+        lookupStockVC.getInfo(self.tempID)
         self.navigationController?.pushViewController(lookupStockVC, animated: true)
     }
     
@@ -58,13 +59,6 @@ class CurrentGameVC: UIViewController, Observable {
         currHistoryVC.navigationController?.title = "Transaction History"
         currHistoryVC.getHistory()
         self.navigationController?.pushViewController(currHistoryVC, animated: true)
-    }
-    
-    @IBAction func buyButtonPressed(sender: AnyObject)
-    {
-        let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("BuyStockVC") as! BuyStockVC
-        viewController.getInfo((Double(InvestrCore.currWallet.value))!, tempID: self.tempID)
-        self.navigationController?.pushViewController(viewController, animated: true)
     }
     
     func getStocks()

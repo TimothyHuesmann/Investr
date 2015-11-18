@@ -11,7 +11,6 @@ import Parse
 
 class BuyStockVC: UIViewController, Observable {
 
-    @IBOutlet weak var lookupButton: UIButton!
     @IBOutlet weak var subTotalLabel: UILabel!
     @IBOutlet weak var numBuyingTF: UITextField!
     @IBOutlet weak var buyButton: UIButton!
@@ -20,7 +19,6 @@ class BuyStockVC: UIViewController, Observable {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var tickerLabel: UILabel!
     @IBOutlet weak var askLabel: UILabel!
-    @IBOutlet weak var tickerTF: UITextField!
     @IBOutlet weak var spinnerAIV: UIActivityIndicatorView!
     var currWallet : Double!
     var tempID: String!
@@ -29,6 +27,7 @@ class BuyStockVC: UIViewController, Observable {
     var tempMax : Double!
     var subTotal : Double!
     var price : String!
+    var ticker: String!
     
     
     @IBAction func buyButtonPressed(sender: AnyObject)
@@ -40,18 +39,6 @@ class BuyStockVC: UIViewController, Observable {
         self.currWallet = self.currWallet - self.subTotal
         InvestrCore.currWallet.value = (NSString(format:"%.2f", self.currWallet)) as String
         
-    }
-    
-    @IBAction func tickerValueChanged(sender: UITextField)
-    {
-        if(sender.text!.isEmpty)
-        {
-            self.lookupButton.enabled = false
-        }
-        else
-        {
-            self.lookupButton.enabled = true
-        }
     }
     
     
@@ -83,36 +70,30 @@ class BuyStockVC: UIViewController, Observable {
         InvestrCore.tempName.addObserver(self)
         InvestrCore.tempAsk.addObserver(self)
         InvestrCore.alertString.addObserver(self)
-
-        // Do any additional setup after loading the view.
-    }
-
-    @IBAction func lookupButtonPressed(sender: AnyObject)
-    {
         self.hideLabels()
-        self.tickerTF!.text = self.tickerTF!.text?.uppercaseString
         self.spinnerAIV.hidden = false
         self.spinnerAIV.startAnimating()
-        InvestrCore.checkOwnedStocks(self.numOwnedLabel,tempID: self.tempID, stockName: self.tickerTF!.text!)
+        InvestrCore.checkOwnedStocks(self.numOwnedLabel,tempID: self.tempID, stockName: self.ticker)
         
         //prestage widgets
         InvestrCore.setLabel = self.maxBuyLabel
         InvestrCore.numSharesTF = self.numBuyingTF
         
         //make the Ask call which relies on the staged widgets
-        InvestrCore.getQuote(self.tickerTF!.text!, label:self.askLabel, value:"Ask")
+        InvestrCore.getQuote(self.ticker, label:self.askLabel, value:"Ask")
         
         //do the rest
-        InvestrCore.getQuote(self.tickerTF!.text!, label:self.tickerLabel, value:"symbol")
-        InvestrCore.getQuote(self.tickerTF!.text!, label:self.nameLabel, value:"Name")
-        
-        
+        InvestrCore.getQuote(self.ticker, label:self.tickerLabel, value:"symbol")
+        InvestrCore.getQuote(self.ticker, label:self.nameLabel, value:"Name")
+
+        // Do any additional setup after loading the view.
     }
     
-    func getInfo(wallet: Double, tempID: String)
+    func getInfo(tempID: String, ticker: String)
     {
-        self.currWallet = wallet
+        self.currWallet = (Double(InvestrCore.currWallet.value))
         self.tempID = tempID
+        self.ticker = ticker
     }
     
     override func didReceiveMemoryWarning() {
