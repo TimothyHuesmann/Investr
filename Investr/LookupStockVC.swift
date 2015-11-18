@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LookupStockVC: UIViewController
+class LookupStockVC: UIViewController, UIWebViewDelegate
 {
 
     @IBOutlet weak var tickerTF: UITextField!
@@ -19,37 +19,18 @@ class LookupStockVC: UIViewController
     
     @IBAction func buyStockButtonPressed(sender: AnyObject)
     {
-        
+        let buyStockVC = self.storyboard?.instantiateViewControllerWithIdentifier("BuyStockVC") as! BuyStockVC
+        self.navigationController?.pushViewController(buyStockVC, animated: true)
     }
-    
-    @IBAction func lookupButtonPressed(sender: AnyObject)
-    {
-        let url = NSURL(string: "http://finance.yahoo.com/echarts?s=\(self.tickerTF.text)+Interactive#{\"range\":\"1d\",\"allowChartStacking\":true}")
-        let requestObject = NSURLRequest(URL: url!)
-        self.stockWV.loadRequest(requestObject)
-        self.stockWV.hidden = false
-        self.buyStockButton.enabled = true
-    }
-    
-    @IBAction func tickerValueChanged(sender: UITextField)
-    {
-        if(sender.text!.isEmpty)
-        {
-            self.lookupButton.enabled = false
-        }
-        else
-        {
-            self.lookupButton.enabled = true
-        }
-    }
-    
-    
     
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
-
+        let url = NSURL(string: "http://finance.yahoo.com")
+        let requestObject = NSURLRequest(URL: url!)
+        self.stockWV.loadRequest(requestObject)
+        self.stockWV.hidden = false
         // Do any additional setup after loading the view.
     }
 
@@ -59,6 +40,26 @@ class LookupStockVC: UIViewController
         // Dispose of any resources that can be recreated.
     }
     
+    func webView(webView: UIWebView, didFailLoadWithError error: NSError?)
+    {
+        print("Webview fail with error \(error)");
+    }
+    
+    func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool
+    {
+        return true;
+    }
+    
+    func webViewDidStartLoad(webView: UIWebView)
+    {
+        print("Webview started Loading")
+    }
+    
+    func webViewDidFinishLoad(webView: UIWebView)
+    {
+        print("Webview did finish load")
+        self.buyStockButton.enabled = true
+    }
 
     /*
     // MARK: - Navigation

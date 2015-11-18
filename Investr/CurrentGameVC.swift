@@ -30,6 +30,12 @@ class CurrentGameVC: UIViewController, Observable {
     var shortDate: String!
     @IBOutlet weak var dateLabel: UILabel!
     
+    @IBAction func tempLookupButtonPressed(sender: AnyObject)
+    {
+        let lookupStockVC = self.storyboard?.instantiateViewControllerWithIdentifier("LookupStockVC") as! LookupStockVC
+        self.navigationController?.pushViewController(lookupStockVC, animated: true)
+    }
+    
     @IBAction func leaderboardButtonPressed(sender: AnyObject)
     {
         let gameStandingsTVC = self.storyboard?.instantiateViewControllerWithIdentifier("GameStandingsTVC") as! GameStandingsTVC
