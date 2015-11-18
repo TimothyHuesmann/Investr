@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import Parse
 
 class PlannedGameVC: UIViewController {
     
@@ -28,15 +29,43 @@ class PlannedGameVC: UIViewController {
     var endTime: String!
     @IBAction func enterButtonPressed(sender: AnyObject)
     {
-        let alertController = UIAlertController(title: "Confirm", message:
-            "Are your sure to join the game?", preferredStyle: UIAlertControllerStyle.Alert)
-        alertController.addAction(UIAlertAction(title: "Yes", style: UIAlertActionStyle.Default,handler: {
-            (action: UIAlertAction!) in
-            InvestrCore.joinGame(InvestrCore.userID, gameID: self.gameID)
-        }))
-        alertController.addAction(UIAlertAction(title: "No", style: UIAlertActionStyle.Default,handler: nil))
+        let query = PFQuery(className: "Game")
+        query.whereKey("objectId", equalTo: self.gameID)
+        query.findObjectsInBackgroundWithBlock
+        {
+            (objects: [PFObject]?, error: NSError?) -> Void in
+            if(error == nil)
+            {
+                if let objects = objects
+                {
+                    if(objects[0]["CurrentPlayers"].containsObject(InvestrCore.currUser))
+                    {
+                        let errorAlertController = UIAlertController(title: "Error", message: "You have already entered this game.", preferredStyle: UIAlertControllerStyle.Alert)
+                        errorAlertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                        self.presentViewController(errorAlertController, animated: true, completion: nil)
+                    }
+                    else
+                    {
+                        let alertController = UIAlertController(title: "Confirm", message:
+                            "Are your sure to join the game?", preferredStyle: UIAlertControllerStyle.Alert)
+                        alertController.addAction(UIAlertAction(title: "Yes", style: UIAlertActionStyle.Default,handler: {
+                            (action: UIAlertAction!) in
+                            InvestrCore.joinGame(InvestrCore.userID, gameID: self.gameID)
+                            self.navigationController?.popViewControllerAnimated(true)
+                        }))
+                        alertController.addAction(UIAlertAction(title: "No", style: UIAlertActionStyle.Default,handler: nil))
+                        
+                        self.presentViewController(alertController, animated: true, completion: nil)
+                    }
+                }
+            }
+            else
+            {
+                
+            }
+        }
         
-        self.presentViewController(alertController, animated: true, completion: nil)
+        
         //needs to add a confirmation button
         //needs to add the function to add to the game
         
