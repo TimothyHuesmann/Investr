@@ -10,11 +10,12 @@ import UIKit
 
 class LookupStockVC: UIViewController, UIWebViewDelegate
 {
-
     @IBOutlet weak var tickerTF: UITextField!
     @IBOutlet weak var lookupButton: UIButton!
     @IBOutlet weak var stockWV: UIWebView!
     @IBOutlet weak var buyStockButton: UIButton!
+    var currURL: String!
+    var currTicker: String!
     
     
     @IBAction func buyStockButtonPressed(sender: AnyObject)
@@ -58,6 +59,30 @@ class LookupStockVC: UIViewController, UIWebViewDelegate
     func webViewDidFinishLoad(webView: UIWebView)
     {
         print("Webview did finish load")
+        self.currURL = (webView.request?.URL!.absoluteString)!
+        //indexes 27 & 28 should equal "s=" if it is a stock page
+        if(self.currURL.containsString("s="))
+        {
+            let index1 = self.currURL.startIndex.advancedBy(29)
+            let substring = self.currURL.substringFromIndex(index1)
+            let index2 = substring.startIndex.advancedBy(5)
+            var tempTickerString = substring.substringToIndex(index2)
+            if(tempTickerString.containsString("&"))
+            {
+                repeat
+                {
+                    tempTickerString = tempTickerString.substringToIndex(tempTickerString.endIndex.predecessor())
+                }
+                while(tempTickerString.containsString("&"))
+            }
+            self.currTicker = tempTickerString
+        }
+        print(self.currURL)
+        
+        if(self.currTicker != nil)
+        {
+            print(self.currTicker)
+        }
         self.buyStockButton.enabled = true
     }
 
@@ -70,5 +95,7 @@ class LookupStockVC: UIViewController, UIWebViewDelegate
         // Pass the selected object to the new view controller.
     }
     */
+    
+    
 
 }
