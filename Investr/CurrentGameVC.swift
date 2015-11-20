@@ -28,6 +28,8 @@ class CurrentGameVC: UIViewController, Observable {
     var stockNames = [String]()
     var transID: String!
     var shortDate: String!
+    var timer: NSTimer!
+    var refresher: UIRefreshControl!
     @IBOutlet weak var dateLabel: UILabel!
     
     @IBAction func tempLookupButtonPressed(sender: AnyObject)
@@ -46,11 +48,15 @@ class CurrentGameVC: UIViewController, Observable {
     
     @IBAction func refreshButtonPressed(sender: AnyObject)
     {
+        autoRefresh()
+    }
+    
+    func autoRefresh()
+    {
         self.portfolioWorthAIV.startAnimating()
         self.portfolioWorthLabel.text = "Calculating Portfolio Value"
         InvestrCore.getPortfolio(InvestrCore.transactionID.value, portfolioLabel: self.portfolioWorthLabel, spinner: self.portfolioWorthAIV)
     }
-    
     
     @IBAction func historyButtonPressed(sender: AnyObject)
     {
@@ -174,7 +180,10 @@ class CurrentGameVC: UIViewController, Observable {
         self.title = tempName
         self.wallet.text = "$\(InvestrCore.currWallet.value)"
         self.dateLabel.text = "\(self.shortDate)"
+        self.refresher = UIRefreshControl()
+        self.refresher.addTarget(self, action: "autoRefresh:", forControlEvents: .ValueChanged)
         self.portfolioWorthLabel.text = "Calculating Portfolio Value"
+        self.timer = NSTimer.scheduledTimerWithTimeInterval(30.0, target: self, selector: "autoRefresh", userInfo:  nil, repeats: true)
         
       
 
@@ -227,7 +236,7 @@ class CurrentGameVC: UIViewController, Observable {
         
         // Configure the cell...
         cell.nameLabel.text = self.stocks[indexPath.row].name
-        cell.numberLabel.text = "\(self.stocks[indexPath.row].value)"
+        cell.numberLabel.text = "\(self.stocks[indexPath.row].value) Owned Stocks"
         
         return cell
     }
