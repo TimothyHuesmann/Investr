@@ -14,6 +14,7 @@ class CurrentGameVC: UIViewController, Observable {
     
     @IBOutlet weak var refreshButton: UIBarButtonItem!
     @IBOutlet weak var portfolioWorthAIV: UIActivityIndicatorView!
+    @IBOutlet weak var currentStocksAIV: UIActivityIndicatorView!
     @IBOutlet weak var portfolioWorthLabel: UILabel!
     @IBOutlet weak var historyButton: UIButton!
     @IBOutlet weak var hiddenLabel: UILabel!
@@ -21,7 +22,7 @@ class CurrentGameVC: UIViewController, Observable {
     @IBOutlet weak var wallet: UILabel!
     var tempName : String!
     var stocksNum : Int!
-    var stocks = [Stock]()
+    var stocks: NSMutableArray = []
     var tempEnd = NSDate()
     var tempID : String!
     var tempStock : NSDictionary!
@@ -30,8 +31,9 @@ class CurrentGameVC: UIViewController, Observable {
     var shortDate: String!
     var timer: NSTimer!
     var refresher: UIRefreshControl!
+    var tempVar: Int!
     @IBOutlet weak var dateLabel: UILabel!
-    
+
     @IBAction func tempLookupButtonPressed(sender: AnyObject)
     {
         let lookupStockVC = self.storyboard?.instantiateViewControllerWithIdentifier("LookupStockVC") as! LookupStockVC
@@ -53,9 +55,13 @@ class CurrentGameVC: UIViewController, Observable {
     
     func autoRefresh()
     {
+        self.tempVar = 2
+        self.StockTV.reloadData()
         self.portfolioWorthAIV.startAnimating()
         self.portfolioWorthLabel.text = "Calculating Portfolio Value"
         InvestrCore.getPortfolio(InvestrCore.transactionID.value, portfolioLabel: self.portfolioWorthLabel, spinner: self.portfolioWorthAIV)
+        InvestrCore.currentGame(InvestrCore.transactionID.value, array: self.stocks)
+        self.currentStocksAIV.startAnimating()
     }
     
     @IBAction func historyButtonPressed(sender: AnyObject)
@@ -82,43 +88,20 @@ class CurrentGameVC: UIViewController, Observable {
                     
                     if objects[0]["stocksInHand"] != nil
                     {
-                        self.stocksNum = objects[0]["stocksInHand"].count
-                        for(var i = 0; i < self.stocksNum;i++)
-                        {
-                            self.tempStock = objects[0]["stocksInHand"][i] as! NSDictionary
-                            let tempNumStock =  self.tempStock["share"] as! NSString
-                            let tempStockName = self.tempStock["symbol"] as! NSString
-                            if(tempNumStock == "0")
-                            {
-                                //stock won't show up if you don't own any of them anymore
-                                //only happens when people sell all of a kind of stock before the game is over
-                            }
-                            else
-                            {
-                                let newStock = Stock(name: tempStockName as String, value: (Int(tempNumStock as String))!)
-                                self.stocks.append(newStock)
-                                self.stockNames.append("\(tempStockName)")
-                            }
-                            
-                        }
+                        InvestrCore.transactionID.updateValue(objects[0].objectId!)
                     }
-                    else
-                    {
-                        self.stocksNum = 0
-                        self.stocks = []
-                    }
-                    InvestrCore.transactionID.updateValue(objects[0].objectId!)
-                }
-                self.StockTV.reloadData()
+                    self.StockTV.reloadData()
                 
-            }
-            else
-            {
-                print("Error: \(error) \(error!.userInfo)")
+                }
+                else
+                {
+                    print("Error: \(error) \(error!.userInfo)")
+                }
             }
         }
-        
     }
+    
+    
     
     func observableStringUpdate(newValue: String, identifier: String)
     {
@@ -126,35 +109,23 @@ class CurrentGameVC: UIViewController, Observable {
         if(identifier == "buyStock")
         {
             let tempVal = newValue.componentsSeparatedByString("-")
-            let tempStock = Stock(name: tempVal[0], value: (Int(tempVal[1]))!)
             if InvestrCore.selling == false
             {
-                if(InvestrCore.indexOfStock(self.stocks, name: tempStock.name) != -1)
-                {
-                    let tempIndex = InvestrCore.indexOfStock(self.stocks, name: tempStock.name)
-                    self.stocks[tempIndex].value = self.stocks[tempIndex].value + tempStock.value
-                }
-                else
-                {
-                    self.stocks.append(tempStock)
-                }
                 
             }
             else
             {
-                let tempIndex = InvestrCore.indexOfStock(self.stocks, name: tempStock.name)
-                self.stocks[tempIndex].value = self.stocks[tempIndex].value - tempStock.value
-                if(self.stocks[tempIndex].value == 0)
-                {
-                    self.stocks.removeAtIndex(tempIndex)
-                }
+    
             }
+            self.tempVar = 1
+            self.StockTV.reloadData()
         }
         
         
         if(identifier == "transactionID")
         {
             InvestrCore.getPortfolio(newValue, portfolioLabel: self.portfolioWorthLabel, spinner: self.portfolioWorthAIV)
+            InvestrCore.currentGame(newValue, array: self.stocks)
         }
         
         
@@ -162,11 +133,17 @@ class CurrentGameVC: UIViewController, Observable {
         {
            self.wallet.text = "$\(newValue)"
         }
-        self.StockTV.reloadData()
         
         if(identifier == "portValue")
         {
             self.portfolioWorthLabel.text = "Current Worth: $\(newValue)"
+        }
+        
+        if(identifier == "alert")
+        {
+            self.tempVar = 0
+            self.StockTV.reloadData()
+            self.currentStocksAIV.stopAnimating()
         }
         
         
@@ -177,13 +154,14 @@ class CurrentGameVC: UIViewController, Observable {
         InvestrCore.observableString.addObserver(self)
         InvestrCore.currWallet.addObserver(self)
         InvestrCore.transactionID.addObserver(self)
+        InvestrCore.alertString.addObserver(self)
         self.title = tempName
         self.wallet.text = "$\(InvestrCore.currWallet.value)"
         self.dateLabel.text = "\(self.shortDate)"
         self.refresher = UIRefreshControl()
         self.refresher.addTarget(self, action: "autoRefresh:", forControlEvents: .ValueChanged)
         self.portfolioWorthLabel.text = "Calculating Portfolio Value"
-        self.timer = NSTimer.scheduledTimerWithTimeInterval(30.0, target: self, selector: "autoRefresh", userInfo:  nil, repeats: true)
+        self.timer = NSTimer.scheduledTimerWithTimeInterval(15.0, target: self, selector: "autoRefresh", userInfo:  nil, repeats: true)
         
       
 
@@ -235,8 +213,50 @@ class CurrentGameVC: UIViewController, Observable {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! StockTVCell
         
         // Configure the cell...
-        cell.nameLabel.text = self.stocks[indexPath.row].name
-        cell.numberLabel.text = "\(self.stocks[indexPath.row].value) Owned Stocks"
+        cell.nameLabel.text = "\(self.stocks[indexPath.row].name!)"
+        cell.numberLabel.text = "\((self.stocks[indexPath.row] as! Stock).value!) Owned Stocks"
+        cell.buyLabel.text = "$\((self.stocks[indexPath.row] as! Stock).buyVal!)"
+        cell.bidLabel.text = "$\((self.stocks[indexPath.row] as! Stock).bidVal)"
+        let tempNum = (self.stocks[indexPath.row] as! Stock).change
+        if(tempNum > 0)
+        {
+            cell.changeLabel.textColor = UIColor.greenColor()
+            cell.changeLabel.text = "+\((self.stocks[indexPath.row] as! Stock).change)"
+        }
+        else if(tempNum < 0)
+        {
+            cell.changeLabel.textColor = UIColor.redColor()
+            cell.changeLabel.text = "\((self.stocks[indexPath.row] as! Stock).change)"
+        }
+        else
+        {
+            cell.changeLabel.textColor = UIColor.blackColor()
+            cell.changeLabel.text = "\((self.stocks[indexPath.row] as! Stock).change)"
+        }
+        if(self.tempVar == 2)
+        {
+            cell.hidden = true
+            cell.buyLabel.hidden = true
+            cell.bidLabel.hidden = true
+            cell.changeLabel.hidden = true
+            cell.spinner.startAnimating()
+        }
+        else if(self.tempVar == 1)
+        {
+            cell.buyLabel.hidden = true
+            cell.bidLabel.hidden = true
+            cell.changeLabel.hidden = true
+            cell.spinner.startAnimating()
+        }
+        else
+        {
+            cell.hidden = false
+            cell.buyLabel.hidden = false
+            cell.bidLabel.hidden = false
+            cell.changeLabel.hidden = false
+            cell.spinner.stopAnimating()
+        }
+        
         
         return cell
     }
@@ -246,7 +266,8 @@ class CurrentGameVC: UIViewController, Observable {
         let indexPath = tableView.indexPathForSelectedRow
         let currentCell = tableView.cellForRowAtIndexPath(indexPath!) as! StockTVCell
         let stockVC = self.storyboard?.instantiateViewControllerWithIdentifier("StockVC") as! StockVC
-        stockVC.setUp(currentCell.nameLabel.text!, numStocks: (Int(currentCell.numberLabel.text!)!), gameID: self.tempID)
+        let tempNum = (self.stocks[indexPath!.row] as! Stock).value
+        stockVC.setUp(currentCell.nameLabel.text!, numStocks: tempNum, gameID: self.tempID)
         InvestrCore.getQuote(currentCell.nameLabel.text!, label: self.hiddenLabel, value: "Bid")
         InvestrCore.getQuote(currentCell.nameLabel.text!, label:self.hiddenLabel, value: "Name")
         self.navigationController?.pushViewController(stockVC, animated: true)        

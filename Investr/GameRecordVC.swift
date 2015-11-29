@@ -73,7 +73,7 @@ class GameRecordVC: UIViewController, Observable
     {
         self.potSizeLabel.text = "Pot Size: $\(self.tempPot)"
         self.numPlayersLabel.text = "Number of Players: \(self.tempPlayers)"
-        self.endTimeLabel.text = "End Time: \(self.tempEnd)"
+        self.endTimeLabel.text = "End Time: \(NSDateFormatter.localizedStringFromDate(self.tempEnd, dateStyle: .ShortStyle, timeStyle: .ShortStyle))"
         self.placeLabel.text = "Place: \(self.place)"
         self.finalMoneyLabel.text = "Ending Money: $\(newValue)"
         activateLabels()

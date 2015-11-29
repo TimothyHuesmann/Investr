@@ -165,11 +165,11 @@ class InvestrCore: NSObject
             
     }
     
-    static func indexOfStock(array: [Stock], name: String) -> Int
+    static func indexOfStock(array: NSMutableArray, name: String) -> Int
     {
         for(var i = 0; i<array.count;i++)
         {
-            if(array[i].name == name)
+            if((array[i] as! Stock).name == name)
             {
                 return i
             }
@@ -208,6 +208,34 @@ class InvestrCore: NSObject
                 }
                self.tempString.updateValue("1")
                 
+        }
+    }
+    
+    static func currentGame(transactionID: String, array: NSMutableArray)
+    {
+        Alamofire.request(.GET, "https://investr-app.herokuapp.com/mobile/currentGame/\(transactionID)", encoding: .JSON)
+            .responseJSON { response in
+                print(response.2.value!)
+                let count = (response.2.value!["response"]!!.count)
+                array.removeAllObjects()
+                for(var i = 0; i < count; i++)
+                {
+                    if((response.2.value!["response"]!![i]["share"] as! String) != "0")
+                    {
+                    let tempName = response.2.value!["response"]!![i]["symbol"] as! String
+                    let tempNum = response.2.value!["response"]!![i]["share"] as! String
+                    let tempChange = response.2.value!["response"]!![i]["change"] as! Double
+                    let tempBuy = response.2.value!["response"]!![i]["bought_price"] as! String
+                    let tempBid = response.2.value!["response"]!![i]["bid_price"] as! String
+                    let tempStock = Stock(name: tempName, value: (Int(tempNum))!, change: tempChange, buyVal: (Double(tempBuy))!, bidVal: (Double(tempBid))!)
+                    array.addObject(tempStock)
+                    }
+                    else
+                    {
+                        
+                    }
+                }
+                InvestrCore.alertString.updateValue("1")
         }
     }
     

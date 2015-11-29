@@ -10,7 +10,7 @@ import UIKit
 import Parse
 
 
-class LoginVC: UIViewController{
+class LoginVC: UIViewController, UITextFieldDelegate{
     
     @IBOutlet weak var submitButton: UIButton!
     @IBOutlet weak var userNameTF: UITextField!
@@ -86,6 +86,9 @@ class LoginVC: UIViewController{
             userNameTF.text = username as! String
             passwordTF.text = defaults.objectForKey("password") as! String
         }
+        self.userNameTF.delegate = self
+        self.passwordTF.delegate = self
+        self.userNameTF.becomeFirstResponder()
 
         
         
@@ -102,6 +105,11 @@ class LoginVC: UIViewController{
         controller.navigationController?.popViewControllerAnimated(true)
     }
     
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        userNameTF.resignFirstResponder()
+        passwordTF.resignFirstResponder()
+        return true
+    }
     
     /*
     // MARK: - Navigation

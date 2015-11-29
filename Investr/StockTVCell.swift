@@ -13,6 +13,10 @@ class StockTVCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var numberLabel: UILabel!
     @IBOutlet weak var changeLabel: UILabel!
+    @IBOutlet weak var buyLabel: UILabel!
+    @IBOutlet weak var bidLabel: UILabel!
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

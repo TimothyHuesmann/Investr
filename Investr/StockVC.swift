@@ -55,7 +55,7 @@ class StockVC: UIViewController, Observable
     {
         InvestrCore.selling = true
         InvestrCore.sellStock((Int(self.numSellingTF.text!)!), ticker: self.ticker)
-        InvestrCore.observableString.updateValue ("\(self.ticker)-\(self.numSellingTF.text!)")
+        InvestrCore.observableString.updateValue ("\(self.ticker)-\(self.numSellingTF.text!)-0-\(self.ticker)")
         InvestrCore.currWallet.value = (NSString(format:"%.2f", ((Double(InvestrCore.currWallet.value))! + self.payout))) as String
         self.navigationController?.popViewControllerAnimated(true)
         
@@ -66,7 +66,7 @@ class StockVC: UIViewController, Observable
     {
         InvestrCore.selling = true
         InvestrCore.sellStock(self.numStocksOwned, ticker: self.ticker)
-        InvestrCore.observableString.updateValue("\(self.ticker)-\(self.numStocksOwned)")
+        InvestrCore.observableString.updateValue("\(self.ticker)-\(self.numStocksOwned)-0-\(self.ticker)")
         InvestrCore.currWallet.value = "\(((Double(InvestrCore.currWallet.value))! + self.totalWorth))"
         self.navigationController?.popViewControllerAnimated(true)
     }
