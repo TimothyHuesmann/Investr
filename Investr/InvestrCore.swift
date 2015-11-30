@@ -215,29 +215,34 @@ class InvestrCore: NSObject
     {
         Alamofire.request(.GET, "https://investr-app.herokuapp.com/mobile/currentGame/\(transactionID)", encoding: .JSON)
             .responseJSON { response in
-                print(response.2.value!)
-                let count = (response.2.value!["response"]!!.count)
-                array.removeAllObjects()
-                for(var i = 0; i < count; i++)
+                if(response.2.value == nil)
                 {
-                    if((response.2.value!["response"]!![i]["share"] as! String) != "0")
+                    
+                }
+                else
+                {
+                    print(response.2.value!)
+                    let count = (response.2.value!["response"]!!.count)
+                    array.removeAllObjects()
+                    for(var i = 0; i < count; i++)
                     {
-                    let tempName = response.2.value!["response"]!![i]["symbol"] as! String
-                    let tempNum = response.2.value!["response"]!![i]["share"] as! String
-                    let tempChange = response.2.value!["response"]!![i]["change"] as! Double
-                    let tempBuy = response.2.value!["response"]!![i]["bought_price"] as! String
-                    let tempBid = response.2.value!["response"]!![i]["bid_price"] as! String
-                    let tempStock = Stock(name: tempName, value: (Int(tempNum))!, change: tempChange, buyVal: (Double(tempBuy))!, bidVal: (Double(tempBid))!)
-                    array.addObject(tempStock)
-                    }
-                    else
-                    {
+                        if((response.2.value!["response"]!![i]["share"] as! String) != "0")
+                        {
+                            let tempName = response.2.value!["response"]!![i]["symbol"] as! String
+                            let tempNum = response.2.value!["response"]!![i]["share"] as! String
+                            let tempChange = response.2.value!["response"]!![i]["change"] as! Double
+                            let tempBuy = response.2.value!["response"]!![i]["bought_price"] as! String
+                            let tempBid = response.2.value!["response"]!![i]["bid_price"] as! String
+                            let tempStock = Stock(name: tempName, value: (Int(tempNum))!, change: tempChange, buyVal: (Double(tempBuy))!, bidVal: (Double(tempBid))!)
+                            array.addObject(tempStock)
+                        }
+                        else
+                        {
                         
+                        }
                     }
                 }
                 InvestrCore.alertString.updateValue("1")
+            }
         }
     }
-    
-    
-}
