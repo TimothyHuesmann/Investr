@@ -34,11 +34,10 @@ class BuyStockVC: UIViewController, Observable {
     {
         InvestrCore.selling = false
         InvestrCore.buyStock(Int(self.numBuyingTF.text!)!, ticker: self.tickerLabel.text!)
-        InvestrCore.observableString.updateValue ("\(self.tickerLabel.text!)-\(self.numBuyingTF.text!)-\(self.subTotal)-\(self.price)")
+        InvestrCore.observableString.updateValue ("\(self.ticker)-\(self.numBuyingTF.text!)")
         self.navigationController?.popViewControllerAnimated(true)
         self.currWallet = self.currWallet - self.subTotal
         InvestrCore.currWallet.value = (NSString(format:"%.2f", self.currWallet)) as String
-        
     }
     
     

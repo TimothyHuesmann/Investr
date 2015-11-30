@@ -109,13 +109,28 @@ class CurrentGameVC: UIViewController, Observable {
         if(identifier == "buyStock")
         {
             let tempVal = newValue.componentsSeparatedByString("-")
+            var tempIndex = 0
+            for stock in self.stocks
+            {
+                var i = 0
+                if (stock as! Stock).name == tempVal[0]
+                {
+                    tempIndex = i
+                }
+                i++
+            }
+            
             if InvestrCore.selling == false
             {
-                
+                (self.stocks.objectAtIndex(tempIndex) as! Stock).value = (self.stocks.objectAtIndex(tempIndex) as! Stock).value + (Int(tempVal[1])!)
             }
             else
             {
-    
+                (self.stocks.objectAtIndex(tempIndex) as! Stock).value = (self.stocks.objectAtIndex(tempIndex) as! Stock).value - (Int(tempVal[1])!)
+                if((self.stocks.objectAtIndex(tempIndex) as! Stock).value == 0)
+                {
+                    self.stocks.removeObjectAtIndex(tempIndex)
+                }
             }
             self.tempVar = 1
             self.StockTV.reloadData()
