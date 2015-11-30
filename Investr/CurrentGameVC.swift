@@ -110,30 +110,38 @@ class CurrentGameVC: UIViewController, Observable {
         {
             let tempVal = newValue.componentsSeparatedByString("-")
             var tempIndex = 0
+            var found = false
             for stock in self.stocks
             {
                 var i = 0
                 if (stock as! Stock).name == tempVal[0]
                 {
                     tempIndex = i
+                    if InvestrCore.selling == false
+                    {
+                        (self.stocks.objectAtIndex(tempIndex) as! Stock).value = (self.stocks.objectAtIndex(tempIndex) as! Stock).value + (Int(tempVal[1])!)
+                    }
+                    else
+                    {
+                        (self.stocks.objectAtIndex(tempIndex) as! Stock).value = (self.stocks.objectAtIndex(tempIndex) as! Stock).value - (Int(tempVal[1])!)
+                        if((self.stocks.objectAtIndex(tempIndex) as! Stock).value == 0)
+                        {
+                            self.stocks.removeObjectAtIndex(tempIndex)
+                        }
+                    }
+                    self.tempVar = 1
+                    
+                    found = true
                 }
                 i++
             }
-            
-            if InvestrCore.selling == false
+            if(found == false && InvestrCore.selling == false)
             {
-                (self.stocks.objectAtIndex(tempIndex) as! Stock).value = (self.stocks.objectAtIndex(tempIndex) as! Stock).value + (Int(tempVal[1])!)
+                self.stocks.addObject(Stock(name: tempVal[0], value: (Int(tempVal[1])!), change: 0, buyVal: 0, bidVal: 0))
+                self.tempVar = 1
             }
-            else
-            {
-                (self.stocks.objectAtIndex(tempIndex) as! Stock).value = (self.stocks.objectAtIndex(tempIndex) as! Stock).value - (Int(tempVal[1])!)
-                if((self.stocks.objectAtIndex(tempIndex) as! Stock).value == 0)
-                {
-                    self.stocks.removeObjectAtIndex(tempIndex)
-                }
-            }
-            self.tempVar = 1
             self.StockTV.reloadData()
+            
         }
         
         
@@ -258,6 +266,7 @@ class CurrentGameVC: UIViewController, Observable {
         }
         else if(self.tempVar == 1)
         {
+            cell.hidden = false
             cell.buyLabel.hidden = true
             cell.bidLabel.hidden = true
             cell.changeLabel.hidden = true
