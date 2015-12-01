@@ -51,6 +51,8 @@ class CurrentGameVC: UIViewController, Observable {
     @IBAction func refreshButtonPressed(sender: AnyObject)
     {
         autoRefresh()
+        InvestrCore.currentGame(InvestrCore.transactionID.value, array: self.stocks)
+        self.currentStocksAIV.startAnimating()
     }
     
     func autoRefresh()
@@ -60,8 +62,6 @@ class CurrentGameVC: UIViewController, Observable {
         self.portfolioWorthAIV.startAnimating()
         self.portfolioWorthLabel.text = "Calculating Portfolio Value"
         InvestrCore.getPortfolio(InvestrCore.transactionID.value, portfolioLabel: self.portfolioWorthLabel, spinner: self.portfolioWorthAIV)
-        InvestrCore.currentGame(InvestrCore.transactionID.value, array: self.stocks)
-        self.currentStocksAIV.startAnimating()
     }
     
     @IBAction func historyButtonPressed(sender: AnyObject)
@@ -258,7 +258,7 @@ class CurrentGameVC: UIViewController, Observable {
         }
         if(self.tempVar == 2)
         {
-            cell.hidden = true
+            cell.hidden = false
             cell.buyLabel.hidden = true
             cell.bidLabel.hidden = true
             cell.changeLabel.hidden = true
