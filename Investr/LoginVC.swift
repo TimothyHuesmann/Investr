@@ -15,6 +15,8 @@ class LoginVC: UIViewController, UITextFieldDelegate{
     @IBOutlet weak var submitButton: UIButton!
     @IBOutlet weak var userNameTF: UITextField!
     @IBOutlet weak var passwordTF: UITextField!
+    var username : String!
+    var password : String!
     
     @IBAction func submitButtonPressed(sender: AnyObject)
     {
@@ -89,6 +91,9 @@ class LoginVC: UIViewController, UITextFieldDelegate{
         self.userNameTF.delegate = self
         self.passwordTF.delegate = self
         self.userNameTF.becomeFirstResponder()
+        self.username = self.userNameTF.text
+        self.password = self.passwordTF.text
+        
 
         
         

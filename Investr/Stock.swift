@@ -14,9 +14,9 @@ class Stock: NSObject
     var value : Int!
     var change : Double!
     var buyVal : Double!
-    var bidVal : Double!
+    var bidVal : String!
     
-    init(name: String, value: Int, change: Double, buyVal: Double, bidVal: Double)
+    init(name: String, value: Int, change: Double, buyVal: Double, bidVal: String)
     {
         self.name = name
         self.value = value

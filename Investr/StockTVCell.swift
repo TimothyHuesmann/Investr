@@ -10,12 +10,17 @@ import UIKit
 
 class StockTVCell: UITableViewCell {
 
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var numberLabel: UILabel!
-    @IBOutlet weak var changeLabel: UILabel!
-    @IBOutlet weak var buyLabel: UILabel!
-    @IBOutlet weak var bidLabel: UILabel!
+    @IBOutlet weak var stockNameLabel: UILabel!
+    @IBOutlet weak var stockNumberLabel: UILabel!
+    @IBOutlet weak var stockChangeLabel: UILabel!
+    @IBOutlet weak var stockBuyLabel: UILabel!
+    @IBOutlet weak var stockBidLabel: UILabel!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
+    @IBOutlet weak var standingNameLabel: UILabel!
+    @IBOutlet weak var standingWalletLabel: UILabel!
+    @IBOutlet weak var standingNumberLabel: UILabel!
+    @IBOutlet weak var boughtForLabel: UILabel!
+    @IBOutlet weak var currentBidLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

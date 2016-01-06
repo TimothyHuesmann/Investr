@@ -21,19 +21,47 @@ class CurrentGameVC: UIViewController, Observable {
     @IBOutlet weak var StockTV: UITableView!
     @IBOutlet weak var wallet: UILabel!
     var tempName : String!
-    var stocksNum : Int!
     var stocks: NSMutableArray = []
     var tempEnd = NSDate()
     var tempID : String!
     var tempStock : NSDictionary!
-    var stockNames = [String]()
     var transID: String!
     var shortDate: String!
     var timer: NSTimer!
     var refresher: UIRefreshControl!
     var tempVar: Int!
     @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var tableSC: UISegmentedControl!
+    var names: NSMutableArray = []
+    var wallets: NSMutableArray = []
 
+    override func viewDidLoad()
+    {
+        super.viewDidLoad()
+        InvestrCore.observableString.addObserver(self)
+        InvestrCore.currWallet.addObserver(self)
+        InvestrCore.transactionID.addObserver(self)
+        InvestrCore.alertString.addObserver(self)
+        InvestrCore.tempString.addObserver(self)
+        self.title = tempName
+        self.wallet.text = "$\(InvestrCore.currWallet.value)"
+        self.dateLabel.text = "\(self.shortDate)"
+        self.refresher = UIRefreshControl()
+        self.refresher.addTarget(self, action: "autoRefresh:", forControlEvents: .ValueChanged)
+        self.portfolioWorthLabel.text = "Calculating Portfolio Value"
+        self.timer = NSTimer.scheduledTimerWithTimeInterval(15.0, target: self, selector: "autoRefresh", userInfo:  nil, repeats: true)
+        InvestrCore.getStandings(tempID, names: self.names, wallets: self.wallets)
+        self.currentStocksAIV.startAnimating()
+        // Do any additional setup after loading the view.
+    }
+    
+    @IBAction func tableSCChanged(sender: AnyObject)
+    {
+        self.tempVar = 3
+        self.StockTV.reloadData()
+    }
+    
+    
     @IBAction func tempLookupButtonPressed(sender: AnyObject)
     {
         let lookupStockVC = self.storyboard?.instantiateViewControllerWithIdentifier("LookupStockVC") as! LookupStockVC
@@ -53,11 +81,12 @@ class CurrentGameVC: UIViewController, Observable {
         autoRefresh()
         InvestrCore.currentGame(InvestrCore.transactionID.value, array: self.stocks)
         self.currentStocksAIV.startAnimating()
+        self.tempVar = 2
     }
     
     func autoRefresh()
     {
-        self.tempVar = 2
+        self.tempVar = 0
         self.StockTV.reloadData()
         self.portfolioWorthAIV.startAnimating()
         self.portfolioWorthLabel.text = "Calculating Portfolio Value"
@@ -137,7 +166,7 @@ class CurrentGameVC: UIViewController, Observable {
             }
             if(found == false && InvestrCore.selling == false)
             {
-                self.stocks.addObject(Stock(name: tempVal[0], value: (Int(tempVal[1])!), change: 0, buyVal: 0, bidVal: 0))
+                self.stocks.addObject(Stock(name: tempVal[0], value: (Int(tempVal[1])!), change: 0, buyVal: 0, bidVal: "0"))
                 self.tempVar = 1
             }
             self.StockTV.reloadData()
@@ -169,27 +198,13 @@ class CurrentGameVC: UIViewController, Observable {
             self.currentStocksAIV.stopAnimating()
         }
         
-        
+        if(identifier == "tempString")
+        {
+            
+        }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        InvestrCore.observableString.addObserver(self)
-        InvestrCore.currWallet.addObserver(self)
-        InvestrCore.transactionID.addObserver(self)
-        InvestrCore.alertString.addObserver(self)
-        self.title = tempName
-        self.wallet.text = "$\(InvestrCore.currWallet.value)"
-        self.dateLabel.text = "\(self.shortDate)"
-        self.refresher = UIRefreshControl()
-        self.refresher.addTarget(self, action: "autoRefresh:", forControlEvents: .ValueChanged)
-        self.portfolioWorthLabel.text = "Calculating Portfolio Value"
-        self.timer = NSTimer.scheduledTimerWithTimeInterval(15.0, target: self, selector: "autoRefresh", userInfo:  nil, repeats: true)
-        
-      
-
-        // Do any additional setup after loading the view.
-    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -203,7 +218,6 @@ class CurrentGameVC: UIViewController, Observable {
         self.shortDate = NSDateFormatter.localizedStringFromDate(self.tempEnd, dateStyle: .ShortStyle, timeStyle: .ShortStyle)
         InvestrCore.currWallet.value = "\(userWallet)"
         self.tempID = game.id
-        self.stocksNum = 0
         self.navigationController?.navigationItem.backBarButtonItem?.title = self.tempName
     }
     
@@ -215,7 +229,7 @@ class CurrentGameVC: UIViewController, Observable {
     func tableView(tableView: UITableView,
         titleForHeaderInSection section: Int) -> String?
     {
-        return "Owned Stocks"
+        return ""
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int
@@ -229,72 +243,115 @@ class CurrentGameVC: UIViewController, Observable {
     {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return self.stocks.count
+        if(self.tableSC.selectedSegmentIndex == 0)
+        {
+            return self.stocks.count
+        }
+        else
+        {
+            return self.names.count
+        }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! StockTVCell
+        
+        var baseCell = UITableViewCell()
+        if(self.tableSC.selectedSegmentIndex == 0)
+        {
+            let cell: StockTVCell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! StockTVCell
+            
+            cell.stockNameLabel.text = "\(self.stocks[indexPath.row].name!)"
+            cell.stockNumberLabel.text = "\((self.stocks[indexPath.row] as! Stock).value!) Owned Stocks"
+            cell.stockBuyLabel.text = "$\((self.stocks[indexPath.row] as! Stock).buyVal!)"
+            cell.stockBidLabel.text = "$\((self.stocks[indexPath.row] as! Stock).bidVal)"
+            let tempNum = (self.stocks[indexPath.row] as! Stock).change
+            if(tempNum > 0)
+            {
+                cell.stockChangeLabel.textColor = UIColor.greenColor()
+                cell.stockChangeLabel.text = "+\((self.stocks[indexPath.row] as! Stock).change)"
+            }
+            else if(tempNum < 0)
+            {
+                cell.stockChangeLabel.textColor = UIColor.redColor()
+                cell.stockChangeLabel.text = "\((self.stocks[indexPath.row] as! Stock).change)"
+            }
+            else
+            {
+                cell.stockChangeLabel.textColor = UIColor.blackColor()
+                cell.stockChangeLabel.text = "\((self.stocks[indexPath.row] as! Stock).change)"
+            }
+            if(self.tempVar == 2)
+            {
+                cell.hidden = false
+                cell.stockBuyLabel.hidden = true
+                cell.stockBidLabel.hidden = true
+                cell.stockChangeLabel.hidden = true
+                cell.spinner.startAnimating()
+                
+            }
+            else if(self.tempVar == 1)
+            {
+                cell.hidden = false
+                cell.stockBuyLabel.hidden = true
+                cell.stockBidLabel.hidden = true
+                cell.stockChangeLabel.hidden = true
+                cell.spinner.startAnimating()
+            }
+            else
+            {
+                cell.hidden = false
+                cell.stockBuyLabel.hidden = false
+                cell.stockBidLabel.hidden = false
+                cell.stockChangeLabel.hidden = false
+                cell.spinner.stopAnimating()
+            }
+            cell.currentBidLabel.hidden = false
+            cell.boughtForLabel.hidden = false
+            cell.stockNameLabel.hidden = false
+            cell.stockNumberLabel.hidden = false
+            cell.standingWalletLabel.hidden = true
+            cell.standingNumberLabel.hidden = true
+            cell.standingNameLabel.hidden = true
+            
+            baseCell = cell
+        }
+        else if(self.tableSC.selectedSegmentIndex == 1)
+        {
+            let cell: StockTVCell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath:  indexPath) as! StockTVCell
+            
+            cell.standingNameLabel.text = "\(self.names[indexPath.row])"
+            cell.standingWalletLabel.text = "$\(self.wallets[indexPath.row])"
+            cell.standingNumberLabel.text = "\(indexPath.row + 1)"
+            cell.standingNameLabel.hidden = false
+            cell.standingNumberLabel.hidden = false
+            cell.standingWalletLabel.hidden = false
+            cell.stockBidLabel.hidden = true
+            cell.stockBuyLabel.hidden = true
+            cell.stockChangeLabel.hidden = true
+            cell.stockNameLabel.hidden = true
+            cell.stockNumberLabel.hidden = true
+            cell.boughtForLabel.hidden = true
+            cell.currentBidLabel.hidden = true
+            baseCell = cell
+        }
         
         // Configure the cell...
-        cell.nameLabel.text = "\(self.stocks[indexPath.row].name!)"
-        cell.numberLabel.text = "\((self.stocks[indexPath.row] as! Stock).value!) Owned Stocks"
-        cell.buyLabel.text = "$\((self.stocks[indexPath.row] as! Stock).buyVal!)"
-        cell.bidLabel.text = "$\((self.stocks[indexPath.row] as! Stock).bidVal)"
-        let tempNum = (self.stocks[indexPath.row] as! Stock).change
-        if(tempNum > 0)
-        {
-            cell.changeLabel.textColor = UIColor.greenColor()
-            cell.changeLabel.text = "+\((self.stocks[indexPath.row] as! Stock).change)"
-        }
-        else if(tempNum < 0)
-        {
-            cell.changeLabel.textColor = UIColor.redColor()
-            cell.changeLabel.text = "\((self.stocks[indexPath.row] as! Stock).change)"
-        }
-        else
-        {
-            cell.changeLabel.textColor = UIColor.blackColor()
-            cell.changeLabel.text = "\((self.stocks[indexPath.row] as! Stock).change)"
-        }
-        if(self.tempVar == 2)
-        {
-            cell.hidden = false
-            cell.buyLabel.hidden = true
-            cell.bidLabel.hidden = true
-            cell.changeLabel.hidden = true
-            cell.spinner.startAnimating()
-        }
-        else if(self.tempVar == 1)
-        {
-            cell.hidden = false
-            cell.buyLabel.hidden = true
-            cell.bidLabel.hidden = true
-            cell.changeLabel.hidden = true
-            cell.spinner.startAnimating()
-        }
-        else
-        {
-            cell.hidden = false
-            cell.buyLabel.hidden = false
-            cell.bidLabel.hidden = false
-            cell.changeLabel.hidden = false
-            cell.spinner.stopAnimating()
-        }
-        
-        
-        return cell
+        return baseCell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath!)
     {
-        let indexPath = tableView.indexPathForSelectedRow
-        let currentCell = tableView.cellForRowAtIndexPath(indexPath!) as! StockTVCell
-        let stockVC = self.storyboard?.instantiateViewControllerWithIdentifier("StockVC") as! StockVC
-        let tempNum = (self.stocks[indexPath!.row] as! Stock).value
-        stockVC.setUp(currentCell.nameLabel.text!, numStocks: tempNum, gameID: self.tempID)
-        InvestrCore.getQuote(currentCell.nameLabel.text!, label: self.hiddenLabel, value: "Bid")
-        InvestrCore.getQuote(currentCell.nameLabel.text!, label:self.hiddenLabel, value: "Name")
-        self.navigationController?.pushViewController(stockVC, animated: true)        
+        if(self.tableSC.selectedSegmentIndex == 0)
+        {
+            let indexPath = tableView.indexPathForSelectedRow
+            let currentCell = tableView.cellForRowAtIndexPath(indexPath!) as! StockTVCell
+            let stockVC = self.storyboard?.instantiateViewControllerWithIdentifier("StockVC") as! StockVC
+            let tempNum = (self.stocks[indexPath!.row] as! Stock).value
+            stockVC.setUp(currentCell.stockNameLabel.text!, numStocks: tempNum, gameID: self.tempID)
+            InvestrCore.getQuote(currentCell.stockNameLabel.text!, label: self.hiddenLabel, value: "Bid")
+            InvestrCore.getQuote(currentCell.stockNameLabel.text!, label:self.hiddenLabel, value: "Name")
+            self.navigationController?.pushViewController(stockVC, animated: true)
+        }
     }
     /*
     // In a storyboard-based application, you will often want to do a little preparation before navigation
