@@ -93,7 +93,49 @@ class LoginVC: UIViewController, UITextFieldDelegate{
         self.userNameTF.becomeFirstResponder()
         self.username = self.userNameTF.text
         self.password = self.passwordTF.text
-        
+        if(self.password != "" && self.username != "")
+        {
+            PFUser.logInWithUsernameInBackground(self.username, password: self.password) {
+                (user: PFUser?, error: NSError?) -> Void in
+                if user != nil
+                {
+                    //success
+                    let defaults = NSUserDefaults.standardUserDefaults()
+                    defaults.setObject(self.username, forKey: "username")
+                    defaults.setObject(self.password, forKey: "password")
+                    defaults.synchronize()
+                    
+                    let menuVC = self.storyboard?.instantiateViewControllerWithIdentifier("MenuVC") as! MenuVC
+                    self.navigationController?.pushViewController(menuVC, animated: true)
+                    // Do stuff after successful login.
+                    InvestrCore.currUser = self.userNameTF.text!         //saves global username
+                    let query = PFUser.query()
+                    query!.whereKey("username", equalTo: InvestrCore.currUser)
+                    
+                    do{
+                        _ = try query!.findObjects()
+                    }
+                    catch
+                    {
+                        
+                    }
+                    
+                    
+                    InvestrCore.userID = PFUser.currentUser()!.objectId!    //saves global user objectId
+                    
+                }
+                else
+                {
+                    //Error
+                    let alert = UIAlertView()
+                    alert.title = "Login Error"
+                    alert.message = "Invalid Email/Password Combination, Please Try Again"
+                    alert.addButtonWithTitle("OK")
+                    alert.show()
+                    // The login failed. Check error to see why.
+                }
+        }
+        }
 
         
         
