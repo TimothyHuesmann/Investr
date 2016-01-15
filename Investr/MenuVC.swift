@@ -43,6 +43,13 @@ class MenuVC: UIViewController {
     {
         super.viewDidLoad()
         self.navigationItem.title = "Welcome, \(InvestrCore.currUser)"
+        
+        if self.revealViewController() != nil
+        {
+            self.menuButton.target = self.revealViewController()
+            self.menuButton.action = "revealToggle:"
+            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        }
 
         // Do any additional setup after loading the view.
     }
