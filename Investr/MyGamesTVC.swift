@@ -12,6 +12,7 @@ import Parse
 class MyGamesTVC: UIViewController {
 
     @IBOutlet weak var theGamesTV: UITableView!
+    @IBOutlet weak var menuButton: UIBarButtonItem!
     var playingGamesnum = 0
     var playingGames = [String]()
     var newPlayingGames = [Game]()
@@ -91,6 +92,14 @@ class MyGamesTVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        //set up slide menu
+        if self.revealViewController() != nil
+        {
+            self.menuButton.target = self.revealViewController()
+            self.menuButton.action = "revealToggle:"
+            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        }
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 

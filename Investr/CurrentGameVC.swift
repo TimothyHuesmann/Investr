@@ -12,6 +12,7 @@ import Parse
 class CurrentGameVC: UIViewController, Observable {
 
     
+    @IBOutlet weak var menuButton: UIBarButtonItem!
     @IBOutlet weak var refreshButton: UIBarButtonItem!
     @IBOutlet weak var portfolioWorthAIV: UIActivityIndicatorView!
     @IBOutlet weak var currentStocksAIV: UIActivityIndicatorView!
@@ -38,6 +39,14 @@ class CurrentGameVC: UIViewController, Observable {
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        //sets up slide out menu
+        if self.revealViewController() != nil
+        {
+            self.menuButton.target = self.revealViewController()
+            self.menuButton.action = "revealToggle:"
+            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        }
+        
         InvestrCore.observableString.addObserver(self)
         InvestrCore.currWallet.addObserver(self)
         InvestrCore.transactionID.addObserver(self)

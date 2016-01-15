@@ -11,6 +11,7 @@ import Parse
 
 class MenuVC: UIViewController {
 
+    @IBOutlet weak var menuButton: UIBarButtonItem!
     
     var currentUser = PFUser.currentUser()
     

@@ -18,6 +18,7 @@ protocol GamesListTVCDelegate
 
 class GamesListTVC: UIViewController
 {
+    @IBOutlet weak var menuButton: UIBarButtonItem!
     @IBOutlet weak var upcomingGamesTV: UITableView!
     var currentUser = PFUser.currentUser()
     var upcomingGamesnum = 0
@@ -104,6 +105,14 @@ class GamesListTVC: UIViewController
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        //set up slide menu
+        if self.revealViewController() != nil
+        {
+            self.menuButton.target = self.revealViewController()
+            self.menuButton.action = "revealToggle:"
+            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        }
     }
     
     override func didReceiveMemoryWarning() {
