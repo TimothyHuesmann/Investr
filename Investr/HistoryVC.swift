@@ -13,6 +13,7 @@ class HistoryVC: UIViewController
 
     var theTransaction: Transaction!
     
+    @IBOutlet weak var menuButton: UIBarButtonItem!
     @IBOutlet weak var typeLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var stocksLabel: UILabel!
@@ -22,6 +23,12 @@ class HistoryVC: UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        if self.revealViewController() != nil
+        {
+            self.menuButton.target = self.revealViewController()
+            self.menuButton.action = "revealToggle:"
+            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        }
         self.typeLabel.text = "\(self.theTransaction.type.uppercaseString)"
         self.nameLabel.text = "\(self.theTransaction.ticker.uppercaseString)"
         self.stocksLabel.text = "\(self.theTransaction.value)"

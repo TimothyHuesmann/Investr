@@ -426,7 +426,9 @@
                             <constraint firstItem="Kdo-Yg-yE5" firstAttribute="leading" secondItem="EZw-zj-mxG" secondAttribute="trailing" constant="83" id="yoi-ks-CxR"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Title" id="PEB-E2-JMN"/>
+                    <navigationItem key="navigationItem" title="Title" id="PEB-E2-JMN">
+                        <barButtonItem key="leftBarButtonItem" title="Menu" id="Gf7-IV-7qf"/>
+                    </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
@@ -434,6 +436,7 @@
                         <outlet property="endDate" destination="AkG-ji-gEN" id="2d6-rT-xjN"/>
                         <outlet property="enterGameButton" destination="acY-UR-hAg" id="Fmy-LH-Jpt"/>
                         <outlet property="gameName" destination="oJC-A9-aYk" id="m2O-Bu-LRg"/>
+                        <outlet property="menuButton" destination="Gf7-IV-7qf" id="o7e-Pi-cKb"/>
                         <outlet property="numPlayers" destination="FiW-GY-5M3" id="urO-bH-5sv"/>
                         <outlet property="potSizeLabel" destination="YAM-BB-rPr" id="sur-l5-sa2"/>
                         <outlet property="priceLabel" destination="inA-Xl-jhX" id="YNz-AK-WHg"/>
@@ -528,8 +531,27 @@
                                             <segue destination="dMR-JH-hqi" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="FS8-YH-G93"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="MVJ-pl-Bwe">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="sif-uG-Ymz">
                                         <rect key="frame" x="0.0" y="176" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sif-uG-Ymz" id="xdp-rF-EV8">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Game History" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4jH-xL-nFU">
+                                                    <rect key="frame" x="18" y="11" width="105" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="2zR-ms-5wV" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="e08-6w-vu5"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="MVJ-pl-Bwe">
+                                        <rect key="frame" x="0.0" y="220" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MVJ-pl-Bwe" id="BCV-ZI-qlv">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -718,6 +740,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Standings" id="ssh-jT-dBg">
+                        <barButtonItem key="leftBarButtonItem" title="Menu" id="QAd-DG-KSw"/>
                         <barButtonItem key="rightBarButtonItem" title="Refresh" id="bCB-yq-xjL">
                             <connections>
                                 <action selector="refreshButtonPressed:" destination="B07-JM-NoH" id="QiO-24-Tf4"/>
@@ -728,6 +751,7 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="menuButton" destination="QAd-DG-KSw" id="sTg-dx-zlJ"/>
                         <outlet property="refreshButton" destination="bCB-yq-xjL" id="wav-tn-Rmz"/>
                         <outlet property="spinnerAIV" destination="JTp-fY-2ts" id="DeO-GA-nap"/>
                         <outlet property="standingsTV" destination="idh-BE-aes" id="Vrd-Yc-vyB"/>
@@ -810,12 +834,15 @@
                             <constraint firstItem="Eu2-at-gKa" firstAttribute="bottom" secondItem="Q2O-dE-d20" secondAttribute="top" id="l7i-em-wea"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Transaction History" id="Igf-9s-yn0"/>
+                    <navigationItem key="navigationItem" title="Transaction History" id="Igf-9s-yn0">
+                        <barButtonItem key="leftBarButtonItem" title="Menu" id="Mn7-eA-HQu"/>
+                    </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="historyTVC" destination="Eu2-at-gKa" id="iga-R9-oH5"/>
+                        <outlet property="menuButton" destination="Mn7-eA-HQu" id="RDF-rG-yOE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xs0-NR-xZj" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -897,11 +924,14 @@
                             <constraint firstItem="u8d-Qz-hH5" firstAttribute="top" secondItem="Nik-j3-Fq4" secondAttribute="bottom" constant="60" id="zVe-9D-2TX"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Info" id="tTB-Uw-bZ9"/>
+                    <navigationItem key="navigationItem" title="Info" id="tTB-Uw-bZ9">
+                        <barButtonItem key="leftBarButtonItem" title="Menu" id="VJY-aB-J6P"/>
+                    </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="menuButton" destination="VJY-aB-J6P" id="kh0-hY-6am"/>
                         <outlet property="moneyLabel" destination="u8d-Qz-hH5" id="iU3-b4-0Zi"/>
                         <outlet property="nameLabel" destination="biV-ja-tO5" id="yCw-Pw-OvU"/>
                         <outlet property="stocksLabel" destination="Nik-j3-Fq4" id="jhJ-a0-wXP"/>
@@ -1354,7 +1384,9 @@
                             <constraint firstItem="MU4-cJ-AGt" firstAttribute="top" secondItem="UKR-lI-iEG" secondAttribute="bottom" constant="8" symbolic="YES" id="z8a-eD-Pqu"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Buy Stocks" id="8nj-PY-SVd"/>
+                    <navigationItem key="navigationItem" title="Buy Stocks" id="8nj-PY-SVd">
+                        <barButtonItem key="leftBarButtonItem" title="Menu" id="wB7-nh-2vW"/>
+                    </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
@@ -1362,6 +1394,7 @@
                         <outlet property="askLabel" destination="KpD-NO-f2j" id="f9i-XG-Rva"/>
                         <outlet property="buyButton" destination="Hvh-IW-AlB" id="lBG-Vx-Z3c"/>
                         <outlet property="maxBuyLabel" destination="uPd-G2-hPG" id="fWK-vE-WqO"/>
+                        <outlet property="menuButton" destination="wB7-nh-2vW" id="HiV-0e-52Z"/>
                         <outlet property="nameLabel" destination="xgE-du-xZI" id="WDp-00-4DX"/>
                         <outlet property="numBuyingTF" destination="rWP-ub-nub" id="X62-kX-A9z"/>
                         <outlet property="numOwnedLabel" destination="UKR-lI-iEG" id="OCi-r9-M6k"/>
@@ -1411,12 +1444,15 @@
                             <constraint firstItem="SC7-qr-7ov" firstAttribute="top" secondItem="ETq-IV-VkB" secondAttribute="bottom" constant="16" id="i5M-l0-Ocw"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Stock Lookup" id="Y4x-IL-krx"/>
+                    <navigationItem key="navigationItem" title="Stock Lookup" id="Y4x-IL-krx">
+                        <barButtonItem key="leftBarButtonItem" title="Menu" id="yyZ-es-Ana"/>
+                    </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="buyStockButton" destination="ETq-IV-VkB" id="um2-YU-VFU"/>
+                        <outlet property="menuButton" destination="yyZ-es-Ana" id="TVZ-6p-AYZ"/>
                         <outlet property="stockWV" destination="b7w-ab-yVF" id="sm7-56-zDg"/>
                     </connections>
                 </viewController>
@@ -1536,12 +1572,15 @@
                             <constraint firstItem="jcO-iC-wS6" firstAttribute="top" secondItem="uOe-DE-TcE" secondAttribute="bottom" constant="258" id="xWA-jb-zbl"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Stock View" id="H1L-Ad-DVS"/>
+                    <navigationItem key="navigationItem" title="Stock View" id="H1L-Ad-DVS">
+                        <barButtonItem key="leftBarButtonItem" title="Menu" id="lYi-Vh-BKT"/>
+                    </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="currPriceLabel" destination="5EE-mw-pkb" id="Erl-Ka-i3P"/>
+                        <outlet property="menuButton" destination="lYi-Vh-BKT" id="zFN-A2-V44"/>
                         <outlet property="nameLabel" destination="MCw-re-Grx" id="Bu7-eh-xFN"/>
                         <outlet property="numSellingTF" destination="jVP-dt-GXo" id="2I1-hd-J0y"/>
                         <outlet property="numStocksOwnedLabel" destination="fnn-hr-jdI" id="uwM-5L-r1P"/>
@@ -1773,17 +1812,20 @@
                             <constraint firstItem="sed-WB-dvs" firstAttribute="bottom" secondItem="ZBj-sf-Ygi" secondAttribute="top" id="sIj-u4-sZe"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Game History" id="IrS-5r-PDl"/>
+                    <navigationItem key="navigationItem" title="Game History" id="IrS-5r-PDl">
+                        <barButtonItem key="leftBarButtonItem" title="Menu" id="May-31-x14"/>
+                    </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="menuButton" destination="May-31-x14" id="1Cc-Ha-HhG"/>
                         <outlet property="theGamesTV" destination="sed-WB-dvs" id="F85-su-SGl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JLV-II-fXP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2213.5" y="-37.5"/>
+            <point key="canvasLocation" x="2505.5" y="-61.5"/>
         </scene>
         <!--Title-->
         <scene sceneID="GL6-EP-AWf">
@@ -1797,15 +1839,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FinalMoney" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3H1-AZ-MI4">
-                                <rect key="frame" x="58" y="125" width="258" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="lYb-Og-gN6"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PotSize" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OUr-VX-oet">
                                 <rect key="frame" x="119" y="236" width="130" height="21"/>
                                 <constraints>
@@ -1857,6 +1890,15 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FinalMoney" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3H1-AZ-MI4">
+                                <rect key="frame" x="58" y="125" width="258" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="lYb-Og-gN6"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -1880,7 +1922,9 @@
                             <constraint firstItem="BI9-P8-gbE" firstAttribute="top" secondItem="cCi-Hv-Tcq" secondAttribute="bottom" constant="49" id="zNa-PB-3MJ"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Title" id="nBy-mJ-NXY"/>
+                    <navigationItem key="navigationItem" title="Title" id="nBy-mJ-NXY">
+                        <barButtonItem key="leftBarButtonItem" title="Menu" id="IfK-1t-Q49"/>
+                    </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
@@ -1889,6 +1933,7 @@
                         <outlet property="finalMoneyLabel" destination="3H1-AZ-MI4" id="dtA-px-6xb"/>
                         <outlet property="finalStandingsButton" destination="bKR-C4-ebs" id="3gJ-ff-ffm"/>
                         <outlet property="gameTransactionsButton" destination="MHK-Zr-qel" id="8PV-Il-0Zu"/>
+                        <outlet property="menuButton" destination="IfK-1t-Q49" id="6KB-nZ-3Vr"/>
                         <outlet property="numPlayersLabel" destination="cCi-Hv-Tcq" id="2tg-h7-ChJ"/>
                         <outlet property="placeLabel" destination="ef0-RS-mul" id="y7W-73-sQJ"/>
                         <outlet property="potSizeLabel" destination="OUr-VX-oet" id="8v0-p7-b9O"/>
@@ -1972,6 +2017,22 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OYj-VB-edl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="88" y="-1468"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="9hI-Q9-2tO">
+            <objects>
+                <navigationController id="2zR-ms-5wV" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="JWj-Zv-jRj">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="1DG-Bt-HAj" kind="relationship" relationship="rootViewController" id="7nu-tR-BTd"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qBk-8Z-X6p" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1848" y="-95"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

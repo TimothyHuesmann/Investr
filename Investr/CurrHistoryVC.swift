@@ -12,6 +12,7 @@ import Parse
 class CurrHistoryVC: UIViewController
 {
     
+    @IBOutlet weak var menuButton: UIBarButtonItem!
     @IBOutlet weak var historyTVC: UITableView!
     var gameID: String!
     var theTransactions = [Transaction]()
@@ -20,6 +21,12 @@ class CurrHistoryVC: UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        if self.revealViewController() != nil
+        {
+            self.menuButton.target = self.revealViewController()
+            self.menuButton.action = "revealToggle:"
+            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        }
 
         // Do any additional setup after loading the view.
     }

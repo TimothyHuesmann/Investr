@@ -11,6 +11,7 @@ import UIKit
 class GameRecordVC: UIViewController, Observable
 {
 
+    @IBOutlet weak var menuButton: UIBarButtonItem!
     @IBOutlet weak var placeLabel: UILabel!
     @IBOutlet weak var finalMoneyLabel: UILabel!
     @IBOutlet weak var potSizeLabel: UILabel!
@@ -45,6 +46,12 @@ class GameRecordVC: UIViewController, Observable
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        if self.revealViewController() != nil
+        {
+            self.menuButton.target = self.revealViewController()
+            self.menuButton.action = "revealToggle:"
+            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        }
         InvestrCore.finalMoney.addObserver(self)
         self.navigationItem.title = self.tempTitle
         self.navigationItem.backBarButtonItem?.title = self.tempTitle

@@ -12,6 +12,7 @@ import Parse
 class GameStandingsTVC: UIViewController, Observable
 {
     
+    @IBOutlet weak var menuButton: UIBarButtonItem!
     @IBOutlet weak var refreshButton: UIBarButtonItem!
     @IBOutlet weak var spinnerAIV: UIActivityIndicatorView!
     @IBOutlet weak var standingsTV: UITableView!
@@ -35,6 +36,12 @@ class GameStandingsTVC: UIViewController, Observable
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        if self.revealViewController() != nil
+        {
+            self.menuButton.target = self.revealViewController()
+            self.menuButton.action = "revealToggle:"
+            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        }
         InvestrCore.tempString.addObserver(self)
         InvestrCore.getStandings(gameID, names: self.names, wallets: self.wallets)
 

@@ -13,6 +13,7 @@ import Parse
 
 class PlannedGameVC: UIViewController {
     
+    @IBOutlet weak var menuButton: UIBarButtonItem!
     @IBOutlet weak var potSizeLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var numPlayers: UILabel!
@@ -72,6 +73,12 @@ class PlannedGameVC: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        if self.revealViewController() != nil
+        {
+            self.menuButton.target = self.revealViewController()
+            self.menuButton.action = "revealToggle:"
+            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        }
         self.gameName.text = self.tempGameName
         self.numPlayers.text = "\(self.tempNumPlayers)"
         self.priceLabel.text = "\(self.tempPriceLabel)"

@@ -11,6 +11,7 @@ import UIKit
 class StockVC: UIViewController, Observable
 {
 
+    @IBOutlet weak var menuButton: UIBarButtonItem!
     @IBOutlet weak var numSellingTF: UITextField!
     @IBOutlet weak var payoutLabel: UILabel!
     @IBOutlet weak var totalWorthLabel: UILabel!
@@ -101,6 +102,12 @@ class StockVC: UIViewController, Observable
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        if self.revealViewController() != nil
+        {
+            self.menuButton.target = self.revealViewController()
+            self.menuButton.action = "revealToggle:"
+            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        }
         self.payoutLabel.text = ""
         self.navigationItem.title = ""
         //register as observers

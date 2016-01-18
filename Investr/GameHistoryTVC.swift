@@ -12,6 +12,7 @@ import Parse
 class GameHistoryTVC: UIViewController
 {
     
+    @IBOutlet weak var menuButton: UIBarButtonItem!
     @IBOutlet weak var theGamesTV: UITableView!
     var theGames = [GameRecord]()
     var tempFinal: NSString!
@@ -21,6 +22,12 @@ class GameHistoryTVC: UIViewController
     {
         
         super.viewDidLoad()
+        if self.revealViewController() != nil
+        {
+            self.menuButton.target = self.revealViewController()
+            self.menuButton.action = "revealToggle:"
+            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        }
 
         // Do any additional setup after loading the view.
     }

@@ -42,7 +42,6 @@ class MenuVC: UIViewController {
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        self.navigationItem.title = "Welcome, \(InvestrCore.currUser)"
         
         if self.revealViewController() != nil
         {

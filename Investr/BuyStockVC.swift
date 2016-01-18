@@ -11,6 +11,7 @@ import Parse
 
 class BuyStockVC: UIViewController, Observable {
 
+    @IBOutlet weak var menuButton: UIBarButtonItem!
     @IBOutlet weak var subTotalLabel: UILabel!
     @IBOutlet weak var numBuyingTF: UITextField!
     @IBOutlet weak var buyButton: UIButton!
@@ -66,6 +67,12 @@ class BuyStockVC: UIViewController, Observable {
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        if self.revealViewController() != nil
+        {
+            self.menuButton.target = self.revealViewController()
+            self.menuButton.action = "revealToggle:"
+            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        }
         InvestrCore.tempName.addObserver(self)
         InvestrCore.tempAsk.addObserver(self)
         InvestrCore.alertString.addObserver(self)
