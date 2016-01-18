@@ -14,13 +14,14 @@ class CurrentGameVC: UIViewController, Observable {
     
     @IBOutlet weak var menuButton: UIBarButtonItem!
     @IBOutlet weak var refreshButton: UIBarButtonItem!
+    @IBOutlet weak var walletPortLabel: UILabel!
     @IBOutlet weak var portfolioWorthAIV: UIActivityIndicatorView!
     @IBOutlet weak var currentStocksAIV: UIActivityIndicatorView!
     @IBOutlet weak var portfolioWorthLabel: UILabel!
     @IBOutlet weak var historyButton: UIButton!
     @IBOutlet weak var hiddenLabel: UILabel!
     @IBOutlet weak var StockTV: UITableView!
-    @IBOutlet weak var wallet: UILabel!
+    @IBOutlet weak var walletPort: UILabel!
     var tempName : String!
     var stocks: NSMutableArray = []
     var tempEnd = NSDate()
@@ -31,10 +32,15 @@ class CurrentGameVC: UIViewController, Observable {
     var timer: NSTimer!
     var refresher: UIRefreshControl!
     var tempVar: Int!
+    var walletVal: String!
+    var portfolioVal: String!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var tableSC: UISegmentedControl!
     var names: NSMutableArray = []
     var wallets: NSMutableArray = []
+    var walletPortTimer: NSTimer!
+    var walletIndicator: Int = 1            //Determines which value is displayed on the top of screen
+                                            //1 -> Wallet 2 -> Portfolio
 
     override func viewDidLoad()
     {
@@ -52,13 +58,16 @@ class CurrentGameVC: UIViewController, Observable {
         InvestrCore.transactionID.addObserver(self)
         InvestrCore.alertString.addObserver(self)
         InvestrCore.tempString.addObserver(self)
+        InvestrCore.portVal.addObserver(self)
         self.title = tempName
-        self.wallet.text = "$\(InvestrCore.currWallet.value)"
+        self.walletPort.text = "$\(InvestrCore.currWallet.value)"
+        self.walletVal = "$\(InvestrCore.currWallet.value)"
+        self.walletPortLabel.text = "Wallet"
         self.dateLabel.text = "\(self.shortDate)"
         self.refresher = UIRefreshControl()
         self.refresher.addTarget(self, action: "autoRefresh:", forControlEvents: .ValueChanged)
-        self.portfolioWorthLabel.text = "Calculating Portfolio Value"
         self.timer = NSTimer.scheduledTimerWithTimeInterval(15.0, target: self, selector: "autoRefresh", userInfo:  nil, repeats: true)
+        self.walletPortTimer = NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: "walletPortRefresh", userInfo: nil, repeats: true)
         InvestrCore.getStandings(tempID, names: self.names, wallets: self.wallets)
         self.currentStocksAIV.startAnimating()
         // Do any additional setup after loading the view.
@@ -97,9 +106,23 @@ class CurrentGameVC: UIViewController, Observable {
     {
         self.tempVar = 0
         self.StockTV.reloadData()
-        self.portfolioWorthAIV.startAnimating()
-        self.portfolioWorthLabel.text = "Calculating Portfolio Value"
-        InvestrCore.getPortfolio(InvestrCore.transactionID.value, portfolioLabel: self.portfolioWorthLabel, spinner: self.portfolioWorthAIV)
+        InvestrCore.getPortfolio(InvestrCore.transactionID.value, portfolioLabel: self.hiddenLabel)
+    }
+    
+    func walletPortRefresh()
+    {
+        if self.walletIndicator == 1                    //The portfolio value is changing to the wallet
+        {
+            self.walletPortLabel.text = "Wallet"
+            self.walletPort.text = self.walletVal
+            self.walletIndicator = 2
+        }
+        else                                            //the wallet value is changing to the portfolio
+        {
+            self.walletPortLabel.text = "Portfolio Value"
+            self.walletPort.text = self.portfolioVal
+            self.walletIndicator = 1
+        }
     }
     
     @IBAction func historyButtonPressed(sender: AnyObject)
@@ -185,19 +208,19 @@ class CurrentGameVC: UIViewController, Observable {
         
         if(identifier == "transactionID")
         {
-            InvestrCore.getPortfolio(newValue, portfolioLabel: self.portfolioWorthLabel, spinner: self.portfolioWorthAIV)
+            InvestrCore.getPortfolio(newValue, portfolioLabel: self.hiddenLabel)
             InvestrCore.currentGame(newValue, array: self.stocks)
         }
         
         
         if(identifier == "wallet")
         {
-           self.wallet.text = "$\(newValue)"
+            self.walletVal = "$\(newValue)"
         }
         
-        if(identifier == "portValue")
+        if(identifier == "portVal")
         {
-            self.portfolioWorthLabel.text = "Current Worth: $\(newValue)"
+            self.portfolioVal = "$\(newValue)"
         }
         
         if(identifier == "alert")

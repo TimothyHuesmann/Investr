@@ -28,6 +28,7 @@ class InvestrCore: NSObject
     static var finalMoney = ObservableString(value:"", identifier:"finalMoney")
     static var tempString = ObservableString(value: "", identifier: "tempString")
     static var alertString = ObservableString(value: "", identifier: "alert")
+    static var portVal = ObservableString(value: "", identifier: "portVal")
     
     
     static func endGame()
@@ -182,7 +183,7 @@ class InvestrCore: NSObject
         return -1
     }
     
-    static func getPortfolio(transID: String, portfolioLabel: UILabel, spinner: UIActivityIndicatorView)
+    static func getPortfolio(transID: String, portfolioLabel: UILabel)
     {
         Alamofire.request(.GET, "https://investr-app.herokuapp.com/mobile/portfolio/\(transID)", encoding: .JSON)
             .responseJSON { response in
@@ -190,7 +191,7 @@ class InvestrCore: NSObject
                 let tempPort = ((response.2.value!["portfolio"]!) as! Double)
                 print(tempPort)
                 portfolioLabel.text = "Portfolio Worth: $\(tempPort)"
-                spinner.stopAnimating()
+                InvestrCore.portVal.updateValue("\(tempPort)")
         }
     }
     
