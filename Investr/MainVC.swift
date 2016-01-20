@@ -33,53 +33,62 @@ class MainVC: UIViewController {
         let defaults = NSUserDefaults.standardUserDefaults()
         let username = defaults.objectForKey("username") as! String
         let password = defaults.objectForKey("password") as! String
-        if(username != "" && password != "")
+        if(InvestrCore.userID == "")
         {
-            PFUser.logInWithUsernameInBackground(username, password: password) {
-                (user: PFUser?, error: NSError?) -> Void in
-                if user != nil
-                {
-                    //success
-                    let defaults = NSUserDefaults.standardUserDefaults()
-                    defaults.setObject(username, forKey: "username")
-                    defaults.setObject(password, forKey: "password")
-                    defaults.synchronize()
-                    
-                    let menuVC = self.storyboard?.instantiateViewControllerWithIdentifier("MenuVC") as! MenuVC
-                    self.navigationController?.pushViewController(menuVC, animated: true)
-                    // Do stuff after successful login.
-                    InvestrCore.currUser = username         //saves global username
-                    let query = PFUser.query()
-                    query!.whereKey("username", equalTo: InvestrCore.currUser)
-                    
-                    do{
-                        _ = try query!.findObjects()
-                    }
-                    catch
+            if(username != "" && password != "")
+            {
+                PFUser.logInWithUsernameInBackground(username, password: password)
                     {
+                        (user: PFUser?, error: NSError?) -> Void in
+                        if user != nil
+                        {
+                            //success
+                            let defaults = NSUserDefaults.standardUserDefaults()
+                            defaults.setObject(username, forKey: "username")
+                            defaults.setObject(password, forKey: "password")
+                            defaults.synchronize()
+                            
+                            let menuVC = self.storyboard?.instantiateViewControllerWithIdentifier("MenuVC") as! MenuVC
+                            self.navigationController?.pushViewController(menuVC, animated: true)
+                            // Do stuff after successful login.
+                            InvestrCore.currUser = username         //saves global username
+                            let query = PFUser.query()
+                            query!.whereKey("username", equalTo: InvestrCore.currUser)
+                            
+                            do{
+                                _ = try query!.findObjects()
+                            }
+                            catch
+                            {
+                                
+                            }
+                            
+                            
+                            InvestrCore.userID = PFUser.currentUser()!.objectId!    //saves global user objectId
+                            
+                        }
+                        else
+                        {
+                            //Error
+                            let alert = UIAlertView()
+                            alert.title = "Login Error"
+                            alert.message = "Invalid Email/Password Combination, Please Try Again"
+                            alert.addButtonWithTitle("OK")
+                            alert.show()
+                            // The login failed. Check error to see why.
+                        }
                         
-                    }
-                    
-                    
-                    InvestrCore.userID = PFUser.currentUser()!.objectId!    //saves global user objectId
-                    
                 }
-                else
-                {
-                    //Error
-                    let alert = UIAlertView()
-                    alert.title = "Login Error"
-                    alert.message = "Invalid Email/Password Combination, Please Try Again"
-                    alert.addButtonWithTitle("OK")
-                    alert.show()
-                    // The login failed. Check error to see why.
-                }
-
+                
+                
+                // Do any additional setup after loading the view.
+            }
         }
-        
-        
-        // Do any additional setup after loading the view.
-    }
+        else
+        {
+            defaults.setObject("", forKey: "username")
+            defaults.setObject("", forKey: "password")
+        }
     }
     
     override func didReceiveMemoryWarning() {

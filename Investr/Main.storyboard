@@ -79,7 +79,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PYa-Qg-Sz8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="185.5" y="79.5"/>
+            <point key="canvasLocation" x="261.5" y="219.5"/>
         </scene>
         <!--Reveal View Controller-->
         <scene sceneID="Ua1-LK-Crg">
@@ -118,7 +118,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CxW-Kh-ii9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-443" y="67"/>
+            <point key="canvasLocation" x="-599" y="17"/>
         </scene>
         <!--Login-->
         <scene sceneID="uQf-oF-ngR">
@@ -566,7 +566,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="Bwy-AC-5O8" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="LP8-Mp-HyF"/>
+                                            <segue destination="0Ok-px-VTp" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="Ld8-BE-zkp"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -2023,6 +2023,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="LP8-Mp-HyF"/>
+        <segue reference="Ld8-BE-zkp"/>
     </inferredMetricsTieBreakers>
 </document>
