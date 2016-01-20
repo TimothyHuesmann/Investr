@@ -11,33 +11,14 @@ import Parse
 
 class MenuVC: UIViewController {
 
+    @IBOutlet weak var gamesTV: UITableView!
     @IBOutlet weak var menuButton: UIBarButtonItem!
     
+    var theGames = [Game]()
+    var thePortfolios = [String]()
+    
+    
     var currentUser = PFUser.currentUser()
-    
-    @IBAction func upcomingGamesButtonPressed(sender: AnyObject)
-    {
-        let gameslistVC = self.storyboard?.instantiateViewControllerWithIdentifier("GamesListTVC") as! GamesListTVC
-        self.navigationController?.pushViewController(gameslistVC, animated: true)
-    }
-    
-    @IBAction func myGamesButtonPressed(sender: AnyObject)
-    {
-        let myGamesVC = self.storyboard?.instantiateViewControllerWithIdentifier("MyGamesTVC") as! MyGamesTVC
-        self.navigationController?.pushViewController(myGamesVC, animated: true)
-    }
-    
-    @IBAction func gameHistoryButtonPressed(sender: AnyObject)
-    {
-        let gameHistoryTVC = self.storyboard?.instantiateViewControllerWithIdentifier("GameHistoryTVC") as! GameHistoryTVC
-        gameHistoryTVC.queryGames()
-        self.navigationController?.pushViewController(gameHistoryTVC, animated: true)
-        
-    }
-    
-    
-    
-    
     
     override func viewDidLoad()
     {
@@ -57,6 +38,74 @@ class MenuVC: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        // #warning Potentially incomplete method implementation.
+        // Return the number of sections.
+        
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // #warning Incomplete method implementation.
+        // Return the number of rows in the section.
+        
+        return 1
+        
+        
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! MenuGameListTVCell
+        
+        // Configure the cell...
+        
+        
+        
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath!)
+    {
+       /*
+        let indexPath = tableView.indexPathForSelectedRow
+        let currentCell = tableView.cellForRowAtIndexPath(indexPath!) as UITableViewCell!
+        
+        let query = PFQuery(className: "Transaction")
+        query.whereKey("userName", equalTo: InvestrCore.currUser)
+        query.findObjectsInBackgroundWithBlock
+            {
+                (objects: [PFObject]?, error: NSError?) -> Void in
+                if error == nil
+                {
+                    if let objects = objects
+                    {
+                        let tempWallet = objects[0]["currentMoney"] as! Double
+                        let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("CurrentGameVC") as! CurrentGameVC
+            
+                            viewController.setGame(self.theGames[(indexPath?.row)!], userWallet: tempWallet)
+                        
+                        
+                        viewController.getStocks()
+                        self.navigationController?.pushViewController(viewController, animated: true)
+                        self.theGames = []
+                    }
+                }
+                else
+                {
+                    print("Error: \(error) \(error!.userInfo)")
+                }
+        }
+
+        */
+        
+        
+        //NEED GAME GETTER BEFORE THIS CAN BE ACTIVATED
+        
+    }
+    
+    
+    
     
 
     /*

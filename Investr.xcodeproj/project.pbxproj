@@ -24,6 +24,7 @@
 		A72042731BC2B02600808FF5 /* Stock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72042721BC2B02600808FF5 /* Stock.swift */; };
 		A73460EF1C49874C00011ED1 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A73460EE1C49874C00011ED1 /* SWRevealViewController.m */; };
 		A73460F31C498D6200011ED1 /* SideMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73460F21C498D6200011ED1 /* SideMenuVC.swift */; };
+		A73460F51C5019CD00011ED1 /* MenuGameListTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73460F41C5019CD00011ED1 /* MenuGameListTVCell.swift */; };
 		A74D17481BF37EE700933972 /* LookupStockVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74D17471BF37EE700933972 /* LookupStockVC.swift */; };
 		A756B9171BBC10510019A990 /* StockVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A756B9161BBC10510019A990 /* StockVC.swift */; };
 		A784C5111BE7AD8700C21692 /* GameStandingsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A784C5101BE7AD8700C21692 /* GameStandingsTVC.swift */; };
@@ -98,6 +99,7 @@
 		A73460ED1C49874C00011ED1 /* Investr-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Investr-Bridging-Header.h"; sourceTree = "<group>"; };
 		A73460EE1C49874C00011ED1 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWRevealViewController.m; path = "../../../../Desktop/SWRevealViewController-master/SWRevealViewController/SWRevealViewController.m"; sourceTree = "<group>"; };
 		A73460F21C498D6200011ED1 /* SideMenuVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuVC.swift; sourceTree = "<group>"; };
+		A73460F41C5019CD00011ED1 /* MenuGameListTVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuGameListTVCell.swift; sourceTree = "<group>"; };
 		A74D17471BF37EE700933972 /* LookupStockVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LookupStockVC.swift; sourceTree = "<group>"; };
 		A756B9161BBC10510019A990 /* StockVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StockVC.swift; sourceTree = "<group>"; };
 		A784C5101BE7AD8700C21692 /* GameStandingsTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameStandingsTVC.swift; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 				A70728331BE25A7B00EDDC85 /* Game.swift */,
 				A784C5141BE7B66F00C21692 /* GameStandingsTVCell.swift */,
 				6891256A1BEA4FB500A9F452 /* SpinCentral.swift */,
+				A73460F41C5019CD00011ED1 /* MenuGameListTVCell.swift */,
 			);
 			name = "Helper Objects";
 			sourceTree = "<group>";
@@ -458,6 +461,7 @@
 			files = (
 				A72042711BC2AC4C00808FF5 /* StockTVCell.swift in Sources */,
 				A7F148B71B97306200A13CE2 /* RegisterVC.swift in Sources */,
+				A73460F51C5019CD00011ED1 /* MenuGameListTVCell.swift in Sources */,
 				A7000F4C1BCBF57C009E1FDD /* TransTVCell.swift in Sources */,
 				A784C5151BE7B66F00C21692 /* GameStandingsTVCell.swift in Sources */,
 				A7F148931B972FAC00A13CE2 /* AppDelegate.swift in Sources */,
