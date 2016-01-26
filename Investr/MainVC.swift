@@ -13,7 +13,8 @@ class MainVC: UIViewController {
     
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var registerButton: UIButton!
-    
+    var username: String = ""
+    var password: String = ""
     
     @IBAction func loginButtonPressed(sender: AnyObject)        //login button
     {
@@ -31,11 +32,14 @@ class MainVC: UIViewController {
     {
         super.viewDidLoad()
         let defaults = NSUserDefaults.standardUserDefaults()
-        let username = defaults.objectForKey("username") as! String
-        let password = defaults.objectForKey("password") as! String
+        if(defaults.objectForKey("username") != nil)
+        {
+            self.username = defaults.objectForKey("username") as! String
+            self.password = defaults.objectForKey("password") as! String
+        }
         if(InvestrCore.userID == "")
         {
-            if(username != "" && password != "")
+            if(self.username != "" && self.password != "")
             {
                 PFUser.logInWithUsernameInBackground(username, password: password)
                     {
@@ -44,14 +48,14 @@ class MainVC: UIViewController {
                         {
                             //success
                             let defaults = NSUserDefaults.standardUserDefaults()
-                            defaults.setObject(username, forKey: "username")
-                            defaults.setObject(password, forKey: "password")
+                            defaults.setObject(self.username, forKey: "username")
+                            defaults.setObject(self.password, forKey: "password")
                             defaults.synchronize()
                             
                             let menuVC = self.storyboard?.instantiateViewControllerWithIdentifier("MenuVC") as! MenuVC
                             self.navigationController?.pushViewController(menuVC, animated: true)
                             // Do stuff after successful login.
-                            InvestrCore.currUser = username         //saves global username
+                            InvestrCore.currUser = self.username         //saves global username
                             let query = PFUser.query()
                             query!.whereKey("username", equalTo: InvestrCore.currUser)
                             

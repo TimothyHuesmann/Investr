@@ -22,6 +22,7 @@ class GameHistoryTVC: UIViewController
     {
         
         super.viewDidLoad()
+        queryGames()
         if self.revealViewController() != nil
         {
             self.menuButton.target = self.revealViewController()

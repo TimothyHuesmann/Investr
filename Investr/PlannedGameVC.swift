@@ -52,7 +52,8 @@ class PlannedGameVC: UIViewController {
                         alertController.addAction(UIAlertAction(title: "Yes", style: UIAlertActionStyle.Default,handler: {
                             (action: UIAlertAction!) in
                             InvestrCore.joinGame(InvestrCore.userID, gameID: self.gameID)
-                            self.navigationController?.popViewControllerAnimated(true)
+                            let myGamesTVC = self.storyboard?.instantiateViewControllerWithIdentifier("MyGamesTVC") as! MyGamesTVC
+                            self.navigationController?.pushViewController(myGamesTVC, animated: true)
                         }))
                         alertController.addAction(UIAlertAction(title: "No", style: UIAlertActionStyle.Default,handler: nil))
                         

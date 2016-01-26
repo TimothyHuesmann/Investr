@@ -27,6 +27,8 @@ class CurrHistoryVC: UIViewController
             self.menuButton.action = "revealToggle:"
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
+        
+        self.historyTVC.reloadData()
 
         // Do any additional setup after loading the view.
     }
@@ -54,22 +56,21 @@ class CurrHistoryVC: UIViewController
                             for(var i = 0; i < objects[0]["log"].count; i++)
                             {
                                 let logString = objects[0]["log"][i]
-                                var tempVal = logString["operation"]!!.componentsSeparatedByString("-")
-                                print(tempVal)
+                                print(logString)
                                 var tempTime: NSString!
                                 tempTime = logString["time"] as! NSString
                                 print(tempTime!)
-                                if(tempVal[0] == "join")
+                                if(logString["operation"] as! String == ("join"))
                                 {
                                     self.theTransactions.append(Transaction(type: "Joined the Game", ticker: "", value: "", date: logString["time"] as! String, amount: ""))
                                 }
-                                else if(tempVal[0] == "checkout")
+                                else if(logString["operation"] as! String == "checkout")
                                 {
                                     self.theTransactions.append(Transaction(type: "Game End", ticker: "", value: "", date: logString["time"] as! String, amount: ""))
                                 }
                                 else
                                 {
-                                    self.theTransactions.append(Transaction(type: tempVal[0], ticker: tempVal[1], value: tempVal[2], date: logString["time"] as! String, amount: tempVal[3]))
+                                    self.theTransactions.append(Transaction(type: logString["operation"] as! String, ticker: logString["symbol"] as! String, value: logString["price"] as! String, date: logString["time"] as! String, amount: logString["share"] as! String))
                                 }
                                 
                             }
