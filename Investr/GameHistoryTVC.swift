@@ -141,15 +141,15 @@ class GameHistoryTVC: UIViewController
                         print(tempTime!)
                         if(tempVal[0] == "join")
                         {
-                            self.theGames[indexPath.row].theTransactions.append(Transaction(type: "Joined the Game", ticker: "", value: "", date: logString["time"] as! String, amount: ""))
+                            self.theGames[indexPath.row].theTransactions.append(Transaction(type: "Joined the Game", ticker: "", value: "", date: logString["time"] as! NSDate, amount: ""))
                         }
                         else if(tempVal[0] == "checkout")
                         {
-                            self.theGames[indexPath.row].theTransactions.append(Transaction(type: "Game End", ticker: "", value: "", date: logString["time"] as! String, amount: ""))
+                            self.theGames[indexPath.row].theTransactions.append(Transaction(type: "Game End", ticker: "", value: "", date: logString["time"] as! NSDate, amount: ""))
                         }
                         else
                         {
-                            self.theGames[indexPath.row].theTransactions.append(Transaction(type: tempVal[0], ticker: tempVal[1], value: tempVal[2], date: logString["time"] as! String, amount: tempVal[3]))
+                            self.theGames[indexPath.row].theTransactions.append(Transaction(type: tempVal[0], ticker: tempVal[1], value: tempVal[2], date: logString["time"] as! NSDate, amount: tempVal[3]))
                         }
                     }
                     InvestrCore.finalMoney.updateValue("\(self.tempFinal)")

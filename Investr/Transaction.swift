@@ -13,10 +13,10 @@ class Transaction: NSObject
     var type: String!
     var value: String!
     var ticker: String!
-    var time: String!
+    var time: NSDate!
     var amount: String!
     
-    init(type: String, ticker: String, value: String, date: String, amount: String)
+    init(type: String, ticker: String, value: String, date: NSDate, amount: String)
     {
         self.type = type
         self.value = value

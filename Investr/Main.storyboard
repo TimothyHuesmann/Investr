@@ -773,14 +773,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Eu2-at-gKa">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                                <rect key="frame" x="0.0" y="6" width="375" height="612"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="44" id="q5J-UC-9p1" customClass="TransTVCell" customModule="Investr" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="q5J-UC-9p1" id="FfF-DC-GEg">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Num" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L4R-9a-4ly">
@@ -827,10 +827,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="Eu2-at-gKa" secondAttribute="trailing" id="0up-Pc-rt7"/>
-                            <constraint firstItem="Eu2-at-gKa" firstAttribute="top" secondItem="xTo-if-yQK" secondAttribute="top" id="4J8-hA-67Q"/>
-                            <constraint firstItem="Eu2-at-gKa" firstAttribute="leading" secondItem="xTo-if-yQK" secondAttribute="leading" id="RHV-ha-vjC"/>
-                            <constraint firstItem="Eu2-at-gKa" firstAttribute="bottom" secondItem="Q2O-dE-d20" secondAttribute="top" id="l7i-em-wea"/>
+                            <constraint firstItem="Eu2-at-gKa" firstAttribute="top" secondItem="xTo-if-yQK" secondAttribute="topMargin" constant="6" id="Fuj-lM-gLc"/>
+                            <constraint firstItem="Eu2-at-gKa" firstAttribute="bottom" secondItem="Q2O-dE-d20" secondAttribute="top" id="QnD-O9-PDE"/>
+                            <constraint firstItem="Eu2-at-gKa" firstAttribute="leading" secondItem="xTo-if-yQK" secondAttribute="leading" id="XBQ-qO-xb3"/>
+                            <constraint firstAttribute="trailing" secondItem="Eu2-at-gKa" secondAttribute="trailing" id="y2C-UI-Rzp"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Transaction History" id="Igf-9s-yn0">

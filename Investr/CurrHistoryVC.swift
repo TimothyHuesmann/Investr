@@ -57,20 +57,22 @@ class CurrHistoryVC: UIViewController
                             {
                                 let logString = objects[0]["log"][i]
                                 print(logString)
-                                var tempTime: NSString!
-                                tempTime = logString["time"] as! NSString
+                                
+                                let tempTime = logString["time"]
                                 print(tempTime!)
                                 if(logString["operation"] as! String == ("join"))
                                 {
-                                    self.theTransactions.append(Transaction(type: "Joined the Game", ticker: "", value: "", date: logString["time"] as! String, amount: ""))
+                                    self.theTransactions.append(Transaction(type: "Joined the Game", ticker: "", value: "", date: logString["time"] as! NSDate, amount: ""))
                                 }
                                 else if(logString["operation"] as! String == "checkout")
                                 {
-                                    self.theTransactions.append(Transaction(type: "Game End", ticker: "", value: "", date: logString["time"] as! String, amount: ""))
+                                    self.theTransactions.append(Transaction(type: "Game End", ticker: "", value: "", date: logString["time"] as! NSDate, amount: ""))
                                 }
                                 else
                                 {
-                                    self.theTransactions.append(Transaction(type: logString["operation"] as! String, ticker: logString["symbol"] as! String, value: logString["price"] as! String, date: logString["time"] as! String, amount: logString["share"] as! String))
+                                    let tempValue = logString["price"] as! NSNumber
+                                    let tempAmount = logString["share"] as! NSNumber
+                                    self.theTransactions.append(Transaction(type: logString["operation"] as! String, ticker: logString["symbol"] as! String, value: "\(tempValue)", date: logString["time"] as! NSDate, amount: "\(tempAmount)"))
                                 }
                                 
                             }
