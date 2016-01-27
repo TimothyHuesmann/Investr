@@ -107,6 +107,11 @@ class PlannedGameVC: UIViewController {
         self.startTime = NSDateFormatter.localizedStringFromDate(start, dateStyle: .ShortStyle, timeStyle: .ShortStyle)
         self.endTime = NSDateFormatter.localizedStringFromDate(end, dateStyle: .ShortStyle, timeStyle: .ShortStyle)
     }
+    
+    @IBAction func cancelButtonPressed(sender: AnyObject)
+    {
+        self.navigationController?.popViewControllerAnimated(true)
+    }
     /*
     // MARK: - Navigation
     

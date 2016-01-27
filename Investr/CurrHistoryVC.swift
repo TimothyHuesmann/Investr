@@ -62,17 +62,18 @@ class CurrHistoryVC: UIViewController
                                 print(tempTime!)
                                 if(logString["operation"] as! String == ("join"))
                                 {
-                                    self.theTransactions.append(Transaction(type: "Joined the Game", ticker: "", value: "", date: logString["time"] as! NSDate, amount: ""))
+                                    self.theTransactions.append(Transaction(type: "Joined the Game", ticker: "", value: "", date: logString["time"] as! NSDate, amount: "", wallet: ""))
                                 }
                                 else if(logString["operation"] as! String == "checkout")
                                 {
-                                    self.theTransactions.append(Transaction(type: "Game End", ticker: "", value: "", date: logString["time"] as! NSDate, amount: ""))
+                                    self.theTransactions.append(Transaction(type: "Game End", ticker: "", value: "", date: logString["time"] as! NSDate, amount: "", wallet: ""))
                                 }
                                 else
                                 {
                                     let tempValue = logString["price"] as! NSNumber
                                     let tempAmount = logString["share"] as! NSNumber
-                                    self.theTransactions.append(Transaction(type: logString["operation"] as! String, ticker: logString["symbol"] as! String, value: "\(tempValue)", date: logString["time"] as! NSDate, amount: "\(tempAmount)"))
+                                    let tempWallet = logString["wallet"] as! NSNumber
+                                    self.theTransactions.append(Transaction(type: logString["operation"] as! String, ticker: logString["symbol"] as! String, value: "\(tempValue)", date: logString["time"] as! NSDate, amount: "\(tempAmount)", wallet: "\(tempWallet)"))
                                 }
                                 
                             }
@@ -128,8 +129,24 @@ class CurrHistoryVC: UIViewController
         
         // Configure the cell...
         cell.typeLabel.text = self.theTransactions[indexPath.row].type.uppercaseString
-        cell.numLabel.text = self.theTransactions[indexPath.row].value
         cell.tickerLabel.text = self.theTransactions[indexPath.row].ticker.uppercaseString
+        cell.numStocksLabel.text = "\(self.theTransactions[indexPath.row].amount) stocks"
+        
+        if(self.theTransactions[indexPath.row].amount != "")
+        {
+            cell.numLabel.text = "$\(self.theTransactions[indexPath.row].value)"
+            cell.walletLabel.text = "$\(self.theTransactions[indexPath.row].wallet)"
+            cell.numStocksLabel.hidden = false
+            cell.tickerPlaceLabel.hidden = false
+            cell.pricePlaceLabel.hidden = false
+            cell.walletPlaceLabel.hidden = false
+        }
+        else
+        {
+            cell.numLabel.text = ""
+            cell.walletLabel.text = ""
+        }
+        
         
         return cell
     }

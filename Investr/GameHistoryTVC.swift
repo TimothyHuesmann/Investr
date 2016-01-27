@@ -134,22 +134,25 @@ class GameHistoryTVC: UIViewController
                     for(var i = 0;i<objects[0]["log"].count;i++)
                     {
                         let logString = objects[0]["log"][i]
-                        var tempVal = logString["operation"]!!.componentsSeparatedByString("-")
-                        print(tempVal)
+                        print(logString)
                         var tempTime: NSString!
                         tempTime = logString["time"] as! NSString
                         print(tempTime!)
-                        if(tempVal[0] == "join")
+                        if(logString["operation"] as! String == "join")
                         {
-                            self.theGames[indexPath.row].theTransactions.append(Transaction(type: "Joined the Game", ticker: "", value: "", date: logString["time"] as! NSDate, amount: ""))
+                            self.theGames[indexPath.row].theTransactions.append(Transaction(type: "Joined the Game", ticker: "", value: "", date: logString["time"] as! NSDate, amount: "", wallet: ""))
                         }
-                        else if(tempVal[0] == "checkout")
+                        else if(logString["operation"] as! String == "checkout")
                         {
-                            self.theGames[indexPath.row].theTransactions.append(Transaction(type: "Game End", ticker: "", value: "", date: logString["time"] as! NSDate, amount: ""))
+                            self.theGames[indexPath.row].theTransactions.append(Transaction(type: "Game End", ticker: "", value: "", date: logString["time"] as! NSDate, amount: "", wallet: ""))
                         }
                         else
                         {
-                            self.theGames[indexPath.row].theTransactions.append(Transaction(type: tempVal[0], ticker: tempVal[1], value: tempVal[2], date: logString["time"] as! NSDate, amount: tempVal[3]))
+                            let tempValue = logString["value"] as! NSNumber
+                            let tempAmount = logString["share"] as! NSNumber
+                            let tempWallet = logString["wallet"] as! NSNumber
+                            
+                            self.theGames[indexPath.row].theTransactions.append(Transaction(type: logString["operation"] as! String, ticker: logString["ticker"] as! String, value: "\(tempValue)", date: logString["time"] as! NSDate, amount: "\(tempAmount)", wallet: "\(tempWallet)"))
                         }
                     }
                     InvestrCore.finalMoney.updateValue("\(self.tempFinal)")

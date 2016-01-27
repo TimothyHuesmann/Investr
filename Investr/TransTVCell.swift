@@ -14,6 +14,13 @@ class TransTVCell: UITableViewCell {
     @IBOutlet weak var typeLabel: UILabel!
     @IBOutlet weak var tickerLabel: UILabel!
     @IBOutlet weak var numLabel: UILabel!
+    @IBOutlet weak var numStocksLabel: UILabel!
+    @IBOutlet weak var walletLabel: UILabel!
+    
+    @IBOutlet weak var tickerPlaceLabel: UILabel!
+    @IBOutlet weak var pricePlaceLabel: UILabel!
+    @IBOutlet weak var walletPlaceLabel: UILabel!
+    
     override func awakeFromNib()
     {
         super.awakeFromNib()
