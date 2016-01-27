@@ -18,6 +18,17 @@ class RegisterVC: UIViewController {
     @IBOutlet weak var conPasswordTF: UITextField!
     @IBOutlet weak var submitButton: UIButton!
     
+    @IBAction func loginButtonPressed(sender: AnyObject)
+    {
+       let loginVC = self.storyboard?.instantiateViewControllerWithIdentifier("LoginVC") as! LoginVC
+        self.navigationController?.popToViewController(loginVC, animated: true)
+    }
+    @IBAction func backButtonPressed(sender: AnyObject)
+    {
+        let mainVC = self.storyboard?.instantiateViewControllerWithIdentifier("MainVC") as! MainVC
+        self.navigationController?.popToViewController(mainVC, animated: true)
+    }
+    
     @IBAction func submitButtonPressed(sender: AnyObject)
     {
         if(self.usernameTF.text != "" && self.emailTF.text != "" && self.phoneTF.text != "" && self.passwordTF.text != "" && self.conPasswordTF.text != "" && self.passwordTF.text == self.conPasswordTF.text)

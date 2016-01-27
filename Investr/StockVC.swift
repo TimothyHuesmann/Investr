@@ -31,6 +31,11 @@ class StockVC: UIViewController, Observable
     var ticker: String!
     var gameID: String!
     
+    @IBAction func cancelButtonPressed(sender: AnyObject)
+    {
+        self.navigationController?.popViewControllerAnimated(true)
+    }
+    
     func observableStringUpdate(newValue: String, identifier: String)
     {
         print("StockVC: newval: \(newValue) for var: \(identifier)")

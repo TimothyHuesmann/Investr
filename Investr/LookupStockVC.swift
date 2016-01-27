@@ -20,6 +20,10 @@ class LookupStockVC: UIViewController, UIWebViewDelegate
     var tempID: String!
     var wallet: Double!
     
+    @IBAction func backButtonPressed(sender: AnyObject)
+    {
+        self.navigationController?.popViewControllerAnimated(true)
+    }
     
     @IBAction func buyStockButtonPressed(sender: AnyObject)
     {
