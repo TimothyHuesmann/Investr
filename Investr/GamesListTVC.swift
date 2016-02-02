@@ -28,7 +28,7 @@ class GamesListTVC: UIViewController
     var playingGames = [String]()
     var newPlayingGames = [Game]()
     var numPlayers = 0
-    var potSize = 0
+    var potSize: Double! = 0
     var price = 0.0
     var tempID = ""
     var tempWallet: Double!
@@ -55,7 +55,7 @@ class GamesListTVC: UIViewController
                     for object in objects
                     {
                         self.upcomingGames.append(object["Name"]! as! String)
-                        self.newUpcomingGames.append(Game(name: object["Name"] as! String, id: object.objectId!, end: object["EndTime"] as! NSDate, numPLayers: object["CurrentPlayers"].count, pot: object["PotSize"] as! Double, price: object["Price"] as! Double))
+                        self.newUpcomingGames.append(Game(name: object["Name"] as! String, id: object.objectId!, end: object["EndTime"] as! NSDate, start: object["StartTime"] as! NSDate, numPLayers: object["CurrentPlayers"].count, pot: object["PotSize"] as! Double, price: object["Price"] as! Double))
                     }
                     self.upcomingGamesTV.reloadData()
                 }
@@ -80,7 +80,7 @@ class GamesListTVC: UIViewController
                     for object2 in objects2
                     {
                         self.playingGames.append(object2["Name"]! as! String)
-                        self.newPlayingGames.append(Game(name: object2["Name"] as! String, id: object2.objectId!, end: object2["EndTime"] as! NSDate, numPLayers: object2["CurrentPlayers"].count, pot: object2["PotSize"] as! Double, price: object2["Price"] as! Double))
+                        self.newPlayingGames.append(Game(name: object2["Name"] as! String, id: object2.objectId!, end: object2["EndTime"] as! NSDate, start: object2["StartTime"] as! NSDate, numPLayers: object2["CurrentPlayers"].count, pot: object2["PotSize"] as! Double, price: object2["Price"] as! Double))
                     }
                     self.upcomingGamesTV.reloadData()
                 }
@@ -213,7 +213,7 @@ class GamesListTVC: UIViewController
                         
                         if objects[0]["PotSize"] != nil
                         {
-                            self.potSize = objects[0]["PotSize"]! as! Int   //setting the potSize label
+                            self.potSize = objects[0]["PotSize"]! as! Double   //setting the potSize label
                         }
                         else
                         {
@@ -223,15 +223,62 @@ class GamesListTVC: UIViewController
                         self.startDate = objects[0]["StartTime"]! as! NSDate
                         self.endDate = objects[0]["EndTime"]! as! NSDate
                         
-                        let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("PlannedGameVC") as! PlannedGameVC
+                        
+                        
+                        if(objects[0]["CurrentPlayers"].containsObject(InvestrCore.currUser))
+                        {
+                            if indexPath!.section == 0
+                            {
+                                let query2 = PFQuery(className: "Transaction")
+                                query2.whereKey("GameID", equalTo: PFObject(withoutDataWithClassName: "Game", objectId: self.newPlayingGames[(indexPath?.row)!].id))
+                                query2.whereKey("userName", equalTo: InvestrCore.currUser)
+                                query2.findObjectsInBackgroundWithBlock
+                                    {
+                                        (objects2: [PFObject]?, error: NSError?) -> Void in
+                                        if error == nil
+                                        {
+                                            if let objects2 = objects2
+                                            {
+                                                self.tempWallet = objects2[0]["currentMoney"] as! Double
+                                            }
+                                        }
+                                        else
+                                        {
+                                            print("Error: \(error) \(error!.userInfo)")
+                                        }
+                                        
+                                
+                                let currentGameVC = self.storyboard?.instantiateViewControllerWithIdentifier("CurrentGameVC") as! CurrentGameVC
+                                currentGameVC.setGame(self.newPlayingGames[indexPath!.row], userWallet: self.tempWallet)
+                                currentGameVC.getStocks()
+                                self.navigationController?.pushViewController(currentGameVC, animated: true)
+                                        self.newPlayingGames = []
+                                        self.newUpcomingGames = []
+                                }
+                            }
+                            else
+                            {
+                                let plannedGameVC = self.storyboard?.instantiateViewControllerWithIdentifier("PlannedGameVC") as! PlannedGameVC
+                                plannedGameVC.setGameInfo(currentCell.textLabel!.text!, numPlayers: self.numPlayers, potSize: self.potSize, price: self.price, gameID: self.tempID, start: self.startDate, end: self.endDate)
+                                plannedGameVC.inGame = true
+                                self.navigationController?.pushViewController(plannedGameVC, animated: true)
+                                self.newPlayingGames = []
+                                self.newUpcomingGames = []
+                                
+                            }
+                        }
+                        else
+                        {
+                            
+                            let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("PlannedGameVC") as! PlannedGameVC
+                            viewController.setGameInfo(currentCell.textLabel!.text!, numPlayers: self.numPlayers, potSize: self.potSize, price: self.price, gameID: self.tempID, start: self.startDate, end: self.endDate)
+                            self.navigationController?.pushViewController(viewController, animated: true)
+                            self.newPlayingGames = []
+                            self.newUpcomingGames = []
+                        }
                         
                         
                         
-                        viewController.setGameInfo(currentCell.textLabel!.text!, numPlayers: self.numPlayers, potSize: self.potSize, price: self.price, gameID: self.tempID, start: self.startDate, end: self.endDate)
-                        self.navigationController?.pushViewController(viewController, animated: true)
-                        
-                        self.newPlayingGames = []
-                        self.newUpcomingGames = []
                         
                     }
                 }

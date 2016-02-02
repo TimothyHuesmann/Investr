@@ -24,10 +24,12 @@ class PlannedGameVC: UIViewController {
     var tempGameName : String!
     var tempNumPlayers : Int!
     var tempPriceLabel : Double!
-    var tempPotSize : Int!
+    var tempPotSize : Double!
     var gameID : String!
     var startTime: String!
     var endTime: String!
+    var inGame = false
+    
     @IBAction func enterButtonPressed(sender: AnyObject)
     {
         let query = PFQuery(className: "Game")
@@ -86,6 +88,15 @@ class PlannedGameVC: UIViewController {
         self.potSizeLabel.text = "\(self.tempPotSize)"
         self.endDate.text = self.endTime
         self.startDate.text = self.startTime
+        if(self.inGame == true)
+        {
+            self.enterGameButton.enabled = false
+            self.enterGameButton.setTitle("You Are Already In This Game", forState: .Normal)
+        }
+        else
+        {
+            self.enterGameButton.enabled = true
+        }
         
         
 
@@ -97,7 +108,7 @@ class PlannedGameVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func setGameInfo(name: String, numPlayers: Int, potSize: Int, price: Double, gameID: String, start: NSDate, end: NSDate)
+    func setGameInfo(name: String, numPlayers: Int, potSize: Double, price: Double, gameID: String, start: NSDate, end: NSDate)
     {
         self.title = name
         self.tempNumPlayers = numPlayers

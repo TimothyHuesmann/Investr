@@ -16,8 +16,9 @@ class Game: NSObject
     var numPlayers: Int!
     var pot: Double!
     var price: Double!
+    var start: NSDate!
     
-    init(name: String, id: String, end: NSDate, numPLayers: Int, pot: Double, price: Double)
+    init(name: String, id: String, end: NSDate, start: NSDate, numPLayers: Int, pot: Double, price: Double)
     {
         self.name = name
         self.id = id

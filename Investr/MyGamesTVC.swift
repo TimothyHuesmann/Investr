@@ -25,6 +25,7 @@ class MyGamesTVC: UIViewController {
     var tempStocks = [String]()
     var tempStocksnum = 0
     
+    
     func gamesQuery()
     {
         let query2 = PFQuery(className: "Game")       //query of games that are running and the user is in
@@ -43,7 +44,7 @@ class MyGamesTVC: UIViewController {
                     for object2 in objects2
                     {
                         self.playingGames.append(object2["Name"]! as! String)
-                        self.newPlayingGames.append(Game(name: object2["Name"] as! String, id: object2.objectId!, end: object2["EndTime"] as! NSDate, numPLayers: object2["CurrentPlayers"].count, pot: object2["PotSize"] as! Double, price: object2["Price"] as! Double))
+                        self.newPlayingGames.append(Game(name: object2["Name"] as! String, id: object2.objectId!, end: object2["EndTime"] as! NSDate, start: object2["StartTime"] as! NSDate, numPLayers: object2["CurrentPlayers"].count, pot: object2["PotSize"] as! Double, price: object2["Price"] as! Double))
                     }
                 }
                 self.theGamesTV.reloadData()
@@ -67,7 +68,7 @@ class MyGamesTVC: UIViewController {
                     for object in objects
                     {
                         self.myUpcomingGames.append(object["Name"]! as! String)
-                        self.newUpcomingGames.append(Game(name: object["Name"] as! String, id: object.objectId!, end: object["EndTime"] as! NSDate, numPLayers: object["CurrentPlayers"].count, pot: object["PotSize"] as! Double, price: object["Price"] as! Double))
+                        self.newUpcomingGames.append(Game(name: object["Name"] as! String, id: object.objectId!, end: object["EndTime"] as! NSDate, start: object["StartTime"] as! NSDate, numPLayers: object["CurrentPlayers"].count, pot: object["PotSize"] as! Double, price: object["Price"] as! Double))
                         
                     }
                     self.theGamesTV.reloadData()
@@ -188,18 +189,33 @@ class MyGamesTVC: UIViewController {
                     if let objects2 = objects2
                     {
                         self.tempWallet = objects2[0]["currentMoney"] as! Double
-                        let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("CurrentGameVC") as! CurrentGameVC
+                        
                         if(indexPath!.section == 0)
                         {
-                          viewController.setGame(self.newPlayingGames[(indexPath?.row)!], userWallet: self.tempWallet)
+                            let tempNumPlayers = self.newPlayingGames[(indexPath?.row)!].numPlayers
+                        let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("CurrentGameVC") as! CurrentGameVC
+                            viewController.setGame(self.newPlayingGames[(indexPath?.row)!], userWallet: self.tempWallet)
+                            viewController.getStocks()
+                            self.navigationController?.pushViewController(viewController, animated: true)
                         }
                         else
                         {
-                            viewController.setGame(self.newUpcomingGames[(indexPath?.row)!], userWallet: self.tempWallet)
+                            print("Hello")
+                            let tempNumPlayers = self.newUpcomingGames[(indexPath?.row)!].numPlayers
+                            let tempPrice = self.newUpcomingGames[(indexPath?.row)!].price
+                            let tempPotSize = self.newUpcomingGames[(indexPath?.row)!].pot
+                            let tempStartDate = self.newUpcomingGames[(indexPath?.row)!].start
+                            let tempEndDate = self.newUpcomingGames[(indexPath?.row)!].end
+                            
+                            let plannedViewController = self.storyboard?.instantiateViewControllerWithIdentifier("PlannedGameVC") as! PlannedGameVC
+                            plannedViewController.setGameInfo(currentCell.textLabel!.text!, numPlayers: tempNumPlayers, potSize: tempPotSize, price: tempPrice, gameID: self.newUpcomingGames[(indexPath?.row)!].id, start: tempStartDate, end: tempEndDate)
+                            self.navigationController?.pushViewController(plannedViewController, animated: true)
+                            self.newPlayingGames = []
+                            self.newUpcomingGames = []
                         }
+                    
                         
-                        viewController.getStocks()
-                        self.navigationController?.pushViewController(viewController, animated: true)
+                        
                         self.newUpcomingGames = []
                         self.newPlayingGames = []
                     }
