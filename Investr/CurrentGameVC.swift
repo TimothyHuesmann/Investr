@@ -292,7 +292,7 @@ class CurrentGameVC: UIViewController, Observable {
         {
             let cell: StockTVCell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! StockTVCell
             
-            cell.stockNameLabel.text = "\(self.stocks[indexPath.row].name!)"
+            cell.stockNameLabel.text = "\((self.stocks[indexPath.row].name!).uppercaseString)"
             cell.stockNumberLabel.text = "\((self.stocks[indexPath.row] as! Stock).value!) Owned Stocks"
             cell.stockBuyLabel.text = "$\((self.stocks[indexPath.row] as! Stock).buyVal!)"
             cell.stockBidLabel.text = "$\((self.stocks[indexPath.row] as! Stock).bidVal)"

@@ -262,4 +262,28 @@ class InvestrCore: NSObject
                 InvestrCore.alertString.updateValue("1")
             }
         }
+    
+    static func inPlay(theGames: NSMutableArray, thePorts: NSMutableArray)
+    {
+        Alamofire.request(.GET, "https://investr-app.herokuapp.com/mobile/inPlay/\(InvestrCore.currUser)", encoding: .JSON)
+            .responseJSON { response in
+         print(response.2.value)
+                
+                
+                
+                for(var i = 0; i < response.2.value!.count; i++ )
+                {
+                    let tempPort = response.2.value![i]["portfolio"]
+                    thePorts.addObject(tempPort!!)
+                    let tempGame = response.2.value![i]["gameID"]
+                    theGames.addObject(tempGame!!)
+                }
+                print(theGames)
+                print(thePorts)
+                InvestrCore.alertString.updateValue("1")
+                
+                
+        }
     }
+    
+}

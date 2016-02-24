@@ -9,27 +9,34 @@
 import UIKit
 import Parse
 
-class MenuVC: UIViewController {
+class MenuVC: UIViewController, Observable {
 
     @IBOutlet weak var gamesTV: UITableView!
     @IBOutlet weak var menuButton: UIBarButtonItem!
     
-    var theGames = [Game]()
-    var thePortfolios = [String]()
+    var theGames: NSMutableArray = []
+    var thePortfolios: NSMutableArray = []
+    var theGamesList: [Game] = []
     
     
     var currentUser = PFUser.currentUser()
     
+    
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
+        InvestrCore.alertString.addObserver(self)
+        InvestrCore.inPlay(self.theGames, thePorts: self.thePortfolios)
         if self.revealViewController() != nil
         {
             self.menuButton.target = self.revealViewController()
             self.menuButton.action = "revealToggle:"
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
+        
+        
+        
 
         // Do any additional setup after loading the view.
     }
@@ -40,17 +47,16 @@ class MenuVC: UIViewController {
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Potentially incomplete method implementation.
+        
         // Return the number of sections.
         
         return 1
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete method implementation.
-        // Return the number of rows in the section.
         
-        return 1
+        
+        return self.theGamesList.count
         
         
     }
@@ -59,20 +65,24 @@ class MenuVC: UIViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! MenuGameListTVCell
         
         // Configure the cell...
+        let multiplier = pow(10.0, 2)
+        let number = self.thePortfolios[indexPath.row] as! Double   //setting the portfolio as a rounded number
+        let rounded = round(number * multiplier) / multiplier
         
-        
+        cell.nameLabel.text = self.theGamesList[indexPath.row].name
+        cell.portLabel.text = "$\(rounded)"
         
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath!)
     {
-       /*
         let indexPath = tableView.indexPathForSelectedRow
-        let currentCell = tableView.cellForRowAtIndexPath(indexPath!) as UITableViewCell!
+        let currentCell = tableView.cellForRowAtIndexPath(indexPath!) as! MenuGameListTVCell!
         
         let query = PFQuery(className: "Transaction")
         query.whereKey("userName", equalTo: InvestrCore.currUser)
+        query.whereKey("gameName", equalTo: self.theGamesList[indexPath!.row].name)
         query.findObjectsInBackgroundWithBlock
             {
                 (objects: [PFObject]?, error: NSError?) -> Void in
@@ -83,7 +93,7 @@ class MenuVC: UIViewController {
                         let tempWallet = objects[0]["currentMoney"] as! Double
                         let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("CurrentGameVC") as! CurrentGameVC
             
-                            viewController.setGame(self.theGames[(indexPath?.row)!], userWallet: tempWallet)
+                            viewController.setGame(self.theGamesList[(indexPath?.row)!], userWallet: tempWallet)
                         
                         
                         viewController.getStocks()
@@ -96,12 +106,44 @@ class MenuVC: UIViewController {
                     print("Error: \(error) \(error!.userInfo)")
                 }
         }
-
-        */
         
         
         //NEED GAME GETTER BEFORE THIS CAN BE ACTIVATED
         
+    }
+    
+    func observableStringUpdate(newValue: String, identifier: String)
+    {
+        let query2 = PFQuery(className: "Game")
+        query2.whereKey("Playing", equalTo:true)
+        query2.whereKey("isFinished", equalTo:false)
+        query2.whereKey("CurrentPlayers", equalTo: InvestrCore.currUser)
+        query2.findObjectsInBackgroundWithBlock{
+            (objects2: [PFObject]?, error: NSError?) -> Void in
+            if(error == nil)
+            {
+                if let objects2 = objects2
+                {
+                    for object in objects2
+                    {
+                        let tempName = object["Name"] as! String
+                        let tempID = object.objectId
+                        let tempEnd = object["EndTime"] as! NSDate
+                        let tempStart = object["StartTime"] as! NSDate
+                        let tempNumPlayers = object["CurrentPlayers"].count
+                        let tempPot = object["PotSize"] as! Double
+                        let tempPrice = object["Price"] as! Double
+                       self.theGamesList.append(Game(name: tempName, id: tempID!, end: tempEnd, start: tempStart, numPLayers: tempNumPlayers, pot: tempPot, price: tempPrice))
+                    }
+                    self.gamesTV.reloadData()
+                }
+            }
+            else
+            {
+                // Log details of the failure
+                print("Error: \(error!) \(error!.userInfo)")
+            }
+        }
     }
     
     

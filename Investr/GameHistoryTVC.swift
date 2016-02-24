@@ -134,10 +134,12 @@ class GameHistoryTVC: UIViewController
                     for(var i = 0;i<objects[0]["log"].count;i++)
                     {
                         let logString = objects[0]["log"][i]
+                        let dateFormatter = NSDateFormatter()
+                        dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss.SSSSxxx"
                         print(logString)
-                        var tempTime: NSString!
-                        tempTime = logString["time"] as! NSString
-                        print(tempTime!)
+                        let tempTime = logString["time"] as! NSDate
+                        print(tempTime)
+                        
                         if(logString["operation"] as! String == "join")
                         {
                             self.theGames[indexPath.row].theTransactions.append(Transaction(type: "Joined the Game", ticker: "", value: "", date: logString["time"] as! NSDate, amount: "", wallet: ""))
