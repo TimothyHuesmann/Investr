@@ -17,6 +17,7 @@ class MenuVC: UIViewController, Observable {
     var theGames: NSMutableArray = []
     var thePortfolios: NSMutableArray = []
     var theGamesList: [Game] = []
+    var theNames: NSMutableArray = []
     
     
     var currentUser = PFUser.currentUser()
@@ -66,7 +67,7 @@ class MenuVC: UIViewController, Observable {
         
         // Configure the cell...
         let multiplier = pow(10.0, 2)
-        let number = self.thePortfolios[indexPath.row] as! Double   //setting the portfolio as a rounded number
+        let number = self.theNames[indexPath.row] as! Double   //setting the portfolio as a rounded number
         let rounded = round(number * multiplier) / multiplier
         
         cell.nameLabel.text = self.theGamesList[indexPath.row].name
@@ -134,6 +135,14 @@ class MenuVC: UIViewController, Observable {
                         let tempPot = object["PotSize"] as! Double
                         let tempPrice = object["Price"] as! Double
                        self.theGamesList.append(Game(name: tempName, id: tempID!, end: tempEnd, start: tempStart, numPLayers: tempNumPlayers, pot: tempPot, price: tempPrice))
+                        for(var i = 0;i<self.thePortfolios.count;i++)
+                        {
+                            if(tempID == self.theGames[i] as! NSString)
+                            {
+                                self.theNames.addObject(self.thePortfolios[i])
+                            }
+                        }
+                        
                     }
                     self.gamesTV.reloadData()
                 }

@@ -20,6 +20,12 @@ class HistoryVC: UIViewController
     @IBOutlet weak var moneyLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     
+    @IBAction func backButtonPressed(sender: AnyObject)
+    {
+        self.navigationController?.popViewControllerAnimated(true);
+    }
+    
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
