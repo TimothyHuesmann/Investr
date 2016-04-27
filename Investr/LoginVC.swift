@@ -85,8 +85,8 @@ class LoginVC: UIViewController, UITextFieldDelegate{
         let username = defaults.objectForKey("username")
         if(username != nil)
         {
-            userNameTF.text = username as! String
-            passwordTF.text = defaults.objectForKey("password") as! String
+            userNameTF.text = username as? String
+            passwordTF.text = defaults.objectForKey("password") as? String
         }
         self.userNameTF.delegate = self
         self.passwordTF.delegate = self
