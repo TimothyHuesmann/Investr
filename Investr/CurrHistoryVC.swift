@@ -24,7 +24,7 @@ class CurrHistoryVC: UIViewController
         if self.revealViewController() != nil
         {
             self.menuButton.target = self.revealViewController()
-            self.menuButton.action = "revealToggle:"
+            self.menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
         
@@ -43,7 +43,7 @@ class CurrHistoryVC: UIViewController
     {
         let query = PFQuery(className: "Transaction")
         query.whereKey("userName", equalTo: InvestrCore.currUser)
-        query.whereKey("GameID", equalTo: PFObject(withoutDataWithClassName: "Game", objectId: self.gameID))
+        query.whereKey("GameID", equalTo: PFObject(outDataWithClassName: "Game", objectId: self.gameID))
         query.findObjectsInBackgroundWithBlock
             {
                 (objects: [PFObject]?, error: NSError?) -> Void in
@@ -53,27 +53,33 @@ class CurrHistoryVC: UIViewController
                     {
                         if(objects[0]["log"] != nil)
                         {
-                            for(var i = 0; i < objects[0]["log"].count; i++)
+                            //for(var i = 0; i < objects[0]["log"].count; i = i + 1)
+                                for i in 0.stride(to: objects[0]["log"].count, by: 1)
                             {
-                                let logString = objects[0]["log"][i]
+                                let logString = objects[0].objectForKey("log")![i] as AnyObject
                                 print(logString)
                                 
-                                let tempTime = logString["time"]
+                                let tempTime = logString.objectForKey("time")
                                 print(tempTime!)
-                                if(logString["operation"] as! String == ("join"))
+                                if(logString.objectForKey("operation") as! String == ("join"))
                                 {
-                                    self.theTransactions.append(Transaction(type: "Joined the Game", ticker: "", value: "", date: logString["time"] as! NSDate, amount: "", wallet: ""))
+                                    self.theTransactions.append(Transaction(type: "Joined the Game", ticker: "", value: "", date: logString.objectForKey("time") as! NSDate, amount: "", wallet: ""))
                                 }
-                                else if(logString["operation"] as! String == "checkout")
+                                else if(logString.objectForKey("operation") as! String == "checkout")
                                 {
-                                    self.theTransactions.append(Transaction(type: "Game End", ticker: "", value: "", date: logString["time"] as! NSDate, amount: "", wallet: ""))
+                                    self.theTransactions.append(Transaction(type: "Game End", ticker: "", value: "", date: logString.objectForKey("time") as! NSDate, amount: "", wallet: ""))
                                 }
                                 else
                                 {
-                                    let tempValue = logString["price"] as! NSNumber
-                                    let tempAmount = logString["share"] as! NSNumber
-                                    let tempWallet = logString["wallet"] as! NSNumber
-                                    self.theTransactions.append(Transaction(type: logString["operation"] as! String, ticker: logString["symbol"] as! String, value: "\(tempValue)", date: logString["time"] as! NSDate, amount: "\(tempAmount)", wallet: "\(tempWallet)"))
+                                    var tempValue = ""
+                                    if let tempHolder = logString.objectForKey("price") as? NSNumber
+                                    {
+                                       tempValue = "\(tempHolder)"
+                                    }
+                                    tempValue = self.toCurrency("\(tempValue)")
+                                    let tempAmount = logString.objectForKey("share") as! NSNumber
+                                    let tempWallet = logString.objectForKey("wallet") as! NSNumber
+                                    self.theTransactions.append(Transaction(type: logString.objectForKey("operation") as! String, ticker: logString.objectForKey("symbol") as! String, value: "\(tempValue)", date: logString.objectForKey("time") as! NSDate, amount: "\(tempAmount)", wallet: "\(tempWallet)"))
                                 }
                                 
                             }
@@ -99,6 +105,20 @@ class CurrHistoryVC: UIViewController
         self.gameID = gameID
     }
     
+    func toCurrency(value: String) -> String
+    {
+        if (value.characters.count == 0)
+        {
+            return "0.00"
+        }
+        else
+        {
+            let double = Double(round(Double(value)!*100)/100)
+            return String(double)
+            //let index = value.characters.indexOf(".")?.advancedBy(3)
+            //return value.substringToIndex(index!)
+        }
+    }
 
     //UnComment  if we need to manipulate the title of the TV
 
