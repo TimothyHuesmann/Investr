@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import Parse
+import IAPHelper
 
 class InvestrCore: NSObject
 {
