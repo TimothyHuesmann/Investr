@@ -8,48 +8,41 @@
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>0</integer>
 		</dict>
 		<key>Alamofire.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>1</integer>
 		</dict>
 		<key>Bolts.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>2</integer>
+		</dict>
+		<key>IAPHelper.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Parse.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>3</integer>
 		</dict>
 		<key>Pods-Investr.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>4</integer>
 		</dict>
 		<key>SwiftyJSON.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>5</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>31930C7F7AF40EF8BFB3AB5922D71EB3</key>
+		<key>3DC33B65864E4EF991883F34B4D64404</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -64,47 +57,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>511B536F0DE06D9C3BD65397A91990C0</key>
+		<key>55A1F9E710E6E5EBFDA3FE3A63EE5DD3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>708E01B006A9F88B3C13711562282B5E</key>
+		<key>60AA9BE8C25CFBDF12DA8DB234483D3B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B3D33FD88FB519CA46935FA6EE559C59</key>
+		<key>B0214E86E9E229E292863BC821997C4D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B9A04D3C9B208813656510FDA8ADAE02</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>CF9160BFB0630E225657040592E4FEF8</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>DDD901517D84AB2CE356BA7948AA51B7</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>DED476042DF9DC3A90559027945B58A0</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>E2EAD3AA0D11CD79353FB42F1BD3A09C</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>FC4227912F3737AA44F52F18687A4A22</key>
+		<key>B272B33F162D6E5C3510BA50ECF2684B</key>
 		<dict>
 			<key>primary</key>
 			<true/>

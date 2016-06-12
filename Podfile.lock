@@ -21,15 +21,17 @@ PODS:
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - Alamofire (2.0.2)
-  - Bolts/Tasks (1.5.0)
-  - Parse (1.10.0):
+  - Bolts/Tasks (1.7.0)
+  - IAPHelper (1.0.8.1)
+  - Parse (1.12.0):
     - Bolts/Tasks (~> 1.5)
-  - SwiftyJSON (2.3.1)
+  - SwiftyJSON (2.3.2)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
   - Alamofire (~> 2.0)
-  - Parse
+  - IAPHelper
+  - Parse (!= 1.13.0)
   - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`)
 
 EXTERNAL SOURCES:
@@ -38,14 +40,17 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   SwiftyJSON:
-    :commit: 10f67900bdf2fb0faba3371249a6fefdcaa880c5
+    :commit: 2a5b70f06001316d4fb54501edc70b4084705da0
     :git: https://github.com/SwiftyJSON/SwiftyJSON.git
 
 SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
   Alamofire: 8edbab00802a752bb5240cc2abe70e7e881488ad
-  Bolts: 722ab9a4f8b50fc4ed1b9998a5a7a2b3f16d80b4
-  Parse: 90b2544822200f84b18bfacc4e8b0a3a6c3584a2
-  SwiftyJSON: 592b53bee5ef3dd9b3bebc6b9cb7ee35426ae8c3
+  Bolts: a0058fa3b331c5a1e4402d534f2dae36dbff31e4
+  IAPHelper: fbed593436838c3d40753ded319062b68c00cc38
+  Parse: de2c52a9a1421b91ae7594ab8ce191afd184f19b
+  SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-COCOAPODS: 0.38.2
+PODFILE CHECKSUM: e86abff45d5d46af25a209a50a1d60e29265084b
+
+COCOAPODS: 1.0.1
